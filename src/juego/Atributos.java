@@ -7,6 +7,7 @@ public class Atributos {//todos son int's o pueden haber doubles?
 	protected int Velocidad;
 	protected int PeleasGanadas;
 	
+	// Crea carta con valores personalizados
 	public Atributos (int fuerza, double altura, double peso, int velocidad, int peleasGanadas) 
 	{
 		this.setAltura(altura);
@@ -16,6 +17,7 @@ public class Atributos {//todos son int's o pueden haber doubles?
 		this.setVelocidad(velocidad);
 	}
 	
+	// Crea carta de cero
 	public Atributos ()
 	{
 		this.setAltura(0);

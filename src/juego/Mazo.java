@@ -4,18 +4,26 @@ import java.util.ArrayList;
 
 public class Mazo {
 	
-	protected static ArrayList<Carta> mazo = new ArrayList<Carta> ();
+	protected ArrayList<Carta> mazo = new ArrayList<Carta> ();
 	
 	public int posicionAzar()
 	{
 		return (int) (Math.random()*mazo.size());
 	}
 	
-	public void crearMazo()
+	public int getTamanioMazo() {
+		return mazo.size();
+	}
+	
+	public void crearMazo(int tamanioOriginal)
 	{
 		//AQUI SE HACE LA CARGA POR ARCHIVO
-		int tamañoArchivo = 15;
-		mazo.ensureCapacity(tamañoArchivo); //Asegurar tamaño del mazo?
+		int tamanioArchivo = 0;
+		if(tamanioOriginal > 0)
+			tamanioArchivo = tamanioOriginal;
+		else
+			tamanioArchivo = 15; // AGUANTEN LAS CONSTANTES JARCODEADAS
+		mazo.ensureCapacity(tamanioArchivo); //Asegurar tamaño del mazo?
 		
 		
 		//al terminar de crearlo lo mezcla?

@@ -5,41 +5,42 @@ import java.util.ArrayList;
 public class Jugador {
 
 	private String nombre;
-	private ArrayList<Carta> mano;
+	private Mazo mazoJugador;
 	
+	public Jugador ()
+	{
+		this.setNombre ("");
+		this.mazoJugador = new Mazo();
+	}
+	
+		public Jugador (String Nombre)
+	{
+		this.setNombre (nombre);
+		this.mazoJugador = new Mazo();
+	}
+		
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public ArrayList<Carta> getMano() {
-		return mano;
-	}
-	public void setMano(ArrayList<Carta> mano) {
-		this.mano = mano;
-	}
 	
-	public Jugador ()
-	{
-		this.setNombre ( "");
-		this.mano = new ArrayList<Carta> ();
-	}
-	
-		public Jugador (String Nombre)
-	{
-		this.setNombre (nombre);
-		this.mano = new ArrayList<Carta> ();
+	// El jugador devuelve las cartas de su mazo al mazo original
+	public void devolverMazo(Mazo mazo) {
+		while(mazoJugador.getTamanioMazo() > 0) {
+			mazo.agregarCartaAlMazo(mazoJugador.sacarCartaDelMazo());
+		}
 	}
 	
 	public int cantidadCartas()
 	{
-		return (this.mano.size());
+		return (this.mazoJugador.getTamanioMazo());
 	}
 	
 	public void recibirCarta(Carta carta)
 	{
-		this.mano.add(carta);
+		this.mazoJugador.agregarCartaAlMazo(carta);
 	}
 	
 	public String seleccionarAtributo()
@@ -47,30 +48,50 @@ public class Jugador {
 		//Validar "entrada" del atributo
 		//Hacer de manera aleatoria
 		//cambiar por int/double ?
+		ArrayList<String> atributos = new ArrayList<String>();
+		atributos.add("Altura");
+		atributos.add("Fuerza");
+		atributos.add("PeleasGanadas");
+		atributos.add("Peso");
+		atributos.add("Velocidad");
 		
-		String atributo= "Fuerza";
-		return (atributo);
+		int opcion = (int) (Math.random()*5);
+		
+		String atributo = atributos.get(opcion);
+		return ("get"+atributo);
 	}
 	
 	public void estadisticasJugador() //public String?
 	{
+		
 		System.out.print (this.getNombre()+" posee "+this.cantidadCartas()+" cartas");
 	}
 	
 	public void entregarCarta(Jugador jugador)
 	{
-		jugador.recibirCarta(this.mano.get(0));
-		this.mano.remove(0);
+		jugador.recibirCarta(this.mazoJugador.sacarCartaDelMazo());
 	}
 	
 
 	
 	public void jugarCarta()
 	{
-		this.mano.get(0);
-		String atributo = seleccionarAtributo();
-		/*double aux = this.mano.getatributo;  eeeeeehhhmm*/ 
+		Carta carta = mazoJugador.sacarCartaDelMazo();
+		String strAux = this.seleccionarAtributo();
+		try {
 		
+		/**
+		 * Idea: que Java interprete al String strAux como un método para llamar
+		 * {
+		 * 	double dblAux = this.mazoJugador.get(0).strAux;
+		 * 	
+		 * }
+		 * Alternativa: USAR SWITCH
+		 */
+		}
+		catch(Exception e) {
+			System.out.println("E");
+		}
 	}
 
 }

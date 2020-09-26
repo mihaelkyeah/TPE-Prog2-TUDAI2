@@ -4,22 +4,56 @@ import java.util.ArrayList;
 
 public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, seguramente sera eliminado el extends
 
+	private Mazo mazoOriginal;
 	private ArrayList<Jugador> jugadores;
-	public final int maxRondas = 5; //constante o modificable? static?
 	
+	public Juego() {
+		mazoOriginal.crearMazo(15);
+		jugadores = new ArrayList<Jugador>();
+	}
+	
+	public void agregarJugador(Jugador j) {
+		jugadores.add(j);
+	}
+	
+	public Jugador getJugador(String nombre) {
+		for(int i = 0; i < jugadores.size(); i++)
+			if(jugadores.get(i).getNombre().equalsIgnoreCase(nombre))
+				return jugadores.get(i);
+		return null;
+	}
+	
+	// ¿Es mejor boolean o un mensaje por string?
+	public void eliminarJugador(String nombre) {
+		if(jugadores.contains(this.getJugador(nombre)))
+			jugadores.remove(this.getJugador(nombre));
+	}
+		
 	public void repartirCartas()
 	{
 		int j = 0;
-		for (int i = 0; i < mazo.size(); i++)
+		for (int i = 0; i < mazoOriginal.getTamanioMazo(); i++)
 		{
 			if(j == jugadores.size())
 				j=0;
 			else
 				j++;
-			Carta aux = sacarCartaDelMazo();
-			jugadores.get(j).recibirCarta(aux);
-			
+			jugadores.get(j).recibirCarta(mazoOriginal.sacarCartaDelMazo());
+			// TODO: mazoOriginal.crearMazo(); <-- Tiene que estar ni bien empieza el juego; tiene que llamarse una sola vez
 		}
+	}
+	
+	public Jugador juegaRonda(Jugador ganador) {
+		// TODO: Incluir verificación externa:
+		// sólo se puede jugar una ronda si hay al menos 2 jugadores en el arraylist jugadores
+		Jugador ganaRonda = ganador;
+		
+		jugadores.get(jugadores.indexOf(ganador)).jugarCarta();
+		for(int i = 0; i < jugadores.size(); i++) {
+			if(jugadores.get(i).presentarCarta().eslamejorcartadelaronda())
+				ganaRonda = jugadores.get(i);
+		}
+		return ganaRonda;
 	}
 	
 	public void estadisticasJugadores()
@@ -46,6 +80,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		return (conCartas == 1);
 	}
 	
+	// Devuelve la posición en el arraylist jugadores que apunta al jugador con más cartas
 	public int jugadorConMasCartas()
 	{
 		int posMasCartas= -1;
