@@ -6,7 +6,7 @@ public class Principal {
 	
 	public void jugarRondas(Juego juego) {
 		for(int i = 0; i < MAXRONDAS; i++) {
-			juego.ganaRonda();
+		//	juego.ganaRonda();
 		}
 	}
 

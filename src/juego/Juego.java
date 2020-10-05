@@ -50,7 +50,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		
 		jugadores.get(jugadores.indexOf(ganador)).jugarCarta();
 		for(int i = 0; i < jugadores.size(); i++) {
-			if(jugadores.get(i).presentarCarta().eslamejorcartadelaronda())
+		//	if(jugadores.get(i).presentarCarta().eslamejorcartadelaronda())
 				ganaRonda = jugadores.get(i);
 		}
 		return ganaRonda;
