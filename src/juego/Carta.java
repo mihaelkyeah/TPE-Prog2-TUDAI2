@@ -1,24 +1,25 @@
 package juego;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+
 
 public class Carta{
 	
 	private String nombre;
-	private Map<String, Integer> atributos;
-	
+	private ArrayList <Atributo> atributos;
 	
 	public Carta (String nombre)
 	{
 		this.nombre = nombre;
-		Map<String, Integer> atributos = new HashMap<>();
+		this.atributos =  new ArrayList <Atributo>();
 	}
 	
-	public void agregarAtributo(String atributo, int valor)
-	{
-		this.atributos.put(atributo, valor);
+	public ArrayList<Atributo> getAtributos() {
+		return atributos;
+	}
+
+	public void setAtributos(ArrayList<Atributo> atributos) {
+		this.atributos = atributos;
 	}
 	
 	public int cantidadAtributos()
@@ -26,23 +27,62 @@ public class Carta{
 		return this.atributos.size();
 	}
 	
+	public Atributo getAtributo(String atributo)
+	{
+		for (Atributo listaAtributos: this.atributos)
+			if (listaAtributos.getNombre().equals(atributo))
+				return(listaAtributos);
+		return null;
+	}
+	
+	public void agregarAtributo(Atributo atributo)
+	{
+		Atributo aux = this.getAtributo(atributo.getNombre());
+		if (aux == null)
+			this.atributos.add(atributo);
+		else
+			aux.setValor(atributo.getValor());
+	}
+	
+	public String getAtributo(int indice)
+	{
+		try {
+			return (this.atributos.get(indice).getNombre());}
+		catch(Exception e)
+		{
+			return "";
+		}
+	}
+	
 	public Object getValor(String atributo)
 	{
-		return (this.atributos.get(atributo));
+		Atributo aux = getAtributo (atributo);
+		if (aux == null)
+			return 0;
+		else
+			return (aux.getValor());
 	}
 	
-	public String getAtributo(int opcion)
+	public int getValor(Atributo atributo)
 	{
-		return ((String) (this.atributos.keySet().toArray()[opcion]));
-	}
-
-	public Map<String, Integer> getAtributos() {
-		return atributos;
-	}
-
-	public void setAtributos(Map<String, Integer> atributos) {
-		this.atributos = atributos;
+		return ((int) atributo.getValor());
 	}
 	
+	
+	public String getAtributoMayor()
+	{
+		Atributo aux = new Atributo("", -1);
+		for (Atributo atributo: this.atributos)
+			if ((int)atributo.getValor() > (int)aux.getValor())
+			{
+				aux.setNombre(atributo.getNombre());
+				aux.setValor(atributo.getValor());
+			}
+		return (aux.getNombre());
+	}
+	
+
+	
+
 	
 }

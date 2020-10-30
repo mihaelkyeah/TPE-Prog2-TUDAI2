@@ -3,6 +3,7 @@ package estrategia;
 import java.util.Map;
 import java.util.Set;
 
+import juego.Atributo;
 import juego.Carta;
 
 public class Ambicioso extends Jugador  {
@@ -33,16 +34,9 @@ public class Ambicioso extends Jugador  {
 
 	@Override
 	public String elegirAtributo(Carta carta) {
-		String atributoMayor = "";
-		int valorMayor = -1;
-		Map<String, Integer> aux = carta.getAtributos();
-		for (String atributo: aux.keySet())
-			if (aux.get(atributo) > valorMayor)
-			{
-				atributoMayor=atributo;
-				valorMayor = aux.get(atributo);
-			}
-		return (atributoMayor);
+		
+		return (carta.getAtributoMayor());
+		
 	}
 
 }

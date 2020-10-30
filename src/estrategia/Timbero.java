@@ -3,8 +3,10 @@ package estrategia;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import juego.Atributo;
 import juego.Carta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -37,7 +39,7 @@ public class Timbero extends Jugador {
 	public String elegirAtributo(Carta carta) {
 		// TODO Auto-generated method stub
 		int opcion = (int) (Math.random()* carta.cantidadAtributos());
-		return (carta.getAtributo(opcion));
+		return ( carta.getAtributo(opcion));
 			
 	}
 
