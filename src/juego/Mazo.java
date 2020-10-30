@@ -1,6 +1,8 @@
 package juego;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Mazo {
 	
@@ -60,6 +62,7 @@ public class Mazo {
 			mazo.set(posOrigen, aux);
 		}
 	}
+
 	
 
 	

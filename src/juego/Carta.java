@@ -1,53 +1,46 @@
 package juego;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 public class Carta{
 	
-	private Atributos atributos;
-	private int numero;
 	private String nombre;
+	private Map<String, Integer> atributos;
 	
-	public Carta ()
-	{
-		this.atributos = new Atributos();
-		this.setNumero(0);
-		this.setNombre("");
-	}
 	
-	public Carta (int fuerza, double altura, double peso, int velocidad, int peleasGanadas, int numero, String nombre)
+	public Carta (String nombre)
 	{
-		this.atributos = new Atributos (fuerza, altura, peso, velocidad, peleasGanadas);
-		this.setNumero(numero);
-		this.setNombre(nombre);
-	}
-	
-	public Carta (Atributos atributos, int numero, String nombre)
-	{
-		this.setAtributos(atributos);
-		this.setNumero(numero);
-		this.setNombre(nombre);
-	}
-
-	public int getNumero() {
-		return numero;
-	}
-
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
 		this.nombre = nombre;
+		Map<String, Integer> atributos = new HashMap<>();
+	}
+	
+	public void agregarAtributo(String atributo, int valor)
+	{
+		this.atributos.put(atributo, valor);
+	}
+	
+	public int cantidadAtributos()
+	{
+		return this.atributos.size();
+	}
+	
+	public Object getValor(String atributo)
+	{
+		return (this.atributos.get(atributo));
+	}
+	
+	public String getAtributo(int opcion)
+	{
+		return ((String) (this.atributos.keySet().toArray()[opcion]));
 	}
 
-	public Atributos getAtributos() {
+	public Map<String, Integer> getAtributos() {
 		return atributos;
 	}
 
-	public void setAtributos(Atributos atributos) {
+	public void setAtributos(Map<String, Integer> atributos) {
 		this.atributos = atributos;
 	}
 	

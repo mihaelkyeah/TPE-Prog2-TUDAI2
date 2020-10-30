@@ -2,6 +2,8 @@ package juego;
 
 import java.util.ArrayList;
 
+import estrategia.Jugador;
+
 public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, seguramente sera eliminado el extends
 
 	private Mazo mazoOriginal;
