@@ -1,9 +1,5 @@
 package estrategia;
 
-import java.util.Map;
-import java.util.Set;
-
-import juego.Atributo;
 import juego.Carta;
 
 public class Ambicioso extends Jugador  {
@@ -19,10 +15,7 @@ public class Ambicioso extends Jugador  {
 		super(jugador);
 	}
 
-	@Override
-	public void jugarCarta() {
-		// TODO Auto-generated method stub
-	}
+
 
 	@Override
 	public Jugador cambiarEstrategia(Jugador jugador) {

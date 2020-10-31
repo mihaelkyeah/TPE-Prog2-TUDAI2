@@ -84,8 +84,27 @@ public abstract class Jugador {
 			System.out.print (this.getNombre()+" posee "+this.cantidadCartas()+" cartas");
 		}
 
+		@Override
+		public String toString() {
+			return getNombre();
+		}
 
 
+		@Override
+		public boolean equals(Object o) {
+			// TODO Auto-generated method stub
+			try {
+				Jugador aux = (Jugador) o;
+				if (this.getNombre().equals(aux.getNombre()))
+					return true;
+				else
+					return false;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
+		}
 
 
 

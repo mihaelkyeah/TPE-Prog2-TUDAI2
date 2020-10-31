@@ -17,12 +17,6 @@ public class Obstinado extends Jugador  {
 	}
 
 	@Override
-	public void jugarCarta() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public Jugador cambiarEstrategia(Jugador jugador) {
 		// TODO Auto-generated method stub
 		Obstinado nuevaEstrategia = new Obstinado(jugador);

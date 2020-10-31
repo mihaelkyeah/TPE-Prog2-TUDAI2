@@ -1,15 +1,19 @@
 package pocima;
 
-import juego.Atributo;
 import juego.Carta;
 
-public abstract class Pocima extends Atributo{
-	
-	public Pocima(String nombre, Object valor) {
-		super(nombre, valor);
+public abstract class Pocima {
+
+	private String nombre;
+	public Pocima(String nombre) {
+		this.nombre = nombre;
 		// TODO Auto-generated constructor stub
 	}
 
-	public abstract void alterarCarta (Carta carta);
+	public String getNombre()
+	{
+		return (this.nombre);
+	}
+	public abstract void alterarCarta (Carta carta); //Void o carta?
 	
 }

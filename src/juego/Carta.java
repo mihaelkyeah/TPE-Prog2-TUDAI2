@@ -2,6 +2,8 @@ package juego;
 
 import java.util.ArrayList;
 
+import pocima.Pocima;
+
 
 public class Carta{
 	
@@ -14,40 +16,35 @@ public class Carta{
 		this.atributos =  new ArrayList <Atributo>();
 	}
 	
-	public ArrayList<Atributo> getAtributos() {
-		return atributos;
-	}
-
-	public void setAtributos(ArrayList<Atributo> atributos) {
-		this.atributos = atributos;
-	}
-	
-	
 	public String getNombre() {
 		return nombre;
 	}
-
+	
 	public Atributo getAtributo(String atributo)
-	{
+	{//Devolver atributo por nombre
 		for (Atributo listaAtributos: this.atributos)
 			if (listaAtributos.getNombre().equals(atributo))
 				return(listaAtributos);
 		return null;
 	}
-
-	public String getAtributo(int indice)
-	{
-		try {
-			return (this.atributos.get(indice).getNombre());}
-		catch(Exception e)
-		{
-			return "";
-		}
+	
+	public Atributo getAtributo(int indice)
+	{//Devolver atributo por posicion en el ArrayList
+		return (this.atributos.get(indice));
 	}
 	
-	public Object getValor(String atributo)
+	public void agregarAtributo(Atributo atributo)
 	{
-		Atributo aux = getAtributo (atributo);
+		Atributo aux = this.getAtributo(atributo.getNombre()); //Se fija si el atributo ya existe
+		if (aux == null)
+			this.atributos.add(atributo); //Si no esta lo agrega
+		else
+			aux.setValor(atributo.getValor()); //Si ya existe lo modifica
+	}
+	
+	public int getValor(String atributo)
+	{//Devolver valor de un atributo por su nombre
+		Atributo aux = this.getAtributo (atributo);
 		if (aux == null)
 			return 0;
 		else
@@ -55,8 +52,8 @@ public class Carta{
 	}
 	
 	public int getValor(Atributo atributo)
-	{
-		return ((int) atributo.getValor());
+	{//Devolver valor de un atributo de manera directa
+		return (atributo.getValor());
 	}
 	
 	public String getAtributoMayor()
@@ -76,18 +73,35 @@ public class Carta{
 		return this.atributos.size();
 	}
 	
-	public void agregarAtributo(Atributo atributo)
+	
+	public void usarPocima(Pocima pocima)
 	{
-		Atributo aux = this.getAtributo(atributo.getNombre());
-		if (aux == null)
-			this.atributos.add(atributo);
-		else
-			aux.setValor(atributo.getValor());
+		pocima.alterarCarta(this);
 	}
-	
-	
 
 	
+	@Override
+	public String toString() {
+		return this.getNombre();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		// TODO Auto-generated method stub
+		try {
+			Carta aux = (Carta) o;
+			if (this.getNombre().equals(aux.getNombre()))
+				return true;
+			else
+				return false;
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
+	}
+
+
 
 	
 }

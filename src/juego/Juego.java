@@ -6,6 +6,7 @@ import estrategia.Jugador;
 
 public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, seguramente sera eliminado el extends
 
+	public static Mazo mesa;
 	private Mazo mazoOriginal;
 	private ArrayList<Jugador> jugadores;
 	

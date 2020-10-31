@@ -1,22 +1,27 @@
 package pocima;
 
-import juego.Atributo;
 import juego.Carta;
 
-public class PocimaCarta extends Pocima  {
+public class PocimaCarta extends Pocima {
 
-	public PocimaCarta(String nombre, Object valor) {
-		super(nombre, valor);
+	private double valor;
+	public PocimaCarta(String nombre, double valor) {
+		super(nombre);
+		this.valor=valor;
 		// TODO Auto-generated constructor stub
 	}
 
+	public void setValor(double valor)
+	{
+		this.valor = valor;
+	}
 	@Override
 	public void alterarCarta(Carta carta) {
 		// TODO Auto-generated method stub	
-		for (Atributo atributo : carta.getAtributos())
-		{
-			atributo.setValor(this.getValor());
-			carta.agregarAtributo(atributo);
+		
+		for (int i=0; i < carta.cantidadAtributos(); i++)
+		{//A cada atributo le inserto el valor;
+			carta.getAtributo(i).setValor((int)this.valor);
 		}
 	}
 
