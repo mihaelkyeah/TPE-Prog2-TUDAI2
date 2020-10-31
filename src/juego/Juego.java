@@ -41,22 +41,11 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			else
 				j++;
 			jugadores.get(j).recibirCarta(mazoOriginal.sacarCartaDelMazo());
-			// TODO: mazoOriginal.crearMazo(); <-- Tiene que estar ni bien empieza el juego; tiene que llamarse una sola vez
+			// TODO: mazoOriginal.crearMazo(); <-- Tiene que estar ni bien empieza el juego; tiene que llamarse una sola vez y aplicar las potas
 		}
 	}
 	
-	public Jugador juegaRonda(Jugador ganador) {
-		// TODO: Incluir verificación externa:
-		// sólo se puede jugar una ronda si hay al menos 2 jugadores en el arraylist jugadores
-		Jugador ganaRonda = ganador;
-		
-		jugadores.get(jugadores.indexOf(ganador)).jugarCarta();
-		for(int i = 0; i < jugadores.size(); i++) {
-		//	if(jugadores.get(i).presentarCarta().eslamejorcartadelaronda())
-				ganaRonda = jugadores.get(i);
-		}
-		return ganaRonda;
-	}
+
 	
 	public void estadisticasJugadores()
 	{
@@ -79,6 +68,8 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		for(int i = 0; i < jugadores.size(); i ++)
 			if ((jugadores.get(i).cantidadCartas()) > 0)
 				conCartas++;
+		if (jugadores.size() < 0)
+			return true;
 		return (conCartas == 1);
 	}
 	
@@ -96,4 +87,58 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	{
 		//utilizara hayGanador o jugadorConMasCartas dependiendo de si quedan rondas o no
 	}
+	/*
+	public Jugador juegaRonda(Jugador ganador) {
+		// TODO: Incluir verificación externa:
+		// sólo se puede jugar una ronda si hay al menos 2 jugadores en el arraylist jugadores
+		Jugador ganaRonda = ganador;
+		
+		jugadores.get(jugadores.indexOf(ganador)).jugarCarta();
+		for(int i = 0; i < jugadores.size(); i++) {
+		//	if(jugadores.get(i).presentarCarta().eslamejorcartadelaronda())
+				ganaRonda = jugadores.get(i);
+		}
+		return ganaRonda;
+	}
+	*/
+	
+	public void Ronda()
+	{
+		boolean ganador = this.hayGanador();
+		int turno = 0, numeroRonda=1;
+		while (!ganador)
+		{
+			System.out.println("------ RONDA "+numeroRonda+" ------");
+			
+			Jugador jugadorTurno = jugadores.get(turno);
+			Carta cartaTurno = jugadorTurno.cartaEnMano();
+			String atributoTurno = jugadorTurno.elegirAtributo(cartaTurno);
+			
+			System.out.println("El jugador "+jugadorTurno.getNombre()+" selecciona competir por el atributo "+atributoTurno);
+			System.out.println("La carta de "+jugadorTurno.getNombre()+" es "+cartaTurno.getNombre()+ " con "+atributoTurno+""+cartaTurno.getValor(atributoTurno));
+			
+			ArrayList <Jugador> enfrentar = this.competidores(jugadorTurno);
+			
+			for (Jugador competidor : enfrentar)
+			{
+				Carta cartaCompetidor = competidor.cartaEnMano();
+				System.out.println("La carta de "+competidor.getNombre()+" es "+cartaCompetidor.getNombre());
+			}
+			 ganador = this.hayGanador();
+			 numeroRonda++;
+			 turno++;
+			 if (turno == jugadores.size())
+				 turno = 0;
+		}
+	}
+
+	public ArrayList <Jugador> competidores(Jugador jugador)
+	{
+		ArrayList <Jugador> copia = new ArrayList <Jugador>();
+		copia.addAll(this.jugadores);
+		copia.remove(jugador);
+		return copia;
+	}
+
+
 }

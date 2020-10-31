@@ -24,9 +24,6 @@ public abstract class Jugador {
 		this.nombre = jugador.nombre;
 		this.mazoJugador = jugador.mazoJugador;
 	}
-	public abstract void jugarCarta();	
-	public abstract Jugador cambiarEstrategia(Jugador jugador);
-	public abstract String elegirAtributo(Carta carta);
 
 	public String getNombre() {
 		return nombre;
@@ -43,6 +40,22 @@ public abstract class Jugador {
 	public void setMazoJugador(Mazo mazoJugador) {
 		this.mazoJugador = mazoJugador;
 	}
+	
+	public abstract Jugador cambiarEstrategia(Jugador jugador);
+	public abstract String elegirAtributo(Carta carta);
+	
+	
+	public Carta cartaEnMano()
+	{
+		return this.mazoJugador.sacarCartaDelMazo();
+	}
+	
+	public void iniciarRonda()
+	{
+		
+	}
+	
+	
 	// El jugador devuelve las cartas de su mazo al mazo original
 		public void devolverMazo(Mazo mazo) {
 			while(mazoJugador.getTamanioMazo() > 0) {
@@ -70,4 +83,10 @@ public abstract class Jugador {
 			
 			System.out.print (this.getNombre()+" posee "+this.cantidadCartas()+" cartas");
 		}
+
+
+
+
+
+
 }

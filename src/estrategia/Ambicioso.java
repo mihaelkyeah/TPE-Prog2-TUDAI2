@@ -22,7 +22,6 @@ public class Ambicioso extends Jugador  {
 	@Override
 	public void jugarCarta() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

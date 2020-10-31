@@ -22,11 +22,11 @@ public class Carta{
 		this.atributos = atributos;
 	}
 	
-	public int cantidadAtributos()
-	{
-		return this.atributos.size();
-	}
 	
+	public String getNombre() {
+		return nombre;
+	}
+
 	public Atributo getAtributo(String atributo)
 	{
 		for (Atributo listaAtributos: this.atributos)
@@ -34,16 +34,7 @@ public class Carta{
 				return(listaAtributos);
 		return null;
 	}
-	
-	public void agregarAtributo(Atributo atributo)
-	{
-		Atributo aux = this.getAtributo(atributo.getNombre());
-		if (aux == null)
-			this.atributos.add(atributo);
-		else
-			aux.setValor(atributo.getValor());
-	}
-	
+
 	public String getAtributo(int indice)
 	{
 		try {
@@ -68,7 +59,6 @@ public class Carta{
 		return ((int) atributo.getValor());
 	}
 	
-	
 	public String getAtributoMayor()
 	{
 		Atributo aux = new Atributo("", -1);
@@ -80,6 +70,21 @@ public class Carta{
 			}
 		return (aux.getNombre());
 	}
+	
+	public int cantidadAtributos()
+	{
+		return this.atributos.size();
+	}
+	
+	public void agregarAtributo(Atributo atributo)
+	{
+		Atributo aux = this.getAtributo(atributo.getNombre());
+		if (aux == null)
+			this.atributos.add(atributo);
+		else
+			aux.setValor(atributo.getValor());
+	}
+	
 	
 
 	
