@@ -59,6 +59,39 @@ public class Mazo {
         }
 	}
 	
+	public void imprimirMazo() {
+		for(Carta carta:this.mazo)
+			System.out.println(carta);
+	}
+	
+	public void validarCartas() {
+		Carta primeraCarta = this.tomarPrimeraCarta();
+		// Guarda una lista de índices para buscar las cartas del mazo para borrar
+		ArrayList<Integer> cartasExtranias = new ArrayList<>();
+		
+		for(int i = 1; i < this.mazo.size(); i++) {
+			Carta cartaActual = this.mazo.get(i);
+			if(cartaActual.cantidadAtributos() == primeraCarta.cantidadAtributos()) {
+				int j = 0;
+				while((j < cartaActual.cantidadAtributos()) && (!(cartaActual.getAtributo(j).equals(null)))) {
+					j++;
+				}
+				if(j != cartaActual.cantidadAtributos()) {
+					cartasExtranias.add(i);
+				}
+			}
+		}
+		
+		for(int i = 0; i < cartasExtranias.size(); i++) {
+			this.mazo.remove(cartasExtranias.get(i));
+		}
+			
+	}
+	
+	private Carta tomarPrimeraCarta() {
+		return this.mazo.get(0);
+	}
+	
 	public void agregarCartaAlMazo(Carta carta)
 	{
 		mazo.add(carta);

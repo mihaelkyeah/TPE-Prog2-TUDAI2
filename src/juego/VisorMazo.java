@@ -30,8 +30,11 @@ public class VisorMazo { //futuro Main TT.TT
         Juego juego = new Juego(mazoPath);
         juego.agregarJugador(jugador1);
         juego.agregarJugador(jugador2);
+        juego.imprimirMazo();
+        /*
         juego.repartirCartas();
         juego.Ronda();
+        */
     }
 
 }

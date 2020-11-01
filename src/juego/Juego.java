@@ -16,6 +16,10 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		this.jugadores = new ArrayList<Jugador>();
 	}
 	
+	public void imprimirMazo() {
+		this.mazoOriginal.imprimirMazo();
+	}
+	
 	public void agregarJugador(Jugador j) {
 		jugadores.add(j);
 	}

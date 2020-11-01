@@ -22,9 +22,9 @@ public class Carta{
 	
 	public Atributo getAtributo(String atributo)
 	{//Devolver atributo por nombre
-		for (Atributo listaAtributos: this.atributos)
-			if (listaAtributos.getNombre().equals(atributo))
-				return(listaAtributos);
+		for (Atributo a: this.atributos)
+			if (a.getNombre().equals(atributo))
+				return(a);
 		return null;
 	}
 	
@@ -32,6 +32,14 @@ public class Carta{
 	{//Devolver atributo por posicion en el ArrayList
 		return (this.atributos.get(indice));
 	}
+	
+	/*
+	public ArrayList<Atributo> getListaAtributos() {
+		ArrayList<Atributo> retorno = new ArrayList<>();
+		for(int i = 0; i < this.atributos.size(); i++)
+			retorno.add(this.getAtributo(i));
+		return retorno;
+	}*/
 	
 	public void agregarAtributo(Atributo atributo)
 	{
