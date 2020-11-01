@@ -69,7 +69,7 @@ public abstract class Jugador {
 		public void estadisticasJugador() //public String?
 		{
 			
-			System.out.print (this.getNombre()+" posee "+this.cantidadCartas()+" cartas");
+			System.out.println (this.getNombre()+" posee "+this.cantidadCartas()+" cartas");
 		}
 
 		@Override

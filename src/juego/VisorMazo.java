@@ -30,15 +30,15 @@ public class VisorMazo { //futuro Main TT.TT
         
         Juego juego = new Juego(mazoPath);
         juego.agregarJugador(jugador1);
-        juego.agregarJugador(jugador2);
-        juego.imprimirMazo();
+       juego.agregarJugador(jugador2);
+       /*   juego.imprimirMazo();
         try {
         	System.out.println("Presione una tecla para continuar...");
         	System.in.read();
         }
         catch(Exception e) {
         	System.out.println(e);
-        }
+        }*/
         // jugador1 = new Ambicioso(jugador1);
         juego.repartirCartas();
         juego.Ronda();

@@ -124,6 +124,8 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		boolean ganador = this.hayGanador();
 		int turno = 0, numeroRonda=1;
 		ArrayList <Atributo> valores = new ArrayList<Atributo>();
+		 for (int i= 0; i < this.jugadores.size(); i++)
+			 this.jugadores.get(i).estadisticasJugador();
 		while (!ganador)
 		{
 			System.out.println("------ RONDA "+numeroRonda+" ------");
@@ -156,14 +158,15 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			 ganador = this.hayGanador();
 			 
 			 // Busca y elimina a todos los jugadores que no tengan cartas
+			 for (int i= 0; i < this.jugadores.size(); i++)
+				 this.jugadores.get(i).estadisticasJugador();
+			 numeroRonda++;
+			 turno++;
+			 valores.clear();
 			 ArrayList<String> perdedores = this.jugadoresPerdedores();
 			 if(perdedores.size() > 0)
 				 for(String nombrePerdedor:perdedores)
 					 this.eliminarJugador(nombrePerdedor);
-				 
-			 numeroRonda++;
-			 turno++;
-			 valores.clear();
 			 if (turno == jugadores.size())
 				 turno = 0;
 		}
