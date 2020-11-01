@@ -29,7 +29,7 @@ public class Atributo {//Las cartas y las pocimas tienen atributos pero cada una
 	}
 	@Override
 	public String toString() {
-		return "Atributo [atributo=" + atributo + ", valor=" + valor + "]";
+		return ("[atributo=" + atributo + ", valor=" + valor + "]");
 	}
 	@Override
 	public boolean equals(Object o) {

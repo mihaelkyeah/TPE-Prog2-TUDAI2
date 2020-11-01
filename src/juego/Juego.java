@@ -10,8 +10,8 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	private Mazo mazoOriginal;
 	private ArrayList<Jugador> jugadores;
 	
-	public Juego() {
-		mazoOriginal.crearMazo(15);
+	public Juego(String jsonFile) {
+		mazoOriginal.crearMazo(jsonFile);
 		jugadores = new ArrayList<Jugador>();
 	}
 	

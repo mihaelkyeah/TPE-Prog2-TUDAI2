@@ -46,7 +46,7 @@ public class Carta{
 	{//Devolver valor de un atributo por su nombre
 		Atributo aux = this.getAtributo (atributo);
 		if (aux == null)
-			return 0;
+			return 0; //si el atributo no existe devuelve 0
 		else
 			return (aux.getValor());
 	}
@@ -82,9 +82,15 @@ public class Carta{
 	
 	@Override
 	public String toString() {
-		return this.getNombre();
+		return "Carta [nombre:" + nombre + ", atributos:" + atributos + "]";
 	}
 
+	/*
+	@Override
+	public String toString() {
+		return this.getNombre();
+	}
+*/
 	@Override
 	public boolean equals(Object o) {
 		// TODO Auto-generated method stub
