@@ -21,7 +21,7 @@ public class PocimaCarta extends Pocima {
 		
 		for (int i=0; i < carta.cantidadAtributos(); i++)
 		{//A cada atributo le inserto el valor;
-			carta.getAtributo(i).setValor((int)this.valor);
+			carta.getAtributo(i).setValor((int)(this.valor *carta.getAtributo(i).getValor()));
 		}
 	}
 

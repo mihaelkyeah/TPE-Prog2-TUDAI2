@@ -167,7 +167,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			 if (turno == jugadores.size())
 				 turno = 0;
 		}
-		System.out.println(""+ganador+" ha ganado el juego");
+		System.out.println(""+jugadores.get(0)+" ha ganado el juego");
 	}
 
 	private ArrayList <Jugador> competidores(Jugador jugador)

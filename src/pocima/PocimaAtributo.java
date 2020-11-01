@@ -19,9 +19,17 @@ public class PocimaAtributo extends Pocima {
 	@Override
 	public void alterarCarta(Carta carta) {
 		// TODO Auto-generated method stub
+		/*Atributo aux = carta.getAtributo(this.getNombre());
+		if (aux != null)
+		{	aux.setValor((int)(this.valor *aux.getValor()));
+			carta.agregarAtributo(aux);
+		}
+	
+	*/
 		Atributo aux = carta.getAtributo(this.getNombre());
-		aux.setValor((int) this.valor);
-		carta.agregarAtributo(aux);
+		this.valor*= aux.getValor();
+		carta.getAtributo(this.getNombre()).setValor((int)this.valor);
+	
 	}
 
 }
