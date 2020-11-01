@@ -13,6 +13,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	public Juego(String jsonFile) {
 		this.mazoOriginal = new Mazo();
 		this.mazoOriginal.crearMazo(jsonFile);
+        this.mazoOriginal.validarCartas();
 		this.jugadores = new ArrayList<Jugador>();
 	}
 	

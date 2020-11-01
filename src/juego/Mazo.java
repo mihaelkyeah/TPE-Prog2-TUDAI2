@@ -65,7 +65,7 @@ public class Mazo {
 	}
 	
 	public void validarCartas() {
-		Carta primeraCarta = this.tomarPrimeraCarta();
+		Carta primeraCarta = this.mazo.get(0);
 		// Guarda una lista de índices para buscar las cartas del mazo para borrar
 		ArrayList<Integer> cartasExtranias = new ArrayList<>();
 		
@@ -73,23 +73,26 @@ public class Mazo {
 			Carta cartaActual = this.mazo.get(i);
 			if(cartaActual.cantidadAtributos() == primeraCarta.cantidadAtributos()) {
 				int j = 0;
-				while((j < cartaActual.cantidadAtributos()) && (!(cartaActual.getAtributo(j).equals(null)))) {
+				Atributo aux = cartaActual.getAtributo(j);
+				
+				
+				while((j < cartaActual.cantidadAtributos()) && (primeraCarta.getAtributo(aux.getNombre()) != null)) {
+					aux = cartaActual.getAtributo(j);
 					j++;
 				}
-				if(j != cartaActual.cantidadAtributos()) {
+				if(j < cartaActual.cantidadAtributos()) {
 					cartasExtranias.add(i);
 				}
 			}
+			else
+				cartasExtranias.add(i);
 		}
 		
+		System.out.println("Cantidad de cartas extrañas:"+cartasExtranias.size());
 		for(int i = 0; i < cartasExtranias.size(); i++) {
-			this.mazo.remove(cartasExtranias.get(i));
+			this.mazo.remove((int)cartasExtranias.get(i));
 		}
 			
-	}
-	
-	private Carta tomarPrimeraCarta() {
-		return this.mazo.get(0);
 	}
 	
 	public void agregarCartaAlMazo(Carta carta)
