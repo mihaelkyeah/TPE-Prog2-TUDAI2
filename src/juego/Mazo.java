@@ -62,12 +62,6 @@ public class Mazo {
 	public void agregarCartaAlMazo(Carta carta)
 	{
 		mazo.add(carta);
-		
-		//agregar al azar?
-		/*
-		 * if (mazo.size() > 2)
-				mezclarMazo();
-		*/
 
 	}
 	
@@ -90,7 +84,13 @@ public class Mazo {
 		}
 	}
 
-	
+	public void agregarMazo(Mazo mazo)
+	{
+		for (int i = 0; i < mazo.getTamanioMazo(); i++)
+		
+		this.agregarCartaAlMazo(mazo.sacarCartaDelMazo());
+		
+	}
 
 	
 	

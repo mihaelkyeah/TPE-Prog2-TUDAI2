@@ -50,32 +50,20 @@ public abstract class Jugador {
 		return this.mazoJugador.sacarCartaDelMazo();
 	}
 	
-	public void iniciarRonda()
-	{
-		
-	}
-	
-	
-	// El jugador devuelve las cartas de su mazo al mazo original
-		public void devolverMazo(Mazo mazo) {
-			while(mazoJugador.getTamanioMazo() > 0) {
-				mazo.agregarCartaAlMazo(mazoJugador.sacarCartaDelMazo());
-			}
-		}
 		
 		public int cantidadCartas()
 		{
 			return (this.mazoJugador.getTamanioMazo());
 		}
 		
-		public void recibirCarta(Carta carta)
+		public void recibirCartas(Carta carta)
 		{
 			this.mazoJugador.agregarCartaAlMazo(carta);
 		}
 		
-		public void entregarCarta(Jugador jugador)
+		public void recibirCartas(Mazo mazo)
 		{
-			jugador.recibirCarta(this.mazoJugador.sacarCartaDelMazo());
+			this.mazoJugador.agregarMazo(mazo);
 		}
 	
 		public void estadisticasJugador() //public String?

@@ -80,17 +80,12 @@ public class Carta{
 	}
 
 	
-	@Override
-	public String toString() {
-		return "Carta [nombre:" + nombre + ", atributos:" + atributos + "]";
-	}
 
-	/*
 	@Override
 	public String toString() {
 		return this.getNombre();
 	}
-*/
+
 	@Override
 	public boolean equals(Object o) {
 		// TODO Auto-generated method stub

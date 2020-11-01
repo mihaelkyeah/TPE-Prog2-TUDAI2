@@ -6,7 +6,7 @@ import estrategia.Jugador;
 
 public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, seguramente sera eliminado el extends
 
-	public static Mazo mesa;
+	public static Mazo mesa = null;
 	private Mazo mazoOriginal;
 	private ArrayList<Jugador> jugadores;
 	
@@ -41,7 +41,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 				j=0;
 			else
 				j++;
-			jugadores.get(j).recibirCarta(mazoOriginal.sacarCartaDelMazo());
+			jugadores.get(j).recibirCartas(mazoOriginal.sacarCartaDelMazo());
 			// TODO: mazoOriginal.crearMazo(); <-- Tiene que estar ni bien empieza el juego; tiene que llamarse una sola vez y aplicar las potas
 		}
 	}
@@ -52,15 +52,6 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	{
 		for (int i=0; i < jugadores.size(); i++)
 			jugadores.get(i).estadisticasJugador();
-	}
-	
-	public void darCartasAlGanador(Jugador ganador)
-	{
-		for (int i = 0; i < jugadores.size(); i++)
-		{
-			if (!(jugadores.get(i).equals(ganador)))
-				jugadores.get(i).entregarCarta(ganador);
-		}
 	}
 	
 	public boolean hayGanador()
@@ -82,6 +73,15 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			if ((posMasCartas== -1) || (jugadores.get(i).cantidadCartas()) > jugadores.get(posMasCartas).cantidadCartas())
 				posMasCartas= i;
 		return (posMasCartas);
+	}
+	
+	public String ganadorRonda(ArrayList <Atributo> jugadores)
+	{
+		Atributo ganador = null;
+		for (Atributo persona : jugadores)
+			if ((ganador == null) || (ganador.valor < persona.valor))
+			{ganador = persona;}
+		return ganador.getNombre();
 	}
 	
 	public void declararGanador()
@@ -107,24 +107,37 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	{
 		boolean ganador = this.hayGanador();
 		int turno = 0, numeroRonda=1;
+		ArrayList <Atributo> valores = null;
 		while (!ganador)
 		{
 			System.out.println("------ RONDA "+numeroRonda+" ------");
 			
+			
 			Jugador jugadorTurno = jugadores.get(turno);
 			Carta cartaTurno = jugadorTurno.cartaEnMano();
 			String atributoTurno = jugadorTurno.elegirAtributo(cartaTurno);
+			valores.add(new Atributo(jugadorTurno.getNombre(), cartaTurno.getValor(atributoTurno)));
 			
-			System.out.println("El jugador "+jugadorTurno.getNombre()+" selecciona competir por el atributo "+atributoTurno);
-			System.out.println("La carta de "+jugadorTurno.getNombre()+" es "+cartaTurno.getNombre()+ " con "+atributoTurno+""+cartaTurno.getValor(atributoTurno));
+			System.out.println("El jugador "+jugadorTurno+" selecciona competir por el atributo "+atributoTurno);
+			System.out.println("La carta de "+jugadorTurno+" es "+cartaTurno+ " con "+atributoTurno+""+cartaTurno.getValor(atributoTurno));
 			
 			ArrayList <Jugador> enfrentar = this.competidores(jugadorTurno);
-			
+			mesa.agregarCartaAlMazo(cartaTurno);
 			for (Jugador competidor : enfrentar)
 			{
 				Carta cartaCompetidor = competidor.cartaEnMano();
-				System.out.println("La carta de "+competidor.getNombre()+" es "+cartaCompetidor.getNombre());
+				System.out.println("La carta de "+competidor+" es "+cartaCompetidor+" con "+atributoTurno+""+cartaCompetidor.getValor(atributoTurno));
+				valores.add(new Atributo(competidor.getNombre(), cartaCompetidor.getValor(atributoTurno)));
+				mesa.agregarCartaAlMazo(cartaCompetidor);
 			}
+			
+			String ganadorEstaRonda = this.ganadorRonda(valores);
+			//recibe las cartas
+			Jugador vencedor = this.getJugador(ganadorEstaRonda);
+			System.out.println("Gana la ronda "+ganadorEstaRonda+" y queda con "+vencedor.cantidadCartas()+" cartas ");
+			//Mostrar estadisticas de todos los jugadores <-- abstraer el tema porque ya molesta -.-
+			// mesa.clear(); //en realidad debe ir al ganador
+			vencedor.recibirCartas(mesa);
 			 ganador = this.hayGanador();
 			 numeroRonda++;
 			 turno++;
@@ -133,7 +146,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		}
 	}
 
-	public ArrayList <Jugador> competidores(Jugador jugador)
+	private ArrayList <Jugador> competidores(Jugador jugador)
 	{
 		ArrayList <Jugador> copia = new ArrayList <Jugador>();
 		copia.addAll(this.jugadores);
