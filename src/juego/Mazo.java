@@ -126,10 +126,12 @@ public class Mazo {
 		{
 			this.agregarCartaAlMazo(carta);
 		}
-		mazoAgregar.mazo.clear();
 	}
 
-	
+	public void borrarMazo()
+	{
+		this.mazo.clear();
+	}
 	
 	
 	

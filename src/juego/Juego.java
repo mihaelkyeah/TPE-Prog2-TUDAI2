@@ -163,6 +163,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			 numeroRonda++;
 			 turno++;
 			 valores.clear();
+			 mesa.borrarMazo();
 			 ArrayList<String> perdedores = this.jugadoresPerdedores();
 			 if(perdedores.size() > 0)
 				 for(String nombrePerdedor:perdedores)
