@@ -12,6 +12,7 @@ import estrategia.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.ArrayList;
@@ -28,12 +29,17 @@ public class VisorMazo { //futuro Main TT.TT
         Jugador jugador2 = new Ambicioso("jugador 2");
         
         Juego juego = new Juego(mazoPath);
-        jugador1 = new Ambicioso(jugador1);
         juego.agregarJugador(jugador1);
         juego.agregarJugador(jugador2);
-     /*   juego.imprimirMazo();
-        jugador1 = new Ambicioso(jugador1);
-        */
+        juego.imprimirMazo();
+        try {
+        	System.out.println("Presione una tecla para continuar...");
+        	System.in.read();
+        }
+        catch(Exception e) {
+        	System.out.println(e);
+        }
+        // jugador1 = new Ambicioso(jugador1);
         juego.repartirCartas();
         juego.Ronda();
 

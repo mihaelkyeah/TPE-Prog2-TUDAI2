@@ -32,10 +32,21 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		return null;
 	}
 	
+	private ArrayList<String> jugadoresPerdedores() {
+		ArrayList<String> retorno = new ArrayList<>();
+		for(Jugador j:this.jugadores)
+			if(j.cantidadCartas() == 0)
+				retorno.add(j.getNombre());
+		return retorno;
+	}
+	
 	// ¿Es mejor boolean o un mensaje por string?
 	public void eliminarJugador(String nombre) {
-		if(jugadores.contains(this.getJugador(nombre)))
+		if(jugadores.contains(this.getJugador(nombre))) {
 			jugadores.remove(this.getJugador(nombre));
+			System.out.println(""+nombre+" ha sido eliminad@ de la competencia.");
+		}
+			
 	}
 		
 	public void repartirCartas()
@@ -143,12 +154,20 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			//Mostrar estadisticas de todos los jugadores <-- abstraer el tema porque ya molesta -.-
 			
 			 ganador = this.hayGanador();
+			 
+			 // Busca y elimina a todos los jugadores que no tengan cartas
+			 ArrayList<String> perdedores = this.jugadoresPerdedores();
+			 if(perdedores.size() > 0)
+				 for(String nombrePerdedor:perdedores)
+					 this.eliminarJugador(nombrePerdedor);
+				 
 			 numeroRonda++;
 			 turno++;
 			 valores.clear();
 			 if (turno == jugadores.size())
 				 turno = 0;
 		}
+		System.out.println(""+ganador+" ha ganado el juego");
 	}
 
 	private ArrayList <Jugador> competidores(Jugador jugador)
