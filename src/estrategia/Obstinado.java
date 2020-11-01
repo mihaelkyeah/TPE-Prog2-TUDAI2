@@ -11,6 +11,10 @@ public class Obstinado extends Jugador  {
 		this.atributoJugando = atributoJugando;
 	}
 	
+	public void setAtributoJugando(String atributoJugando)
+	{
+		this.atributoJugando = atributoJugando;
+	}
 	public Obstinado (Jugador jugador)
 	{
 		super(jugador);

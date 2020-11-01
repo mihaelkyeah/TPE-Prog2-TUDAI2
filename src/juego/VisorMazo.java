@@ -28,13 +28,15 @@ public class VisorMazo { //futuro Main TT.TT
         Jugador jugador2 = new Ambicioso("jugador 2");
         
         Juego juego = new Juego(mazoPath);
+        jugador1 = new Ambicioso(jugador1);
         juego.agregarJugador(jugador1);
         juego.agregarJugador(jugador2);
-        juego.imprimirMazo();
-        /*
+     /*   juego.imprimirMazo();
+        jugador1 = new Ambicioso(jugador1);
+        */
         juego.repartirCartas();
         juego.Ronda();
-        */
+
     }
 
 }
