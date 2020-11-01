@@ -25,7 +25,7 @@ public class VisorMazo { //futuro Main TT.TT
         Mazo mazoAux = new Mazo();
         mazoAux.crearMazo(mazoPath);
         Jugador jugador1 = new Timbero ("jugador 1");
-        Jugador jugador2 = new Timbero("jugador 2");
+        Jugador jugador2 = new Ambicioso("jugador 2");
         
         Juego juego = new Juego(mazoPath);
         juego.agregarJugador(jugador1);

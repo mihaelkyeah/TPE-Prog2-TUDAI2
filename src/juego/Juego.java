@@ -6,7 +6,7 @@ import estrategia.Jugador;
 
 public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, seguramente sera eliminado el extends
 
-	public static Mazo mesa = null;
+	public static Mazo mesa = new Mazo();
 	private Mazo mazoOriginal;
 	private ArrayList<Jugador> jugadores;
 	
@@ -107,29 +107,25 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	{
 		boolean ganador = this.hayGanador();
 		int turno = 0, numeroRonda=1;
-		ArrayList <Atributo> valores = null;
+		ArrayList <Atributo> valores = new ArrayList<Atributo>();
 		while (!ganador)
 		{
 			System.out.println("------ RONDA "+numeroRonda+" ------");
 			
-			
 			Jugador jugadorTurno = jugadores.get(turno);
-			System.out.println("------ AQUI LLEGUE ------"+jugadorTurno.cantidadCartas());
 			Carta cartaTurno = jugadorTurno.cartaEnMano();
-			System.out.println("------ AQUI LLEGUE ------");
 			String atributoTurno = jugadorTurno.elegirAtributo(cartaTurno);
-
 			valores.add(new Atributo(jugadorTurno.getNombre(), cartaTurno.getValor(atributoTurno)));
 			
 			System.out.println("El jugador "+jugadorTurno+" selecciona competir por el atributo "+atributoTurno);
-			System.out.println("La carta de "+jugadorTurno+" es "+cartaTurno+ " con "+atributoTurno+""+cartaTurno.getValor(atributoTurno));
+			System.out.println("La carta de "+jugadorTurno+" es "+cartaTurno+ " con "+atributoTurno+" "+cartaTurno.getValor(atributoTurno));
 			
 			ArrayList <Jugador> enfrentar = this.competidores(jugadorTurno);
 			mesa.agregarCartaAlMazo(cartaTurno);
 			for (Jugador competidor : enfrentar)
 			{
 				Carta cartaCompetidor = competidor.cartaEnMano();
-				System.out.println("La carta de "+competidor+" es "+cartaCompetidor+" con "+atributoTurno+""+cartaCompetidor.getValor(atributoTurno));
+				System.out.println("La carta de "+competidor+" es "+cartaCompetidor+" con "+atributoTurno+" "+cartaCompetidor.getValor(atributoTurno));
 				valores.add(new Atributo(competidor.getNombre(), cartaCompetidor.getValor(atributoTurno)));
 				mesa.agregarCartaAlMazo(cartaCompetidor);
 			}
@@ -137,13 +133,14 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			String ganadorEstaRonda = this.ganadorRonda(valores);
 			//recibe las cartas
 			Jugador vencedor = this.getJugador(ganadorEstaRonda);
+			vencedor.recibirCartas(mesa);// el ganador recibe las cartas en la mesa
 			System.out.println("Gana la ronda "+ganadorEstaRonda+" y queda con "+vencedor.cantidadCartas()+" cartas ");
 			//Mostrar estadisticas de todos los jugadores <-- abstraer el tema porque ya molesta -.-
 			
-			vencedor.recibirCartas(mesa);// el ganador recibe las cartas en la mesa
 			 ganador = this.hayGanador();
 			 numeroRonda++;
 			 turno++;
+			 valores.clear();
 			 if (turno == jugadores.size())
 				 turno = 0;
 		}
