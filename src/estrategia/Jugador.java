@@ -11,7 +11,7 @@ import java.util.List;
 public abstract class Jugador {
 
 	protected String nombre;
-	protected Mazo mazoJugador;
+	private Mazo mazoJugador;
 	
 	public Jugador (String nombre)
 	{

@@ -6,6 +6,9 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonValue;
 
+import estrategia.Jugador;
+import estrategia.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,11 +24,14 @@ public class VisorMazo { //futuro Main TT.TT
         String mazoPath = "./superheroes.json";
         Mazo mazoAux = new Mazo();
         mazoAux.crearMazo(mazoPath);
-        for (int i= 0 ; i < mazoAux.getTamanioMazo(); i ++)
-        {
-        	Carta cartaAux = mazoAux.sacarCartaDelMazo();
-        	System.out.println(cartaAux);
-        }
+        Jugador jugador1 = new Timbero ("jugador 1");
+        Jugador jugador2 = new Timbero("jugador 2");
+        
+        Juego juego = new Juego(mazoPath);
+        juego.agregarJugador(jugador1);
+        juego.agregarJugador(jugador2);
+        juego.repartirCartas();
+        juego.Ronda();
     }
 
 }

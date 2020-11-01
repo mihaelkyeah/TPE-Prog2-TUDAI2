@@ -11,8 +11,9 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	private ArrayList<Jugador> jugadores;
 	
 	public Juego(String jsonFile) {
-		mazoOriginal.crearMazo(jsonFile);
-		jugadores = new ArrayList<Jugador>();
+		this.mazoOriginal = new Mazo();
+		this.mazoOriginal.crearMazo(jsonFile);
+		this.jugadores = new ArrayList<Jugador>();
 	}
 	
 	public void agregarJugador(Jugador j) {
@@ -35,14 +36,13 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	public void repartirCartas()
 	{
 		int j = 0;
-		for (int i = 0; i < mazoOriginal.getTamanioMazo(); i++)
+		// TODO: mazoOriginal.crearMazo(); <-- Tiene que estar ni bien empieza el juego; tiene que llamarse una sola vez y aplicar las potas
+		while (this.mazoOriginal.getTamanioMazo() > 0)
 		{
-			if(j == jugadores.size())
+			jugadores.get(j).recibirCartas(this.mazoOriginal.sacarCartaDelMazo());
+			j++;
+			if(j == this.jugadores.size())
 				j=0;
-			else
-				j++;
-			jugadores.get(j).recibirCartas(mazoOriginal.sacarCartaDelMazo());
-			// TODO: mazoOriginal.crearMazo(); <-- Tiene que estar ni bien empieza el juego; tiene que llamarse una sola vez y aplicar las potas
 		}
 	}
 	
@@ -60,7 +60,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		for(int i = 0; i < jugadores.size(); i ++)
 			if ((jugadores.get(i).cantidadCartas()) > 0)
 				conCartas++;
-		if (jugadores.size() < 0)
+		if (jugadores.size() < 2)
 			return true;
 		return (conCartas == 1);
 	}
@@ -114,8 +114,11 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			
 			
 			Jugador jugadorTurno = jugadores.get(turno);
+			System.out.println("------ AQUI LLEGUE ------"+jugadorTurno.cantidadCartas());
 			Carta cartaTurno = jugadorTurno.cartaEnMano();
+			System.out.println("------ AQUI LLEGUE ------");
 			String atributoTurno = jugadorTurno.elegirAtributo(cartaTurno);
+
 			valores.add(new Atributo(jugadorTurno.getNombre(), cartaTurno.getValor(atributoTurno)));
 			
 			System.out.println("El jugador "+jugadorTurno+" selecciona competir por el atributo "+atributoTurno);
@@ -136,8 +139,8 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			Jugador vencedor = this.getJugador(ganadorEstaRonda);
 			System.out.println("Gana la ronda "+ganadorEstaRonda+" y queda con "+vencedor.cantidadCartas()+" cartas ");
 			//Mostrar estadisticas de todos los jugadores <-- abstraer el tema porque ya molesta -.-
-			// mesa.clear(); //en realidad debe ir al ganador
-			vencedor.recibirCartas(mesa);
+			
+			vencedor.recibirCartas(mesa);// el ganador recibe las cartas en la mesa
 			 ganador = this.hayGanador();
 			 numeroRonda++;
 			 turno++;

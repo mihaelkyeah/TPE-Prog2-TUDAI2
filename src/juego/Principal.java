@@ -14,7 +14,7 @@ public class Principal {
 		// TODO Auto-generated method stub
 		System.out.println("Hola mundo :D");
 	
-		Juego nuevoJuego = new Juego();
+		//Juego nuevoJuego = new Juego();
 	}
 
 }
