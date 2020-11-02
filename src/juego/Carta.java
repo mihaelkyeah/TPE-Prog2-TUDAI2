@@ -9,15 +9,30 @@ public class Carta{
 	
 	private String nombre;
 	private ArrayList <Atributo> atributos;
+	private Pocima pocima;
 	
 	public Carta (String nombre)
 	{
 		this.nombre = nombre;
 		this.atributos =  new ArrayList <Atributo>();
+		this.pocima =  null;
 	}
 	
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public Pocima getPocima()
+	{
+		return (this.pocima);
+	}
+	
+	public void setPocima(Pocima pocima)
+	{
+		if (this.pocima == null)
+		{
+			this.pocima = pocima;
+		}
 	}
 	
 	public Atributo getAtributo(String atributo)
@@ -33,13 +48,6 @@ public class Carta{
 		return (this.atributos.get(indice));
 	}
 	
-	/*
-	public ArrayList<Atributo> getListaAtributos() {
-		ArrayList<Atributo> retorno = new ArrayList<>();
-		for(int i = 0; i < this.atributos.size(); i++)
-			retorno.add(this.getAtributo(i));
-		return retorno;
-	}*/
 	
 	public void agregarAtributo(Atributo atributo)
 	{

@@ -15,13 +15,15 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonValue;
 
+import pocima.Pocima;
+
 public class Mazo {
 	
 	protected ArrayList<Carta> mazo = new ArrayList<Carta> ();
 	
 	public int posicionAzar()
 	{
-		return (int) (Math.random()*mazo.size());
+		return (int) (Math.random()*this.mazo.size());
 	}
 	
 	public int getTamanioMazo() {
@@ -131,6 +133,15 @@ public class Mazo {
 	public void borrarMazo()
 	{
 		this.mazo.clear();
+	}
+
+	public void repartirPocimas(ArrayList<Pocima> listaPocimas) {
+		// TODO Auto-generated method stub
+		for (int i=0; i < listaPocimas.size(); i++ )
+		{
+			int pos = posicionAzar();
+			this.mazo.get(pos).setPocima(listaPocimas.get(i));
+		}
 	}
 	
 	

@@ -7,6 +7,7 @@ import javax.json.JsonReader;
 import javax.json.JsonValue;
 
 import estrategia.Jugador;
+import pocima.Pocima;
 import estrategia.*;
 
 import java.io.File;
@@ -25,6 +26,8 @@ public class VisorMazo { //futuro Main TT.TT
         String mazoPath = "./superheroes.json";
         Mazo mazoAux = new Mazo();
         mazoAux.crearMazo(mazoPath);
+        
+        ArrayList <Pocima> listaPocimas = new ArrayList <Pocima>();
         Jugador jugador1 = new Timbero ("jugador 1");
         Jugador jugador2 = new Timbero("jugador 2");
         Jugador jugador3 = new Timbero("jugador 3");
@@ -46,7 +49,7 @@ public class VisorMazo { //futuro Main TT.TT
         	System.out.println(e);
         }*/
         // jugador1 = new Ambicioso(jugador1);
-        juego.repartirCartas();
+        juego.repartirCartas(listaPocimas);
         juego.Ronda();
 
     }

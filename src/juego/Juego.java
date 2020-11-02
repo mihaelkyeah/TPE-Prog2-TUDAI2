@@ -3,6 +3,7 @@ package juego;
 import java.util.ArrayList;
 
 import estrategia.Jugador;
+import pocima.Pocima;
 
 public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, seguramente sera eliminado el extends
 
@@ -41,10 +42,11 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			
 	}
 		
-	public void repartirCartas()
+	public void repartirCartas(ArrayList<Pocima> listaPocimas)
 	{
 		int j = 0;
 		// TODO: mazoOriginal.crearMazo(); <-- Tiene que estar ni bien empieza el juego; tiene que llamarse una sola vez y aplicar las potas
+		this.mazoOriginal.repartirPocimas(listaPocimas);
 		while (this.mazoOriginal.getTamanioMazo() > 0)
 		{
 			jugadores.get(j).recibirCartas(this.mazoOriginal.sacarCartaDelMazo());
