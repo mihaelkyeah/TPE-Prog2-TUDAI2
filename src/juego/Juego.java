@@ -106,81 +106,61 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		this.mostrarEstadisticasTodos();
 		while (!ganador)
 		{
-			System.out.println("------ RONDA "+numeroRonda+" ------");
-			
-			Jugador jugadorTurno = jugadores.get(turno);
-			Carta cartaTurno = jugadorTurno.cartaEnMano();
-			String atributoTurno = jugadorTurno.elegirAtributo(cartaTurno);
-			valores.add(new Atributo(jugadorTurno.getNombre(), cartaTurno.getValor(atributoTurno)));
-			
-			this.mostrarJugada(jugadorTurno,cartaTurno,atributoTurno);
-			
-			mesa.agregarCartaAlMazo(cartaTurno);
-			
-			this.enfrentar(jugadorTurno,atributoTurno,valores);
-			
-			String ganadorEstaRonda = this.ganadorRonda(valores);
-			//recibe las cartas
-			Jugador vencedor = this.getJugador(ganadorEstaRonda);
-			vencedor.recibirCartas(mesa);// el ganador recibe las cartas en la mesa
-			this.mostrarGanadorRonda(vencedor);
-			//Mostrar estadisticas de todos los jugadores <-- abstraer el tema porque ya molesta -.-
-			
-			ganador = this.hayGanador();
-			numeroRonda++;
-			turno++;
-			valores.clear();
-			mesa.borrarMazo();
-			
-			this.eliminarPerdedores();
-			 
-			if (turno == jugadores.size())
-				 turno = 0;
+			ganador = this.juegaRonda(numeroRonda, turno);
 		}
-		this.declararGanador();
+				this.declararGanador();
 	}
 	
 	public void Ronda(int limiteRonda)
 	{
 		boolean ganador = this.hayGanador();
 		int turno = 0, numeroRonda=1;
-		ArrayList <Atributo> valores = new ArrayList<Atributo>();
 		this.mostrarEstadisticasTodos();
 		while (!ganador && numeroRonda < limiteRonda+1)
 		{
-			System.out.println("------ RONDA "+numeroRonda+" ------");
-			
-			Jugador jugadorTurno = jugadores.get(turno);
-			Carta cartaTurno = jugadorTurno.cartaEnMano();
-			String atributoTurno = jugadorTurno.elegirAtributo(cartaTurno);
-			valores.add(new Atributo(jugadorTurno.getNombre(), cartaTurno.getValor(atributoTurno)));
-			
-			this.mostrarJugada(jugadorTurno,cartaTurno,atributoTurno);
-			
-			mesa.agregarCartaAlMazo(cartaTurno);
-			
-			this.enfrentar(jugadorTurno,atributoTurno,valores);
-			
-			String ganadorEstaRonda = this.ganadorRonda(valores);
-			//recibe las cartas
-			Jugador vencedor = this.getJugador(ganadorEstaRonda);
-			vencedor.recibirCartas(mesa);// el ganador recibe las cartas en la mesa
-			this.mostrarGanadorRonda(vencedor);
-			//Mostrar estadisticas de todos los jugadores <-- abstraer el tema porque ya molesta -.-
-			
-			ganador = this.hayGanador();
-			numeroRonda++;
-			turno++;
-			valores.clear();
-			mesa.borrarMazo();
-			
-			this.eliminarPerdedores();
-			 
-			if (turno == jugadores.size())
-				 turno = 0;
+			ganador = this.juegaRonda(numeroRonda, turno);
 		}
-		this.declararGanador();
+			this.declararGanador();
 	}
+	
+	public boolean juegaRonda(int numeroRonda, int turno)
+	{
+		ArrayList <Atributo> valores = new ArrayList<Atributo>();
+		
+		System.out.println("------ RONDA "+numeroRonda+" ------");
+		
+		Jugador jugadorTurno = jugadores.get(turno);
+		Carta cartaTurno = jugadorTurno.cartaEnMano();
+		String atributoTurno = jugadorTurno.elegirAtributo(cartaTurno);
+		valores.add(new Atributo(jugadorTurno.getNombre(), cartaTurno.getValor(atributoTurno)));
+		
+		this.mostrarJugada(jugadorTurno,cartaTurno,atributoTurno);
+		
+		mesa.agregarCartaAlMazo(cartaTurno);
+		
+		this.enfrentar(jugadorTurno,atributoTurno,valores);
+		
+		String ganadorEstaRonda = this.ganadorRonda(valores);
+		//recibe las cartas
+		Jugador vencedor = this.getJugador(ganadorEstaRonda);
+		vencedor.recibirCartas(mesa);// el ganador recibe las cartas en la mesa
+		this.mostrarGanadorRonda(vencedor);
+		//Mostrar estadisticas de todos los jugadores <-- abstraer el tema porque ya molesta -.-
+		
+		boolean ganador = this.hayGanador();
+		numeroRonda++;
+		turno++;
+		valores.clear();
+		mesa.borrarMazo();
+		
+		this.eliminarPerdedores();
+		 
+		if (turno == jugadores.size())
+			 turno = 0;
+		
+		return ganador;
+	}
+	
 	
 	private void enfrentar(Jugador jugadorTurno, String atributoTurno, ArrayList<Atributo> valores) {
 		ArrayList <Jugador> enfrentar = this.competidores(jugadorTurno);

@@ -29,7 +29,7 @@ public class VisorMazo { //futuro Main TT.TT
         Jugador jugador2 = new Timbero("jugador 2");
         Jugador jugador3 = new Timbero("jugador 3");
         Jugador jugador4 = new Timbero("jugador 4");
-        Jugador jugador5 = new Timbero("jugador ");
+        Jugador jugador5 = new Timbero("jugador 5");
         
         Juego juego = new Juego(mazoPath);
         juego.agregarJugador(jugador1);
@@ -47,7 +47,7 @@ public class VisorMazo { //futuro Main TT.TT
         }*/
         // jugador1 = new Ambicioso(jugador1);
         juego.repartirCartas();
-        juego.Ronda();
+        juego.Ronda(103);
 
     }
 
