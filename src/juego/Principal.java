@@ -94,7 +94,7 @@ public class Principal {
        	}
        	*/
        
-       	juego.Ronda();
+       	juego.Ronda(8);
 
     }
     	

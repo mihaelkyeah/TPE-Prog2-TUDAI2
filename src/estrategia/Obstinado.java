@@ -15,9 +15,16 @@ public class Obstinado extends Jugador  {
 	{
 		this.atributoJugando = atributoJugando;
 	}
+	
 	public Obstinado (Jugador jugador)
 	{
 		super(jugador);
+	}
+	
+	public Obstinado (Jugador jugador, String atributoJugando)
+	{
+		super(jugador);
+		this.atributoJugando = atributoJugando;
 	}
 
 	@Override

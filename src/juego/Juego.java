@@ -1,8 +1,9 @@
 package juego;
 
 import java.util.ArrayList;
-
-import estrategia.Jugador;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import estrategia.*;
 import pocima.Pocima;
 
 public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, seguramente sera eliminado el extends
@@ -162,10 +163,15 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		valores.clear();
 		mesa.borrarMazo();
 		
+		
 		this.eliminarPerdedores();
+		
+		for(Jugador j:this.jugadores)
+			this.deseaCambiarEstrategia(j, atributoTurno);
 		
 		return ganador;
 	}
+
 	
 	
 	private void enfrentar(Jugador jugadorTurno, String atributoTurno, ArrayList<Atributo> valores) {
@@ -218,6 +224,57 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	
 	private void mostrarGanadorJuego(String nombreJugador) {
 		System.out.println(""+nombreJugador+" ha ganado el juego!!");
+	}
+	
+	private Jugador deseaCambiarEstrategia(Jugador jugadorOriginal, String atributoMano) {
+		System.out.println(jugadorOriginal+" - ¿Desea cambiar la estrategia para la siguiente ronda? (S/N)");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		char respuesta = '0';
+		try {
+			respuesta = (char)reader.read();
+		}
+		catch(Exception e) {
+		}
+		if((respuesta == 'S') || (respuesta == 's'))
+			return this.cambiarEstrategia(jugadorOriginal, atributoMano);
+		else {
+			System.out.println("No se harán cambios.");
+			return jugadorOriginal;
+		}
+		
+	}
+	
+	private Jugador cambiarEstrategia(Jugador jugadorOriginal, String atributoMano) {
+		System.out.println("Seleccione estrategia:");
+		System.out.println("1. Ambicioso (\"1\")");
+		System.out.println("2. Obstinado (\"2\")");
+		System.out.println("3. Timbero (\"3\")");
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		char opcion = '0';
+		Jugador retorno;
+		try {
+			opcion = (char)reader.read();
+		}
+		catch(Exception e) {
+			System.out.println("Opción inválida. No se harán cambios.");
+		}
+		switch(opcion) {
+		case('1'):
+				retorno = new Ambicioso(jugadorOriginal.getNombre());
+			break;
+		case('2'):
+				retorno = new Obstinado(jugadorOriginal.getNombre(),atributoMano);
+			break;
+		case('3'):
+				retorno = new Timbero(jugadorOriginal.getNombre());
+			break;
+		default:
+				System.out.println("No se harán cambios.");
+				return jugadorOriginal;
+		}
+		retorno = retorno.cambiarEstrategia(jugadorOriginal);
+		return retorno;
+		
 	}
 	
 	private void declararGanador() {
