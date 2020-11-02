@@ -27,6 +27,13 @@ public class Atributo {//Las cartas y las pocimas tienen atributos pero cada una
 		this.atributo = nombre;
 		this.valor = valor;
 	}
+	
+	public Atributo copiarAtributo() {
+		String nombreNuevo = this.getNombre();
+		int valorNuevo = this.getValor();
+		Atributo retorno = new Atributo(nombreNuevo,valorNuevo);
+		return retorno;
+	}
 	@Override
 	public String toString() {
 		return ("[atributo=" + atributo + ", valor=" + valor + "]");

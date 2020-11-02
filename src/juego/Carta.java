@@ -18,6 +18,14 @@ public class Carta{
 		this.pocima =  null;
 	}
 	
+	public Carta(Carta carta) {
+		this.nombre = carta.getNombre();
+		this.atributos = new ArrayList<>(carta.getCopiaAtributos());
+		this.pocima = carta.getPocima();
+	}
+
+
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -119,10 +127,12 @@ public class Carta{
 		return retorno;
 	}
 	
-	private ArrayList<Atributo> getCopiaAtributos() {
+	public ArrayList<Atributo> getCopiaAtributos() {
 		ArrayList<Atributo> retorno = new ArrayList<>();
-		for(Atributo a:this.atributos)
-			retorno.add(a);
+		for(Atributo a:this.atributos) {
+			Atributo nuevo = a.copiarAtributo();
+			retorno.add(nuevo);
+		}
 		return retorno;
 	}
 

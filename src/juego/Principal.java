@@ -60,7 +60,10 @@ public class Principal {
        Pocima pocima1 = new PocimaPorcentaje("Pocion Reductora",0.50,"fuerza");
        Pocima pocima2 = new PocimaSeteo("Numero Magico",23);
        Pocima pocima3 = new PocimaPorcentaje("Pocion Aumentadora",1.25);
-       Pocima pocimaCocktail = new PocimaCocktail("VamoAVerQueSale",pocima1,pocima3); 
+       Pocima pocima4 = new PocimaPorcentaje("Pocion Aumentadora",2.25);
+       Pocima pocimaCocktail = new PocimaCocktail("VamoAVerQueSale",pocima1,pocima3);
+       Pocima pocimaCocktail2 = new PocimaCocktail("sasarasa",pocima4,pocima1);
+       Pocima pocimaCocktailLoco = new PocimaCocktail("Cocktail Loco",pocimaCocktail,pocimaCocktail2);
        
        listaPocimas.add(pocima1);
        listaPocimas.add(pocima2);
@@ -69,11 +72,16 @@ public class Principal {
        
        juego.repartirCartas(listaPocimas);
        
-       /* Pruebas de escritorio con pócimas
+       
+       
        	Carta carta1 = mazoAux.sacarCartaDelMazo();
        	System.out.println(carta1+" "+carta1.getValor("fuerza"));
        	int resultado = pocimaCocktail.alterarCarta(carta1, "fuerza");
        	System.out.println(carta1+" "+carta1.getValor("fuerza"));
+       	System.out.println(resultado);
+       	resultado = pocimaCocktail2.alterarCarta(carta1, "fuerza");
+       	System.out.println(resultado);
+       	resultado = pocimaCocktailLoco.alterarCarta(carta1, "fuerza");
        	System.out.println(resultado);
        	try {
        		System.in.read();
@@ -81,8 +89,9 @@ public class Principal {
        	catch(Exception e) {
        		System.out.println(e);
        	}
-       	*/
-        juego.Ronda();
+       	
+       
+       // juego.Ronda();
 
     }
     	
