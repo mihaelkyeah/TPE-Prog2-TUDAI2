@@ -1,6 +1,5 @@
 package pocima;
 
-import juego.Atributo;
 import juego.Carta;
 
 public class PocimaSeteo extends Pocima {
@@ -27,7 +26,7 @@ public class PocimaSeteo extends Pocima {
 			if (this.getRestriccion().equals(atributoAfectado))
 				return  (this.seteo);
 			else
-				return (carta.getAtributo(atributoAfectado).getValor());
+				return (0);
 		}
 	}
 

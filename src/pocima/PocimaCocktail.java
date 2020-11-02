@@ -19,6 +19,9 @@ public class PocimaCocktail extends Pocima {
 	@Override
 	public int alterarCarta(Carta carta, String atributoEnJuego) {
 		// TODO Auto-generated method stub
+	/*	int resultado =this.pota1.alterarCarta(carta, atributoEnJuego);
+			if (this.pota2 != null)
+				resultado =(this.pota2.alterarCarta(carta, atributoEnJuego) );*/
 		return (this.pota1.alterarCarta(carta, atributoEnJuego) + this.pota2.alterarCarta(carta, atributoEnJuego) );
 	}
 	

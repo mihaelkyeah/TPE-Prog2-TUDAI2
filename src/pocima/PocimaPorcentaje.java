@@ -1,6 +1,5 @@
 package pocima;
 
-import juego.Atributo;
 import juego.Carta;
 
 public class PocimaPorcentaje extends Pocima{
@@ -29,7 +28,7 @@ public class PocimaPorcentaje extends Pocima{
 			if (this.getRestriccion().equals(atributoAfectado))
 				return  (int)(this.porcentaje * carta.getAtributo(atributoAfectado).getValor());
 			else
-				return (carta.getAtributo(atributoAfectado).getValor());
+				return (0);
 		}
 	}
 
