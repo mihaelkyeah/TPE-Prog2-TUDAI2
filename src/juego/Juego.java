@@ -137,7 +137,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			if (turno == jugadores.size())
 				 turno = 0;
 		}
-		this.mostrarGanadorJuego(jugadores.get(0));
+		this.declararGanador();
 	}
 	
 	public void Ronda(int limiteRonda)
@@ -179,10 +179,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			if (turno == jugadores.size())
 				 turno = 0;
 		}
-		if(ganador)
-			this.mostrarGanadorJuego(jugadores.get(0));
-		else
-			this.declararGanador();
+		this.declararGanador();
 	}
 	
 	private void enfrentar(Jugador jugadorTurno, String atributoTurno, ArrayList<Atributo> valores) {
@@ -229,20 +226,37 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		System.out.println("Gana la ronda "+vencedor+" y queda con "+vencedor.cantidadCartas()+" cartas ");
 	}
 	
-	private void mostrarGanadorJuego(Jugador jugador) {
-		System.out.println(""+jugador+" ha ganado el juego!!");
+	private void mostrarGanadorJuego(String nombreJugador) {
+		System.out.println(""+nombreJugador+" ha ganado el juego!!");
 	}
 	
 	private void declararGanador() {
 		
-		ArrayList<Atributo> ganadores = new ArrayList;
-		for(Jugador j:this.jugadores) {
-			Atributo ganador;
-			ganador.setNombre(j.getNombre());
-			ganador.setValor(j.cantidadCartas());
-			ganadores.add(ganador);
-		}
+		System.out.println("\n========= RESULTADOS =========\n\n");
 		
+		ArrayList<Atributo> ganadores = new ArrayList<>();
+		
+		ganadores.add(new Atributo(jugadores.get(0).getNombre(), jugadores.get(0).cantidadCartas()));
+		
+        for (int i = 1; i < jugadores.size(); i++)
+        {
+            if (jugadores.get(i).cantidadCartas() >= ganadores.get(0).getValor()) {
+            	if (jugadores.get(i).cantidadCartas() > ganadores.get(0).getValor())
+            		ganadores.clear();
+            	ganadores.add(new Atributo(jugadores.get(i).getNombre(),jugadores.get(i).cantidadCartas()));
+            }
+            
+        }
+        
+        if(ganadores.size()>1) {
+        	System.out.println("Empate entre los siguientes jugadores:");
+        	for(Atributo ganador:ganadores)
+        		System.out.println(ganador);
+        }
+        else
+        	this.mostrarGanadorJuego(ganadores.get(0).getNombre());
+        
+        	
 	}
 
 

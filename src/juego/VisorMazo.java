@@ -26,11 +26,17 @@ public class VisorMazo { //futuro Main TT.TT
         Mazo mazoAux = new Mazo();
         mazoAux.crearMazo(mazoPath);
         Jugador jugador1 = new Timbero ("jugador 1");
-        Jugador jugador2 = new Ambicioso("jugador 2");
+        Jugador jugador2 = new Timbero("jugador 2");
+        Jugador jugador3 = new Timbero("jugador 3");
+        Jugador jugador4 = new Timbero("jugador 4");
+        Jugador jugador5 = new Timbero("jugador ");
         
         Juego juego = new Juego(mazoPath);
         juego.agregarJugador(jugador1);
        juego.agregarJugador(jugador2);
+       juego.agregarJugador(jugador3);
+       juego.agregarJugador(jugador4);
+       juego.agregarJugador(jugador5);
        /*   juego.imprimirMazo();
         try {
         	System.out.println("Presione una tecla para continuar...");
