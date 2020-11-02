@@ -34,6 +34,13 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		return null;
 	}
 	
+	public int getPosicionJugador(String nombre) {
+		for(int i = 0; i < jugadores.size(); i++)
+			if(jugadores.get(i).getNombre().equalsIgnoreCase(nombre))
+				return (i);
+		return -1;
+	}
+	
 	// ¿Es mejor boolean o un mensaje por string?
 	public void eliminarJugador(String nombre) {
 		if(jugadores.contains(this.getJugador(nombre))) {
@@ -226,7 +233,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		System.out.println(""+nombreJugador+" ha ganado el juego!!");
 	}
 	
-	private Jugador deseaCambiarEstrategia(Jugador jugadorOriginal, String atributoMano) {
+	private void deseaCambiarEstrategia(Jugador jugadorOriginal, String atributoMano) {
 		System.out.println(jugadorOriginal+" - ¿Desea cambiar la estrategia para la siguiente ronda? (S/N)");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		char respuesta = '0';
@@ -236,10 +243,12 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		catch(Exception e) {
 		}
 		if((respuesta == 'S') || (respuesta == 's'))
-			return this.cambiarEstrategia(jugadorOriginal, atributoMano);
+		{	
+			int pos = this.getPosicionJugador(jugadorOriginal.getNombre());
+			this.jugadores.set( pos, (this.cambiarEstrategia(jugadorOriginal, atributoMano)));
+		}
 		else {
 			System.out.println("No se harán cambios.");
-			return jugadorOriginal;
 		}
 		
 	}
@@ -251,7 +260,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		System.out.println("3. Timbero (\"3\")");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		char opcion = '0';
-		Jugador retorno;
+		Jugador retorno = null;
 		try {
 			opcion = (char)reader.read();
 		}
@@ -260,19 +269,18 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		}
 		switch(opcion) {
 		case('1'):
-				retorno = new Ambicioso(jugadorOriginal.getNombre());
+				retorno = new Ambicioso(jugadorOriginal);
 			break;
 		case('2'):
-				retorno = new Obstinado(jugadorOriginal.getNombre(),atributoMano);
+				retorno = new Obstinado(jugadorOriginal, atributoMano);
 			break;
 		case('3'):
-				retorno = new Timbero(jugadorOriginal.getNombre());
+				retorno = new Timbero(jugadorOriginal);
 			break;
 		default:
 				System.out.println("No se harán cambios.");
 				return jugadorOriginal;
 		}
-		retorno = retorno.cambiarEstrategia(jugadorOriginal);
 		return retorno;
 		
 	}

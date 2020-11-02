@@ -21,8 +21,8 @@ public abstract class Jugador {
 	
 	public Jugador (Jugador jugador)
 	{
-		this.nombre = jugador.nombre;
-		this.mazoJugador = jugador.mazoJugador;
+		this.nombre = jugador.getNombre();
+		this.mazoJugador = jugador.getMazoJugador();
 	}
 
 	public String getNombre() {
