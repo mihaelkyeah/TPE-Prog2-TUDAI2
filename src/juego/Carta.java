@@ -90,9 +90,9 @@ public class Carta{
 	}
 	
 	
-	public void usarPocima(Pocima pocima)
+	public void usarPocima(Pocima pocima, String atributoEnJuego)
 	{
-		pocima.alterarCarta(this);
+		int resultado = pocima.alterarCarta(this,atributoEnJuego);
 	}
 
 	

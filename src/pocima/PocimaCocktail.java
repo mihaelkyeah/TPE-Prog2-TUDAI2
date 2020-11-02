@@ -15,12 +15,11 @@ public class PocimaCocktail extends Pocima {
 		// TODO Auto-generated constructor stub
 	}
 
+
 	@Override
-	public int alterarCarta(Carta carta) {
+	public int alterarCarta(Carta carta, String atributoEnJuego) {
 		// TODO Auto-generated method stub
-		this.pota1.alterarCarta(carta);
-		this.pota2.alterarCarta(carta);
-		return 0;
+		return (this.pota1.alterarCarta(carta, atributoEnJuego) + this.pota2.alterarCarta(carta, atributoEnJuego) );
 	}
 	
 
