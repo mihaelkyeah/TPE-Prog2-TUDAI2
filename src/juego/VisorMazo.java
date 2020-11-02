@@ -47,7 +47,7 @@ public class VisorMazo { //futuro Main TT.TT
         }*/
         // jugador1 = new Ambicioso(jugador1);
         juego.repartirCartas();
-        juego.Ronda(103);
+        juego.Ronda();
 
     }
 

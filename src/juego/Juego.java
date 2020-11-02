@@ -102,11 +102,14 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	{
 		boolean ganador = this.hayGanador();
 		int turno = 0, numeroRonda=1;
-		ArrayList <Atributo> valores = new ArrayList<Atributo>();
 		this.mostrarEstadisticasTodos();
 		while (!ganador)
 		{
 			ganador = this.juegaRonda(numeroRonda, turno);
+			numeroRonda++;
+			turno++;
+			if (turno >= jugadores.size())
+				 turno = 0;
 		}
 				this.declararGanador();
 	}
@@ -119,6 +122,10 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		while (!ganador && numeroRonda < limiteRonda+1)
 		{
 			ganador = this.juegaRonda(numeroRonda, turno);
+			numeroRonda++;
+			turno++;
+			if (turno >= jugadores.size())
+				 turno = 0;
 		}
 			this.declararGanador();
 	}
@@ -127,7 +134,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	{
 		ArrayList <Atributo> valores = new ArrayList<Atributo>();
 		
-		System.out.println("------ RONDA "+numeroRonda+" ------");
+		System.out.println("\n------ RONDA "+numeroRonda+" ------");
 		
 		Jugador jugadorTurno = jugadores.get(turno);
 		Carta cartaTurno = jugadorTurno.cartaEnMano();
@@ -154,9 +161,6 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		mesa.borrarMazo();
 		
 		this.eliminarPerdedores();
-		 
-		if (turno == jugadores.size())
-			 turno = 0;
 		
 		return ganador;
 	}
@@ -212,7 +216,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	
 	private void declararGanador() {
 		
-		System.out.println("\n========= RESULTADOS =========\n\n");
+		System.out.println("\n========= RESULTADOS =========\n");
 		
 		ArrayList<Atributo> ganadores = new ArrayList<>();
 		
