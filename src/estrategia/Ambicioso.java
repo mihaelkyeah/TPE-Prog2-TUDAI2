@@ -15,8 +15,6 @@ public class Ambicioso extends Jugador  {
 		super(jugador);
 	}
 
-
-
 	@Override
 	public Jugador cambiarEstrategia(Jugador jugador) {
 		// TODO Auto-generated method stub

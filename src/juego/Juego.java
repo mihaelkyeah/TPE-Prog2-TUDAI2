@@ -32,14 +32,6 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		return null;
 	}
 	
-	private ArrayList<String> jugadoresPerdedores() {
-		ArrayList<String> retorno = new ArrayList<>();
-		for(Jugador j:this.jugadores)
-			if(j.cantidadCartas() == 0)
-				retorno.add(j.getNombre());
-		return retorno;
-	}
-	
 	// ¿Es mejor boolean o un mensaje por string?
 	public void eliminarJugador(String nombre) {
 		if(jugadores.contains(this.getJugador(nombre))) {
@@ -100,32 +92,18 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		return ganador.getNombre();
 	}
 	
-	public void declararGanador()
-	{
-		//utilizara hayGanador o jugadorConMasCartas dependiendo de si quedan rondas o no
+	// Muestra por pantalla las estadísticas de todos los jugadores
+	public void mostrarEstadisticasTodos() {
+		for (int i= 0; i < this.jugadores.size(); i++)
+			 this.jugadores.get(i).estadisticasJugador();
 	}
-	/*
-	public Jugador juegaRonda(Jugador ganador) {
-		// TODO: Incluir verificación externa:
-		// sólo se puede jugar una ronda si hay al menos 2 jugadores en el arraylist jugadores
-		Jugador ganaRonda = ganador;
-		
-		jugadores.get(jugadores.indexOf(ganador)).jugarCarta();
-		for(int i = 0; i < jugadores.size(); i++) {
-		//	if(jugadores.get(i).presentarCarta().eslamejorcartadelaronda())
-				ganaRonda = jugadores.get(i);
-		}
-		return ganaRonda;
-	}
-	*/
 	
 	public void Ronda()
 	{
 		boolean ganador = this.hayGanador();
 		int turno = 0, numeroRonda=1;
 		ArrayList <Atributo> valores = new ArrayList<Atributo>();
-		 for (int i= 0; i < this.jugadores.size(); i++)
-			 this.jugadores.get(i).estadisticasJugador();
+		this.mostrarEstadisticasTodos();
 		while (!ganador)
 		{
 			System.out.println("------ RONDA "+numeroRonda+" ------");
@@ -135,43 +113,87 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			String atributoTurno = jugadorTurno.elegirAtributo(cartaTurno);
 			valores.add(new Atributo(jugadorTurno.getNombre(), cartaTurno.getValor(atributoTurno)));
 			
-			System.out.println("El jugador "+jugadorTurno+" selecciona competir por el atributo "+atributoTurno);
-			System.out.println("La carta de "+jugadorTurno+" es "+cartaTurno+ " con "+atributoTurno+" "+cartaTurno.getValor(atributoTurno));
+			this.mostrarJugada(jugadorTurno,cartaTurno,atributoTurno);
 			
-			ArrayList <Jugador> enfrentar = this.competidores(jugadorTurno);
 			mesa.agregarCartaAlMazo(cartaTurno);
-			for (Jugador competidor : enfrentar)
-			{
-				Carta cartaCompetidor = competidor.cartaEnMano();
-				System.out.println("La carta de "+competidor+" es "+cartaCompetidor+" con "+atributoTurno+" "+cartaCompetidor.getValor(atributoTurno));
-				valores.add(new Atributo(competidor.getNombre(), cartaCompetidor.getValor(atributoTurno)));
-				mesa.agregarCartaAlMazo(cartaCompetidor);
-			}
+			
+			this.enfrentar(jugadorTurno,atributoTurno,valores);
 			
 			String ganadorEstaRonda = this.ganadorRonda(valores);
 			//recibe las cartas
 			Jugador vencedor = this.getJugador(ganadorEstaRonda);
 			vencedor.recibirCartas(mesa);// el ganador recibe las cartas en la mesa
-			System.out.println("Gana la ronda "+ganadorEstaRonda+" y queda con "+vencedor.cantidadCartas()+" cartas ");
+			this.mostrarGanadorRonda(vencedor);
 			//Mostrar estadisticas de todos los jugadores <-- abstraer el tema porque ya molesta -.-
 			
-			 ganador = this.hayGanador();
+			ganador = this.hayGanador();
+			numeroRonda++;
+			turno++;
+			valores.clear();
+			mesa.borrarMazo();
+			
+			this.eliminarPerdedores();
 			 
-			 // Busca y elimina a todos los jugadores que no tengan cartas
-			 for (int i= 0; i < this.jugadores.size(); i++)
-				 this.jugadores.get(i).estadisticasJugador();
-			 numeroRonda++;
-			 turno++;
-			 valores.clear();
-			 mesa.borrarMazo();
-			 ArrayList<String> perdedores = this.jugadoresPerdedores();
-			 if(perdedores.size() > 0)
-				 for(String nombrePerdedor:perdedores)
-					 this.eliminarJugador(nombrePerdedor);
-			 if (turno == jugadores.size())
+			if (turno == jugadores.size())
 				 turno = 0;
 		}
-		System.out.println(""+jugadores.get(0)+" ha ganado el juego");
+		this.mostrarGanadorJuego(jugadores.get(0));
+	}
+	
+	public void Ronda(int limiteRonda)
+	{
+		boolean ganador = this.hayGanador();
+		int turno = 0, numeroRonda=1;
+		ArrayList <Atributo> valores = new ArrayList<Atributo>();
+		this.mostrarEstadisticasTodos();
+		while (!ganador && numeroRonda < limiteRonda+1)
+		{
+			System.out.println("------ RONDA "+numeroRonda+" ------");
+			
+			Jugador jugadorTurno = jugadores.get(turno);
+			Carta cartaTurno = jugadorTurno.cartaEnMano();
+			String atributoTurno = jugadorTurno.elegirAtributo(cartaTurno);
+			valores.add(new Atributo(jugadorTurno.getNombre(), cartaTurno.getValor(atributoTurno)));
+			
+			this.mostrarJugada(jugadorTurno,cartaTurno,atributoTurno);
+			
+			mesa.agregarCartaAlMazo(cartaTurno);
+			
+			this.enfrentar(jugadorTurno,atributoTurno,valores);
+			
+			String ganadorEstaRonda = this.ganadorRonda(valores);
+			//recibe las cartas
+			Jugador vencedor = this.getJugador(ganadorEstaRonda);
+			vencedor.recibirCartas(mesa);// el ganador recibe las cartas en la mesa
+			this.mostrarGanadorRonda(vencedor);
+			//Mostrar estadisticas de todos los jugadores <-- abstraer el tema porque ya molesta -.-
+			
+			ganador = this.hayGanador();
+			numeroRonda++;
+			turno++;
+			valores.clear();
+			mesa.borrarMazo();
+			
+			this.eliminarPerdedores();
+			 
+			if (turno == jugadores.size())
+				 turno = 0;
+		}
+		if(ganador)
+			this.mostrarGanadorJuego(jugadores.get(0));
+		else
+			this.declararGanador();
+	}
+	
+	private void enfrentar(Jugador jugadorTurno, String atributoTurno, ArrayList<Atributo> valores) {
+		ArrayList <Jugador> enfrentar = this.competidores(jugadorTurno);
+		for (Jugador competidor : enfrentar)
+		{
+			Carta cartaCompetidor = competidor.cartaEnMano();
+			System.out.println("La carta de "+competidor+" es "+cartaCompetidor+" con "+atributoTurno+" "+cartaCompetidor.getValor(atributoTurno));
+			valores.add(new Atributo(competidor.getNombre(), cartaCompetidor.getValor(atributoTurno)));
+			mesa.agregarCartaAlMazo(cartaCompetidor);
+		}
 	}
 
 	private ArrayList <Jugador> competidores(Jugador jugador)
@@ -180,6 +202,47 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		copia.addAll(this.jugadores);
 		copia.remove(jugador);
 		return copia;
+	}
+	
+	private void mostrarJugada(Jugador jugadorTurno, Carta cartaTurno, String atributoTurno) {
+		System.out.println("El jugador "+jugadorTurno+" selecciona competir por el atributo "+atributoTurno);
+		System.out.println("La carta de "+jugadorTurno+" es "+cartaTurno+ " con "+atributoTurno+" "+cartaTurno.getValor(atributoTurno));
+	}
+	
+	// Busca y elimina a todos los jugadores que no tengan cartas
+	private void eliminarPerdedores() {
+		ArrayList<String> perdedores = this.jugadoresPerdedores();
+		if(perdedores.size() > 0)
+			for(String nombrePerdedor:perdedores)
+				this.eliminarJugador(nombrePerdedor);
+	}
+	
+	private ArrayList<String> jugadoresPerdedores() {
+		ArrayList<String> retorno = new ArrayList<>();
+		for(Jugador j:this.jugadores)
+			if(j.cantidadCartas() == 0)
+				retorno.add(j.getNombre());
+		return retorno;
+	}
+	
+	private void mostrarGanadorRonda(Jugador vencedor) {
+		System.out.println("Gana la ronda "+vencedor+" y queda con "+vencedor.cantidadCartas()+" cartas ");
+	}
+	
+	private void mostrarGanadorJuego(Jugador jugador) {
+		System.out.println(""+jugador+" ha ganado el juego!!");
+	}
+	
+	private void declararGanador() {
+		
+		ArrayList<Atributo> ganadores = new ArrayList;
+		for(Jugador j:this.jugadores) {
+			Atributo ganador;
+			ganador.setNombre(j.getNombre());
+			ganador.setValor(j.cantidadCartas());
+			ganadores.add(ganador);
+		}
+		
 	}
 
 
