@@ -5,10 +5,12 @@ import juego.Carta;
 public class PocimaCarta extends Pocima {
 
 	private double valor;
-	public PocimaCarta(String nombre, double valor) {
+	private String criterio;
+	
+	public PocimaCarta(String nombre, double valor, String criterio) {
 		super(nombre);
 		this.valor=valor;
-		// TODO Auto-generated constructor stub
+		this.criterio = criterio;
 	}
 
 	public void setValor(double valor)
@@ -16,13 +18,27 @@ public class PocimaCarta extends Pocima {
 		this.valor = valor;
 	}
 	@Override
-	public void alterarCarta(Carta carta) {
+	public int alterarCarta(Carta carta) {
 		// TODO Auto-generated method stub	
 		
 		for (int i=0; i < carta.cantidadAtributos(); i++)
 		{//A cada atributo le inserto el valor;
-			carta.getAtributo(i).setValor((int)(this.valor *carta.getAtributo(i).getValor()));
+			/*
+			if(this.criterio.equalsIgnoreCase("porcentaje"))
+				return this.alterarPorcentaje(carta,i);
+			return this.alterarValorArbitrario(carta,i);
+			*/
 		}
+		// TODO reimplementar
+		return 0;
+	}
+	
+	private int alterarPorcentaje(Carta carta, int i) {
+		return (int)(this.valor * carta.getAtributo(i).getValor());
+	}
+	
+	private int alterarValorArbitrario(Carta carta, int i) {
+		return (int)(this.valor + carta.getAtributo(i).getValor());
 	}
 
 }

@@ -7,7 +7,7 @@ import javax.json.JsonReader;
 import javax.json.JsonValue;
 
 import estrategia.Jugador;
-import pocima.Pocima;
+import pocima.*;
 import estrategia.*;
 
 import java.io.File;
@@ -49,7 +49,13 @@ public class VisorMazo { //futuro Main TT.TT
         	System.out.println(e);
         }*/
         // jugador1 = new Ambicioso(jugador1);
-        juego.repartirCartas(listaPocimas);
+       
+       listaPocimas.add(new PocimaAtributo("fuerza",65536.25,"fuerza"));
+       listaPocimas.add(new PocimaAtributo("peso",500,"peso"));
+       listaPocimas.add(new PocimaAtributo("velocidad",65536.25,"velocidad"));
+       listaPocimas.add(new PocimaAtributo("pato elpes",1,"pes"));
+       
+       juego.repartirCartas(listaPocimas);
         juego.Ronda();
 
     }

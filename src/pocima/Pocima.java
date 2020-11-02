@@ -14,6 +14,6 @@ public abstract class Pocima {
 	{
 		return (this.nombre);
 	}
-	public abstract void alterarCarta (Carta carta); //Void o carta?
+	public abstract int alterarCarta (Carta carta); //Void o carta?
 	
 }

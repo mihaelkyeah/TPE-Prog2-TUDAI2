@@ -5,10 +5,13 @@ import juego.Carta;
 
 //Esta clase solo debe invocarse en caso que este jugando con un atributo especifico
 public class PocimaAtributo extends Pocima {
+	
 	private double valor;
-	public PocimaAtributo(String nombre, double valor) {
+	private String atributo;
+	public PocimaAtributo(String nombre, double valor, String atributo) {
 		super(nombre);
 		this.valor = valor;
+		this.atributo = atributo;
 	}
 
 	public void setValor(double valor)
@@ -17,7 +20,7 @@ public class PocimaAtributo extends Pocima {
 	}
 	
 	@Override
-	public void alterarCarta(Carta carta) {
+	public int alterarCarta(Carta carta) {
 		// TODO Auto-generated method stub
 		/*Atributo aux = carta.getAtributo(this.getNombre());
 		if (aux != null)
@@ -27,8 +30,8 @@ public class PocimaAtributo extends Pocima {
 	
 	*/
 		Atributo aux = carta.getAtributo(this.getNombre());
-		this.valor*= aux.getValor();
-		carta.getAtributo(this.getNombre()).setValor((int)this.valor);
+		return (int)(this.valor*= aux.getValor());
+		// carta.getAtributo(this.getNombre()).setValor((int)this.valor);
 	
 	}
 
