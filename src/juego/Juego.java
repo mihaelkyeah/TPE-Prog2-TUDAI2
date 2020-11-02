@@ -141,9 +141,9 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		Jugador jugadorTurno = jugadores.get(turno);
 		Carta cartaTurno = jugadorTurno.cartaEnMano();
 		String atributoTurno = jugadorTurno.elegirAtributo(cartaTurno);
-		valores.add(new Atributo(jugadorTurno.getNombre(), cartaTurno.getValor(atributoTurno)));
-		
 		this.mostrarJugada(jugadorTurno,cartaTurno,atributoTurno);
+		int valorPocima = cartaTurno.usarPocima(cartaTurno.getPocima(), atributoTurno);
+		valores.add(new Atributo(jugadorTurno.getNombre(), valorPocima));
 		
 		mesa.agregarCartaAlMazo(cartaTurno);
 		
@@ -174,7 +174,11 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		{
 			Carta cartaCompetidor = competidor.cartaEnMano();
 			System.out.println("La carta de "+competidor+" es "+cartaCompetidor+" con "+atributoTurno+" "+cartaCompetidor.getValor(atributoTurno));
-			valores.add(new Atributo(competidor.getNombre(), cartaCompetidor.getValor(atributoTurno)));
+			
+			// Aplicar pócimas
+			int valorPocima = cartaCompetidor.usarPocima(cartaCompetidor.getPocima(), atributoTurno);
+			
+			valores.add(new Atributo(competidor.getNombre(), valorPocima));
 			mesa.agregarCartaAlMazo(cartaCompetidor);
 		}
 	}

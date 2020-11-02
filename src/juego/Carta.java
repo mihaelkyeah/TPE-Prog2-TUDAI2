@@ -90,9 +90,23 @@ public class Carta{
 	}
 	
 	
-	public void usarPocima(Pocima pocima, String atributoEnJuego)
-	{
-		int resultado = pocima.alterarCarta(this,atributoEnJuego);
+	public int usarPocima(Pocima pocima, String atributoEnJuego)
+	{	
+		if (pocima == null)
+			return this.getValor(atributoEnJuego);
+		else {
+			int resultado = pocima.alterarCarta(this,atributoEnJuego);
+			if(resultado != 0) {
+				System.out.println("Se aplica la pócima "+pocima+" - Valor resultante = "+resultado);
+				// Cuando la pócima se usa, se gasta
+				// O_O
+				this.pocima = null;
+				return resultado;
+			}
+			else
+				return this.getValor(atributoEnJuego);
+		}
+		
 	}
 	
 	
