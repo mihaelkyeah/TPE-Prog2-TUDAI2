@@ -20,6 +20,11 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.ArrayList;
 
+// TODO: Separar estrategias de jugador (que la estrategia sea un atributo del jugador)
+// TODO: Pócimas: alterarCarta -> cambiar a alterarAtributo y recibir int valor, String nombreAtributo
+// TODO: Sacar de la clase Carta el getAtributoMayor()
+// TODO: Agregar a Carta un getNombresAtributos que devuelva un ArrayList<String> con todos los nombres de los atributos de la carta
+// TODO: Implementar estrategias utilizando el getNombresAtributos
 
 public class Principal {
 
@@ -28,7 +33,7 @@ public class Principal {
     	
     	//TODO: JUGADOR AMBICIOSO (opcional): si tiene una pócima que disminuye el valor del atributo, no la usa
     	
-        String mazoPath = "./superheroes.json";
+        String mazoPath = "./autos.json";
         Mazo mazoAux = new Mazo();
         mazoAux.crearMazo(mazoPath);
         

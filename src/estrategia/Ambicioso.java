@@ -1,6 +1,8 @@
 package estrategia;
 
+import juego.Atributo;
 import juego.Carta;
+import java.util.ArrayList;
 
 public class Ambicioso extends Jugador  {
 
@@ -18,7 +20,17 @@ public class Ambicioso extends Jugador  {
 	@Override
 	public String elegirAtributo(Carta carta) {
 		
-		return (carta.getAtributoMayor());
+		ArrayList<String> nombres = carta.getNombresAtributos();
+		String nombre = "";
+		int aux = -1;
+		for (String nombreAtributo: nombres)
+			if (carta.getValor(nombreAtributo) > aux) {
+				nombre = nombreAtributo;
+				aux = carta.getValor(nombreAtributo);
+			}
+		return nombre;
+		
+		// return (carta.getAtributoMayor());
 		
 	}
 

@@ -70,19 +70,6 @@ public class Carta{
 		return (atributo.getValor());
 	}
 	
-	// Devuelve el nombre del atributo con mayor valor de la estructura 
-	public String getAtributoMayor()
-	{
-		Atributo aux = new Atributo("", -1);
-		for (Atributo atributo: this.atributos)
-			if ((int)atributo.getValor() > (int)aux.getValor())
-			{
-				aux.setNombre(atributo.getNombre());
-				aux.setValor(atributo.getValor());
-			}
-		return (aux.getNombre());
-	}
-	
 	// Devuelve la cantidad de atributos que tiene una carta
 	public int cantidadAtributos() {
 		return this.atributos.size();
@@ -127,6 +114,13 @@ public class Carta{
 			Atributo nuevo = a.copiarAtributo();
 			retorno.add(nuevo);
 		}
+		return retorno;
+	}
+	
+	public ArrayList<String> getNombresAtributos() {
+		ArrayList<String> retorno = new ArrayList<>();
+		for(Atributo a:this.atributos)
+			retorno.add(a.getNombre());
 		return retorno;
 	}
 

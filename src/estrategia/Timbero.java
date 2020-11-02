@@ -16,8 +16,8 @@ public class Timbero extends Jugador {
 
 	@Override
 	public String elegirAtributo(Carta carta) {
-		int opcion = (int) (Math.random()* carta.cantidadAtributos());
-		return (carta.getAtributo(opcion).getNombre());
+		int opcion = (int) (Math.random()* carta.getNombresAtributos().size());
+		return (carta.getNombresAtributos().get(opcion));
 	}
 
 }
