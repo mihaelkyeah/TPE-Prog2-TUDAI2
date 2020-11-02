@@ -21,8 +21,8 @@ public class Mazo {
 	
 	protected ArrayList<Carta> mazo = new ArrayList<Carta> ();
 	
-	public int posicionAzar()
-	{
+	// Devuelve un número al azar con respecto a los índices disponibles en el mazo
+	public int posicionAzar() {
 		return (int) (Math.random()*this.mazo.size());
 	}
 	
@@ -63,11 +63,13 @@ public class Mazo {
         }
 	}
 	
+	// Muestra todas las cartas por pantalla
 	public void imprimirMazo() {
 		for(Carta carta:this.mazo)
 			System.out.println(carta);
 	}
 	
+	// Verifica que todas las cartas a agregar al mazo tengan los mismos atributos que la primera
 	public void validarCartas() {
 		Carta primeraCarta = this.mazo.get(0); //Desde la primera carta se valida los atributos
 		
@@ -97,21 +99,22 @@ public class Mazo {
 			
 	}
 	
-	public void agregarCartaAlMazo(Carta carta)
-	{
+	// Agrega una carta al mazo
+	public void agregarCartaAlMazo(Carta carta) {
 		mazo.add(carta);
-
 	}
 	
-	public Carta sacarCartaDelMazo()
-	{
+	// Saca una carta del mazo como se sacaría en la vida real
+	// (sacándola en vez de copiarla)
+	public Carta sacarCartaDelMazo() {
 		Carta aux = mazo.get(0);
 		mazo.remove(0);
 		return (aux);
 	}
 	
-	public void mezclarMazo()
-	{
+	// Se buscan dos índices al azar y se intercambian las cartas entre esas dos posiciones,
+	// tantas veces como cartas haya en el mazo
+	public void mezclarMazo() {
 		for (int i = 0; i < mazo.size() ; i++)
 		{
 			int posOrigen = posicionAzar();
@@ -122,21 +125,19 @@ public class Mazo {
 		}
 	}
 
-	public void agregarMazo(Mazo mazoAgregar)
-	{		
-		for (Carta carta : mazoAgregar.mazo)
-		{
+	// Agrega una por una todas las cartas de un mazo a este mazo
+	public void agregarMazo(Mazo mazoAgregar) {		
+		for (Carta carta : mazoAgregar.mazo) {
 			this.agregarCartaAlMazo(carta);
 		}
 	}
 
-	public void borrarMazo()
-	{
+	public void borrarMazo() {
 		this.mazo.clear();
 	}
 
+	// Reparte las pócimas entre las cartas del mazo
 	public void repartirPocimas(ArrayList<Pocima> listaPocimas) {
-		// TODO Auto-generated method stub
 		while (listaPocimas.size() > this.getTamanioMazo())
 			listaPocimas.remove(0);	//Verifico que la cantidad de pocimas no supere la cantidad de cartas, si supera comienzo a eliminar desde la primera pocima
 		

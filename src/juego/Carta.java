@@ -30,25 +30,23 @@ public class Carta{
 	public void setPocima(Pocima pocima)
 	{
 		if (this.pocima == null)
-		{
 			this.pocima = pocima;
-		}
 	}
 	
-	public Atributo getAtributo(String atributo)
-	{//Devolver atributo por nombre
+	//Devolver atributo por nombre
+	public Atributo getAtributo(String atributo) {
 		for (Atributo a: this.atributos)
 			if (a.getNombre().equals(atributo))
 				return(a);
 		return null;
 	}
 	
-	public Atributo getAtributo(int indice)
-	{//Devolver atributo por posicion en el ArrayList
+	//Devolver atributo por posicion en el ArrayList
+	public Atributo getAtributo(int indice) {
 		return (this.atributos.get(indice));
 	}
 	
-	
+	// Agrega un atributo a la lista de atributos
 	public void agregarAtributo(Atributo atributo)
 	{
 		Atributo aux = this.getAtributo(atributo.getNombre()); //Se fija si el atributo ya existe
@@ -58,8 +56,8 @@ public class Carta{
 			aux.setValor(atributo.getValor()); //Si ya existe lo modifica
 	}
 	
-	public int getValor(String atributo)
-	{//Devolver valor de un atributo por su nombre
+	//Devolver valor de un atributo por su nombre
+	public int getValor(String atributo) {
 		Atributo aux = this.getAtributo (atributo);
 		if (aux == null)
 			return 0; //si el atributo no existe devuelve 0
@@ -67,11 +65,12 @@ public class Carta{
 			return (aux.getValor());
 	}
 	
-	public int getValor(Atributo atributo)
-	{//Devolver valor de un atributo de manera directa
+	//Devolver valor de un atributo de manera directa
+	public int getValor(Atributo atributo) {
 		return (atributo.getValor());
 	}
 	
+	// Devuelve el nombre del atributo con mayor valor de la estructura 
 	public String getAtributoMayor()
 	{
 		Atributo aux = new Atributo("", -1);
@@ -84,12 +83,13 @@ public class Carta{
 		return (aux.getNombre());
 	}
 	
-	public int cantidadAtributos()
-	{
+	// Devuelve la cantidad de atributos que tiene una carta
+	public int cantidadAtributos() {
 		return this.atributos.size();
 	}
 	
-	
+	// Aplica el efecto de una pócima al valor de una carta
+	// sin afectar la carta del mazo, sólo afectando el valor de la carta en la jugada
 	public int usarPocima(Pocima pocima, String atributoEnJuego)
 	{	
 		if (pocima == null)
@@ -109,7 +109,8 @@ public class Carta{
 		
 	}
 	
-	
+	// Hace un deep clone de una carta
+	// (con direcciones nuevas de memoria para la instancia y sus atributos)
 	public Carta copiarCarta() {
 		Carta retorno = new Carta(this.nombre);
 		ArrayList<Atributo> atributosCarta = this.getCopiaAtributos();
@@ -119,6 +120,7 @@ public class Carta{
 		return retorno;
 	}
 	
+	// Hace un deep clone de la estructura de atributos que tiene la carta
 	public ArrayList<Atributo> getCopiaAtributos() {
 		ArrayList<Atributo> retorno = new ArrayList<>();
 		for(Atributo a:this.atributos) {

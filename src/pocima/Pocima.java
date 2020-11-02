@@ -12,12 +12,10 @@ public abstract class Pocima {
 	public Pocima(String nombre) {
 		this.nombre = nombre;
 		this.restriccion=SIN_RESTRICCION;
-		// TODO Auto-generated constructor stub
 	}
 	public Pocima(String nombre, String restriccion) {
 		this.nombre = nombre;
 		this.restriccion= restriccion;
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getNombre()

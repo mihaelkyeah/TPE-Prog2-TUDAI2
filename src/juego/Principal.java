@@ -26,7 +26,6 @@ public class Principal {
 
     public static void main(String[] args) {
     	
-    	//TODO: ARREGLAR PÓCIMA COCKTAIL
     	//TODO: JUGADOR AMBICIOSO (opcional): si tiene una pócima que disminuye el valor del atributo, no la usa
     	
         String mazoPath = "./superheroes.json";
@@ -62,7 +61,7 @@ public class Principal {
 		Pocima pocima3 = new PocimaPorcentaje("Pocion Aumentadora",1.25);
 		Pocima pocima4 = new PocimaPorcentaje("Pocion Aumentadora",2.25);
 		Pocima pocimaCocktail = new PocimaCocktail("VamoAVerQueSale",pocima1,pocima3);
-		Pocima pocimaCocktail2 = new PocimaCocktail("sasarasa",pocima4,pocima1);
+		Pocima pocimaCocktail2 = new PocimaCocktail("Sí, es un hermoso juego de cartas. ¡¿POR QUÉ EL MÍO NO SE VE ASÍ?!",pocima4,pocima1);
 		Pocima pocimaCocktailLoco = new PocimaCocktail("Cocktail Loco",pocimaCocktail,pocimaCocktail2);
        
 		listaPocimas.add(pocima1);
@@ -71,7 +70,6 @@ public class Principal {
 		listaPocimas.add(pocimaCocktail);
 		listaPocimas.add(pocimaCocktail2);
 		listaPocimas.add(pocimaCocktailLoco);
-       	// listaPocimas.add(pocimaCocktail);
        
        	juego.repartirCartas(listaPocimas);
        

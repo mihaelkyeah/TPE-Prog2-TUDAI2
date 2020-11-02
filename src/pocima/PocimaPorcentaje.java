@@ -8,19 +8,16 @@ public class PocimaPorcentaje extends Pocima{
 	public PocimaPorcentaje(String nombre, double porcentaje) {
 		super(nombre);
 		this.porcentaje=porcentaje;
-		// TODO Auto-generated constructor stub
 	}
 
 	public PocimaPorcentaje(String nombre, double porcentaje, String restriccion) {
 		super(nombre, restriccion);
 		this.porcentaje=porcentaje;
-		// TODO Auto-generated constructor stub
 	}
 
+	// Altera el valor del atributo aplicable multiplicándolo por un porcentaje
 	@Override
-	public int alterarCarta(Carta carta, String atributoAfectado) {
-		// TODO Auto-generated method stub
-		
+	public int alterarCarta(Carta carta, String atributoAfectado) {		
 		if (this.getRestriccion().equals(SIN_RESTRICCION))
 			return  (int)(this.porcentaje * carta.getAtributo(atributoAfectado).getValor());
 		else
