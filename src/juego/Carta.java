@@ -94,8 +94,23 @@ public class Carta{
 	{
 		int resultado = pocima.alterarCarta(this,atributoEnJuego);
 	}
-
 	
+	
+	public Carta copiarCarta() {
+		Carta retorno = new Carta(this.nombre);
+		ArrayList<Atributo> atributosCarta = this.getCopiaAtributos();
+		for(Atributo a:atributosCarta)
+			retorno.agregarAtributo(a);
+		retorno.setPocima(this.pocima);
+		return retorno;
+	}
+	
+	private ArrayList<Atributo> getCopiaAtributos() {
+		ArrayList<Atributo> retorno = new ArrayList<>();
+		for(Atributo a:this.atributos)
+			retorno.add(a);
+		return retorno;
+	}
 
 	@Override
 	public String toString() {

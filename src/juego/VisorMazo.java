@@ -6,6 +6,8 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonValue;
 
+// import com.sun.tools.sjavac.server.SysInfo;
+
 import estrategia.Jugador;
 import pocima.*;
 import estrategia.*;
@@ -50,14 +52,30 @@ public class VisorMazo { //futuro Main TT.TT
         }*/
         // jugador1 = new Ambicioso(jugador1);
        
-       listaPocimas.add(new PocimaAtributo("fuerza",65536.25,"fuerza"));
-       listaPocimas.add(new PocimaAtributo("peso",500,"peso"));
-       listaPocimas.add(new PocimaAtributo("velocidad",65536.25,"velocidad"));
-       listaPocimas.add(new PocimaAtributo("pato elpes",1,"pes"));
+       Pocima pocima1 = new PocimaPorcentaje("pocionmagica",0.50);
+       Pocima pocima2 = new PocimaSeteo("Numero Magico",23);
+       Pocima pocima3 = new PocimaPorcentaje("pocionmagica",1.25);
+       Pocima pocimaCocktail = new PocimaCocktail("VamoAVerQueSale",pocima1,pocima3); 
+       
+       listaPocimas.add(pocima1);
+       listaPocimas.add(pocima2);
+       listaPocimas.add(pocima3);
+       listaPocimas.add(pocimaCocktail);
        
        juego.repartirCartas(listaPocimas);
-        juego.Ronda();
+       	Carta carta1 = mazoAux.sacarCartaDelMazo();
+       	System.out.println(carta1+" "+carta1.getValor("fuerza"));
+       	int resultado = pocimaCocktail.alterarCarta(carta1, "fuerza");
+       	System.out.println(carta1+" "+carta1.getValor("fuerza"));
+       	System.out.println(resultado);
+       	try {
+       		System.in.read();
+       	}
+       	catch(Exception e) {
+       		System.out.println(e);
+       	}
+        // juego.Ronda();
 
     }
-
+    	
 }
