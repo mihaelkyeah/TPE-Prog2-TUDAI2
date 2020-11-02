@@ -17,14 +17,6 @@ public class Carta{
 		this.atributos =  new ArrayList <Atributo>();
 		this.pocima =  null;
 	}
-	
-	public Carta(Carta carta) {
-		this.nombre = carta.getNombre();
-		this.atributos = new ArrayList<>(carta.getCopiaAtributos());
-		this.pocima = carta.getPocima();
-	}
-
-
 
 	public String getNombre() {
 		return nombre;

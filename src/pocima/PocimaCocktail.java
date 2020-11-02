@@ -22,7 +22,7 @@ public class PocimaCocktail extends Pocima {
 	/*	int resultado =this.pota1.alterarCarta(carta, atributoEnJuego);
 			if (this.pota2 != null)
 				resultado =(this.pota2.alterarCarta(carta, atributoEnJuego) );*/
-		Carta cartaAux = new Carta(carta);
+		Carta cartaAux = carta.copiarCarta();
 		int resultado = this.pota1.alterarCarta(cartaAux, atributoEnJuego);
 		cartaAux.getAtributo(atributoEnJuego).setValor(resultado);
 		if (this.pota2 != null)
