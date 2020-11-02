@@ -137,10 +137,16 @@ public class Mazo {
 
 	public void repartirPocimas(ArrayList<Pocima> listaPocimas) {
 		// TODO Auto-generated method stub
-		for (int i=0; i < listaPocimas.size(); i++ )
+		while (listaPocimas.size() > this.getTamanioMazo())
+			listaPocimas.remove(0);	//Verifico que la cantidad de pocimas no supere la cantidad de cartas, si supera comienzo a eliminar desde la primera pocima
+		
+		while (listaPocimas.size() > 0)   //Mientras tenga pocimas por repartir
 		{
 			int pos = posicionAzar();
-			this.mazo.get(pos).setPocima(listaPocimas.get(i));
+			while (this.mazo.get(pos).getPocima() != null)   //Me aseguro de llegar a una posicion donde se pueda colocar la posima
+				pos = posicionAzar();
+			this.mazo.get(pos).setPocima(listaPocimas.get(0));		//Pongo la pocima
+			listaPocimas.remove(0);								//Borro la pocima que ya coloque
 		}
 	}
 	
