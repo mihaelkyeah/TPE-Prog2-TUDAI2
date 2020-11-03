@@ -140,7 +140,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		
 		Jugador jugadorTurno = jugadores.get(turno);
 		Carta cartaTurno = jugadorTurno.cartaEnMano();
-		String atributoTurno = jugadorTurno.elegirAtributo(cartaTurno);
+		String atributoTurno = jugadorTurno.getEstrategia().elegirAtributo(cartaTurno);
 		this.mostrarJugada(jugadorTurno,cartaTurno,atributoTurno);
 		int valorPocima = cartaTurno.usarPocima(cartaTurno.getPocima(), atributoTurno);
 		valores.add(new Atributo(jugadorTurno.getNombre(), valorPocima));
@@ -239,8 +239,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		}
 		if((respuesta == 'S') || (respuesta == 's'))
 		{	
-			int pos = this.getPosicionJugador(jugadorOriginal.getNombre());
-			this.jugadores.set( pos, jugadores.get(pos).cambiarEstrategia(jugadorOriginal, atributoMano));
+			jugadorOriginal.cambiarEstrategia(atributoMano);
 		}
 		else {
 			System.out.println("No se harán cambios.");

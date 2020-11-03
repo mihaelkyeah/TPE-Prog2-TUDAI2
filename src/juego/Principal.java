@@ -21,10 +21,17 @@ import java.util.List;
 import java.util.ArrayList;
 
 // TODO: Separar estrategias de jugador (que la estrategia sea un atributo del jugador)
+		// HECHO :D
 // TODO: Pócimas: alterarCarta -> cambiar a alterarAtributo y recibir int valor, String nombreAtributo
-// TODO: Sacar de la clase Carta el getAtributoMayor()
+		// 
+// TODO: Sacar de la clase Carta el getAtributoMayor() <- cambiarlo por un getAtributo con criterio?
+		//
 // TODO: Agregar a Carta un getNombresAtributos que devuelva un ArrayList<String> con todos los nombres de los atributos de la carta
-// TODO: Implementar estrategias utilizando el getNombresAtributos
+
+// TODO: Cambiar estrategias acorde a la utilización del getNombresAtributos
+
+// TODO: Probar Collections.shuffle(mazo) en el mazo
+		// 
 
 public class Principal {
 
@@ -33,16 +40,22 @@ public class Principal {
     	
     	//TODO: JUGADOR AMBICIOSO (opcional): si tiene una pócima que disminuye el valor del atributo, no la usa
     	
-        String mazoPath = "./autos.json";
+        String mazoPath = "./superheroes.json";
         Mazo mazoAux = new Mazo();
         mazoAux.crearMazo(mazoPath);
         
         ArrayList <Pocima> listaPocimas = new ArrayList <Pocima>();
-        Jugador jugador1 = new Obstinado("jugador 1","fuerza");
-        Jugador jugador2 = new Obstinado("jugador 2","velocidad");
-        Jugador jugador3 = new Obstinado("jugador 3","altura");
-        Jugador jugador4 = new Obstinado("jugador 4","peso");
-        Jugador jugador5 = new Obstinado("jugador 5","fuerza");
+        Jugador jugador1 = new Jugador("jugador 1");
+        Jugador jugador2 = new Jugador("jugador 2");
+        Jugador jugador3 = new Jugador("jugador 3");
+        Jugador jugador4 = new Jugador("jugador 4");
+        Jugador jugador5 = new Jugador("jugador 5");
+        
+        jugador1.setEstrategia(new Obstinado("fuerza"));
+        jugador2.setEstrategia(new Obstinado("velocidad"));
+        jugador3.setEstrategia(new Obstinado("altura"));
+        jugador4.setEstrategia(new Timbero());
+        jugador5.setEstrategia(new Ambicioso());
         
         Juego juego = new Juego(mazoPath);
         juego.agregarJugador(jugador1);
@@ -50,16 +63,15 @@ public class Principal {
 		juego.agregarJugador(jugador3);
 		juego.agregarJugador(jugador4);
 		juego.agregarJugador(jugador5);
-       
-		/*   juego.imprimirMazo();
-        try {
+		
+		juego.imprimirMazo();
+		try {
         	System.out.println("Presione una tecla para continuar...");
         	System.in.read();
         }
         catch(Exception e) {
         	System.out.println(e);
-        }*/
-        // jugador1 = new Ambicioso(jugador1);
+        }
        
 		Pocima pocima1 = new PocimaPorcentaje("Pocion Reductora",0.50,"fuerza");
 		Pocima pocima2 = new PocimaSeteo("Numero Magico",23);

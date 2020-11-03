@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,6 +116,8 @@ public class Mazo {
 	// Se buscan dos índices al azar y se intercambian las cartas entre esas dos posiciones,
 	// tantas veces como cartas haya en el mazo
 	public void mezclarMazo() {
+		Collections.shuffle(this.mazo);
+		/*
 		for (int i = 0; i < mazo.size() ; i++)
 		{
 			int posOrigen = posicionAzar();
@@ -123,6 +126,7 @@ public class Mazo {
 			mazo.set(posDestino, mazo.get(posOrigen));
 			mazo.set(posOrigen, aux);
 		}
+		*/
 	}
 
 	// Agrega una por una todas las cartas de un mazo a este mazo

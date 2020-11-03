@@ -4,17 +4,12 @@ import juego.Atributo;
 import juego.Carta;
 import java.util.ArrayList;
 
-public class Ambicioso extends Jugador  {
-
-
-	public Ambicioso(String nombre) {
-		super(nombre);
-		// TODO Auto-generated constructor stub
-	}
+public class Ambicioso extends Estrategia  {
 	
-	public Ambicioso (Jugador jugador)
-	{
-		super(jugador);
+	private static final String ESTRATEGIA_NOMBRE_AMBICIOSO = "Ambicioso";
+	
+	public Ambicioso() {
+		super(ESTRATEGIA_NOMBRE_AMBICIOSO);
 	}
 
 	@Override

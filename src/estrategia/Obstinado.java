@@ -2,24 +2,18 @@ package estrategia;
 
 import juego.Carta;
 
-public class Obstinado extends Jugador  {
+public class Obstinado extends Estrategia  {
 
+	private static final String ESTRATEGIA_NOMBRE_OBSTINADO = "Obstinado";
 	private String atributoJugando;
 	
-	public Obstinado(String nombre, String atributoJugando) {
-		super(nombre);
-		this.atributoJugando = atributoJugando;
-	}
-	
-	public Obstinado (Jugador jugador, String atributoJugando)
-	{
-		super(jugador);
+	public Obstinado(String atributoJugando) {
+		super(ESTRATEGIA_NOMBRE_OBSTINADO);
 		this.atributoJugando = atributoJugando;
 	}
 
 	@Override
 	public String elegirAtributo(Carta carta) {
-		// TODO Auto-generated method stub
 		return this.atributoJugando;
 	}
 

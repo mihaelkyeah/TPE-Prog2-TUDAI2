@@ -2,16 +2,12 @@ package estrategia;
 
 import juego.Carta;
 
-public class Timbero extends Jugador {
-
-	public Timbero(String nombre) {
-		super(nombre);
-		// TODO Auto-generated constructor stub
-	}
-
-	public Timbero (Jugador jugador)
-	{
-		super(jugador);
+public class Timbero extends Estrategia {
+	
+	private static final String ESTRATEGIA_NOMBRE_TIMBERO = "Timbero";
+	
+	public Timbero() {
+		super(ESTRATEGIA_NOMBRE_TIMBERO);
 	}
 
 	@Override

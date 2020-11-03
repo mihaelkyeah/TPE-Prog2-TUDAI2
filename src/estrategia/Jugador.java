@@ -11,10 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class Jugador {
+public class Jugador {
 
-	protected String nombre;
+	private String nombre;
 	private Mazo mazoJugador;
+	private Estrategia estrategia;
 	
 	public Jugador (String nombre)
 	{
@@ -44,14 +45,14 @@ public abstract class Jugador {
 		this.mazoJugador = mazoJugador;
 	}
 	
-	// Originalmente, este método iba a servir para que cada jugador pudiera cambiar de tipo
-	// en cualquier momento de la ejecución del programa, pero terminó siendo reemplazado
-	// por llamadas a los constructores de cada tipo que hereda de Jugador
-	// public abstract Jugador cambiarEstrategia(Jugador jugador);
-	
-	public abstract String elegirAtributo(Carta carta);
-	
-	
+	public Estrategia getEstrategia() {
+		return estrategia;
+	}
+
+	public void setEstrategia(Estrategia estrategia) {
+		this.estrategia = estrategia;
+	}
+
 	public Carta cartaEnMano()
 	{
 		return this.mazoJugador.sacarCartaDelMazo();
@@ -79,7 +80,7 @@ public abstract class Jugador {
 		System.out.println (this.getNombre()+" posee "+this.cantidadCartas()+" cartas");
 	}
 	
-	public Jugador cambiarEstrategia(Jugador jugadorOriginal, String atributoMano) {
+	public void cambiarEstrategia(String atributoMano) {
 		System.out.println("Seleccione estrategia:");
 		System.out.println("1. Ambicioso (\"1\")");
 		System.out.println("2. Obstinado (\"2\")");
@@ -95,19 +96,17 @@ public abstract class Jugador {
 		}
 		switch(opcion) {
 		case('1'):
-				retorno = new Ambicioso(jugadorOriginal);
+				this.setEstrategia(new Ambicioso());
 			break;
 		case('2'):
-				retorno = new Obstinado(jugadorOriginal, atributoMano);
+				this.setEstrategia(new Obstinado(atributoMano));
 			break;
 		case('3'):
-				retorno = new Timbero(jugadorOriginal);
+				this.setEstrategia(new Timbero());
 			break;
 		default:
 				System.out.println("No se harán cambios.");
-				return jugadorOriginal;
-		}
-		return retorno;	
+		}	
 	}
 
 	@Override
