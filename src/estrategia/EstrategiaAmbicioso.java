@@ -25,8 +25,6 @@ public class EstrategiaAmbicioso extends Estrategia  {
 			}
 		return nombre;
 		
-		// return (carta.getAtributoMayor());
-		
 	}
 
 }

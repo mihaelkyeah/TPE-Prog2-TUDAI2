@@ -56,8 +56,11 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	// Reparte las cartas y las pócimas a los jugadores
 	public void repartirCartas(ArrayList<Pocima> listaPocimas)
 	{
+		this.imprimirMazo();
 		int j = 0;
 		this.mazoOriginal.repartirPocimas(listaPocimas);
+		this.mazoOriginal.mezclarMazo();
+		this.imprimirMazo();
 		while (this.mazoOriginal.getTamanioMazo() > 0)
 		{
 			jugadores.get(j).recibirCarta(this.mazoOriginal.sacarCartaDelMazo());
@@ -95,30 +98,18 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		return ganador.getNombre();
 	}
 	
-	// Ronda sin límite de turnos
-	public void Ronda()
-	{
-		boolean ganador = this.hayGanador();
-		int turno = 0, numeroRonda=1;
-		this.mostrarEstadisticasTodos();
-		while (!ganador)
-		{
-			ganador = this.juegaRonda(numeroRonda, turno);
-			numeroRonda++;
-			turno++;
-			if (turno >= jugadores.size())
-				 turno = 0;
-		}
-				this.declararGanador();
+	// Ronda sin límites
+	public void Ronda() {
+		this.Ronda(Integer.MAX_VALUE);
 	}
 	
 	// Ronda con límite de turnos recibido por parámetro
 	public void Ronda(int limiteRonda)
 	{
 		boolean ganador = this.hayGanador();
-		int turno = 0, numeroRonda=1;
+		int turno = 0, numeroRonda=0;
 		this.mostrarEstadisticasTodos();
-		while (!ganador && numeroRonda < limiteRonda+1)
+		while (!ganador && numeroRonda < limiteRonda)
 		{
 			ganador = this.juegaRonda(numeroRonda, turno);
 			numeroRonda++;
@@ -126,7 +117,7 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 			if (turno >= jugadores.size())
 				 turno = 0;
 		}
-			this.declararGanador();
+		this.declararGanador();
 	}
 	
 	// Procedimiento al que llaman Ronda() y Ronda(int)
@@ -136,7 +127,11 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	{
 		ArrayList <Atributo> valores = new ArrayList<Atributo>();
 		
-		System.out.println("\n------ RONDA "+numeroRonda+" ------");
+		// jajajaja
+		if(numeroRonda!=Integer.MAX_VALUE)
+			System.out.println("\n------ RONDA "+(numeroRonda+1)+" ------");
+		else
+			System.out.println("\n------ RONDA "+(numeroRonda)+" ------");
 		
 		Jugador jugadorTurno = jugadores.get(turno);
 		Carta cartaTurno = jugadorTurno.cartaEnMano();

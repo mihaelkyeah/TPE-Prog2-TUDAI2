@@ -1,6 +1,7 @@
 package juego;
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -68,6 +69,7 @@ public class Mazo {
 	public void imprimirMazo() {
 		for(Carta carta:this.mazo)
 			System.out.println(carta);
+		System.out.println("----------------");
 	}
 	
 	// Verifica que todas las cartas a agregar al mazo tengan los mismos atributos que la primera
@@ -117,16 +119,6 @@ public class Mazo {
 	// tantas veces como cartas haya en el mazo
 	public void mezclarMazo() {
 		Collections.shuffle(this.mazo);
-		/*
-		for (int i = 0; i < mazo.size() ; i++)
-		{
-			int posOrigen = posicionAzar();
-			int posDestino = posicionAzar();
-			Carta aux = mazo.get(posDestino);
-			mazo.set(posDestino, mazo.get(posOrigen));
-			mazo.set(posOrigen, aux);
-		}
-		*/
 	}
 
 	// Agrega una por una todas las cartas de un mazo a este mazo
