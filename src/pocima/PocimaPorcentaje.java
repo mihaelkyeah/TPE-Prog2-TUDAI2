@@ -1,7 +1,5 @@
 package pocima;
 
-import juego.Carta;
-
 public class PocimaPorcentaje extends Pocima{
 
 	private double porcentaje;

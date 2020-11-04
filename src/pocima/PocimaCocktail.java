@@ -1,7 +1,5 @@
 package pocima;
 
-import juego.Carta;
-
 public class PocimaCocktail extends Pocima {
 	
 	private Pocima pota1;

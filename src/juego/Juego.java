@@ -1,8 +1,6 @@
 package juego;
 
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import estrategia.*;
 import pocima.Pocima;
 
@@ -157,10 +155,7 @@ public class Juego {
 		mesa.borrarMazo();
 		
 		this.eliminarPerdedores();
-		/*
-		for(Jugador j:this.jugadores)
-			this.deseaCambiarEstrategia(j, atributoTurno);
-		*/
+		
 		return ganador;
 	}
 	
@@ -216,27 +211,6 @@ public class Juego {
 	
 	private void mostrarGanadorJuego(String nombreJugador) {
 		System.out.println(""+nombreJugador+" ha ganado el juego!!");
-	}
-	
-	// Pregunta a un jugador (o a los que se especifique) si desea(n) cambiar su estrategia
-	// al final de cada ronda
-	private void deseaCambiarEstrategia(Jugador jugadorOriginal, String atributoMano) {
-		System.out.println(jugadorOriginal+" - ¿Desea cambiar la estrategia para la siguiente ronda? (S/N)");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		char respuesta = '0';
-		try {
-			respuesta = (char)reader.read();
-		}
-		catch(Exception e) {
-		}
-		if((respuesta == 'S') || (respuesta == 's'))
-		{	
-			jugadorOriginal.cambiarEstrategia(atributoMano);
-		}
-		else {
-			System.out.println("No se harán cambios.");
-		}
-		
 	}
 	
 	// Determina si hay un ganador definitivo en cualquier momento del juego,

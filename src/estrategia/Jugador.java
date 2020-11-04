@@ -4,12 +4,6 @@ import juego.Carta;
 
 import juego.Mazo;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-
-import java.util.List;
-
 
 public class Jugador {
 
@@ -78,34 +72,6 @@ public class Jugador {
 	{
 		
 		System.out.println (this.getNombre()+" posee "+this.cantidadCartas()+" cartas");
-	}
-	
-	public void cambiarEstrategia(String atributoMano) {
-		System.out.println("Seleccione estrategia:");
-		System.out.println("1. Ambicioso (\"1\")");
-		System.out.println("2. Obstinado (\"2\")");
-		System.out.println("3. Timbero (\"3\")");
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		char opcion = '0';
-		try {
-			opcion = (char)reader.read();
-		}
-		catch(Exception e) {
-			System.out.println("Opción inválida. No se harán cambios.");
-		}
-		switch(opcion) {
-		case('1'):
-				this.setEstrategia(new EstrategiaAmbicioso());
-			break;
-		case('2'):
-				this.setEstrategia(new EstrategiaObstinado(atributoMano));
-			break;
-		case('3'):
-				this.setEstrategia(new EstrategiaTimbero());
-			break;
-		default:
-				System.out.println("No se harán cambios.");
-		}	
 	}
 
 	@Override

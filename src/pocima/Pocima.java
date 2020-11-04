@@ -1,7 +1,5 @@
 package pocima;
 
-import juego.Carta;
-
 public abstract class Pocima {
 
 	private String nombre;
