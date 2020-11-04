@@ -79,7 +79,6 @@ public class Carta{
 		else {
 			int resultado = pocima.alterarAtributo(atributoEnJuego,this.getValor(atributoEnJuego));
 			if(resultado != 0) {
-				System.out.println("Se aplica la pócima "+pocima+" - Valor resultante = "+resultado);
 				return resultado;
 			}
 			else

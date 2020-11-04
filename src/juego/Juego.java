@@ -168,6 +168,8 @@ public class Juego {
 		System.out.println("La carta de "+jugador+" es "+cartaJugador+" con "+atributoTurno+" "+cartaJugador.getValor(atributoTurno));
 		// Aplicar pócimas
 		int valorPocima = cartaJugador.usarPocima(cartaJugador.getPocima(), atributoTurno);
+		if(valorPocima != cartaJugador.getValor(atributoTurno))
+			System.out.println("Se aplica la pócima "+cartaJugador.getPocima()+" - Valor resultante = "+valorPocima);
 		valores.add(new Atributo(jugador.getNombre(), valorPocima));
 		mesa.agregarCartaAlMazo(cartaJugador);
 	}

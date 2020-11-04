@@ -15,14 +15,17 @@ public class EstrategiaAmbicioso extends Estrategia  {
 	public String elegirAtributo(Carta carta) {
 		
 		ArrayList<String> nombres = carta.getNombresAtributos();
-		String nombre = "";
-		int aux = -1;
-		for (String nombreAtributo: nombres)
-			if (carta.getValor(nombreAtributo) > aux) {
-				nombre = nombreAtributo;
-				aux = carta.getValor(nombreAtributo);
-			}
-		return nombre;
+        String nombre = "";
+        int aux = -1;
+        for (String nombreAtributo: nombres)
+        {
+            int resultado = carta.usarPocima (carta.getPocima(), nombreAtributo);
+            if (resultado > aux) {
+                nombre = nombreAtributo;
+                aux = carta.getValor(nombreAtributo);
+            }
+        }
+        return nombre;
 		
 	}
 

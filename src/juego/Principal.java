@@ -23,10 +23,16 @@ public class Principal {
         Jugador jugador4 = new Jugador("jugador 4");
         Jugador jugador5 = new Jugador("jugador 5");
         
+        /*
         jugador1.setEstrategia(new EstrategiaObstinado("Km/h"));
         jugador2.setEstrategia(new EstrategiaObstinado("HP"));
         jugador3.setEstrategia(new EstrategiaObstinado("Cilindros"));
         jugador4.setEstrategia(new EstrategiaTimbero());
+        */
+        jugador1.setEstrategia(new EstrategiaAmbicioso());
+        jugador2.setEstrategia(new EstrategiaAmbicioso());
+        jugador3.setEstrategia(new EstrategiaAmbicioso());
+        jugador4.setEstrategia(new EstrategiaAmbicioso());
         jugador5.setEstrategia(new EstrategiaAmbicioso());
         
         Juego juego = new Juego(mazoPath);
@@ -36,7 +42,7 @@ public class Principal {
 		juego.agregarJugador(jugador4);
 		juego.agregarJugador(jugador5);
 		
-		Pocima pocima1 = new PocimaPorcentaje("Pocion Reductora",0.50,"fuerza");
+		Pocima pocima1 = new PocimaPorcentaje("Pocion Reductora",0.50,"Km/h");
 		Pocima pocima2 = new PocimaSeteo("Numero Mágico",23);
 		Pocima pocima3 = new PocimaPorcentaje("Pocion Aumentadora",1.25);
 		Pocima pocima4 = new PocimaPorcentaje("Pocion Aumentadora más polenta",2.25);
@@ -53,7 +59,7 @@ public class Principal {
 		
        	juego.repartirCartas(listaPocimas);
        	
-       	juego.Ronda(8);
+       	juego.Ronda();
        	
     }
     	
