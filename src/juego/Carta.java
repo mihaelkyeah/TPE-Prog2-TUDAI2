@@ -80,8 +80,6 @@ public class Carta{
 			int resultado = pocima.alterarAtributo(atributoEnJuego,this.getValor(atributoEnJuego));
 			if(resultado != 0) {
 				System.out.println("Se aplica la pócima "+pocima+" - Valor resultante = "+resultado);
-				// Cuando la pócima se usa, se gasta
-				// O_O
 				return resultado;
 			}
 			else
@@ -92,7 +90,8 @@ public class Carta{
 	
 	public boolean validarCarta(Carta carta) {
 		
-        if(this.cantidadAtributos() == carta.cantidadAtributos()) { //primero se fija que coincida la cantidad de atributos, de no hacerlo ya es rechazada
+		//primero se fija que coincida la cantidad de atributos, de no hacerlo ya es rechazada
+        if(this.cantidadAtributos() == carta.cantidadAtributos()) { 
                 int j = 0;
                 Atributo aux = this.getAtributo(j);
                 while((j < this.cantidadAtributos()) && (carta.getAtributo(aux.getNombre()) != null)) { //Verifica que todos los atributos de la carta esten en la primera carta

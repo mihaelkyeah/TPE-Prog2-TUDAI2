@@ -185,12 +185,6 @@ public class Juego {
 		return copia;
 	}
 	
-	// Muestra la primera jugada de la ronda
-	private void mostrarJugada(Jugador jugadorTurno, Carta cartaTurno, String atributoTurno) {
-		System.out.println("El jugador "+jugadorTurno+" selecciona competir por el atributo "+atributoTurno);
-		System.out.println("La carta de "+jugadorTurno+" es "+cartaTurno+ " con "+atributoTurno+" "+cartaTurno.getValor(atributoTurno));
-	}
-	
 	// Busca y elimina a todos los jugadores que no tengan cartas
 	private void eliminarPerdedores() {
 		ArrayList<String> perdedores = this.jugadoresPerdedores();
