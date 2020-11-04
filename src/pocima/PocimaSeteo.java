@@ -17,16 +17,12 @@ public class PocimaSeteo extends Pocima {
 
 	// Altera el valor del atributo aplicable reemplazándolo por un valor arbitrario
 	@Override
-	public int alterarCarta(Carta carta, String atributoAfectado) {
-		if (this.getRestriccion().equals(SIN_RESTRICCION))
+	public int alterarAtributo(String atributo, int valor) {
+		if ((this.getRestriccion().equals(SIN_RESTRICCION)) || (this.getRestriccion().equals(atributo)))
 			return (this.seteo);
 		else
-		{
-			if (this.getRestriccion().equals(atributoAfectado))
-				return  (this.seteo);
-			else
-				return (0);
-		}
+			return (0);
+		
 	}
 
 }

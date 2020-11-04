@@ -162,10 +162,10 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		mesa.borrarMazo();
 		
 		this.eliminarPerdedores();
-		
+		/*
 		for(Jugador j:this.jugadores)
 			this.deseaCambiarEstrategia(j, atributoTurno);
-		
+		*/
 		return ganador;
 	}
 
@@ -267,8 +267,10 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
         
         if(ganadores.size()>1) {
         	System.out.println("Empate entre los siguientes jugadores:");
-        	for(Atributo ganador:ganadores)
-        		System.out.println(ganador);
+        	for(Atributo ganador:ganadores) {
+        		System.out.println(ganador.getNombre());
+        		System.out.println("Cantidad de cartas: "+ganador.getValor());
+        	}
         }
         else
         	this.mostrarGanadorJuego(ganadores.get(0).getNombre());   

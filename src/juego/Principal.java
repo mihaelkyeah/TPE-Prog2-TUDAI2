@@ -23,7 +23,7 @@ import java.util.ArrayList;
 // TODO: Separar estrategias de jugador (que la estrategia sea un atributo del jugador)
 		// HECHO :D
 // TODO: Pócimas: alterarCarta -> cambiar a alterarAtributo y recibir int valor, String nombreAtributo
-		// 
+		// HECHO :D 
 // TODO: Sacar de la clase Carta el getAtributoMayor() <- cambiarlo por un getAtributo con criterio?
 		//
 // TODO: Agregar a Carta un getNombresAtributos que devuelva un ArrayList<String> con todos los nombres de los atributos de la carta
@@ -51,11 +51,11 @@ public class Principal {
         Jugador jugador4 = new Jugador("jugador 4");
         Jugador jugador5 = new Jugador("jugador 5");
         
-        jugador1.setEstrategia(new Obstinado("fuerza"));
-        jugador2.setEstrategia(new Obstinado("velocidad"));
-        jugador3.setEstrategia(new Obstinado("altura"));
-        jugador4.setEstrategia(new Timbero());
-        jugador5.setEstrategia(new Ambicioso());
+        jugador1.setEstrategia(new EstrategiaObstinado("fuerza"));
+        jugador2.setEstrategia(new EstrategiaObstinado("velocidad"));
+        jugador3.setEstrategia(new EstrategiaObstinado("altura"));
+        jugador4.setEstrategia(new EstrategiaTimbero());
+        jugador5.setEstrategia(new EstrategiaAmbicioso());
         
         Juego juego = new Juego(mazoPath);
         juego.agregarJugador(jugador1);
@@ -74,11 +74,11 @@ public class Principal {
         }
        
 		Pocima pocima1 = new PocimaPorcentaje("Pocion Reductora",0.50,"fuerza");
-		Pocima pocima2 = new PocimaSeteo("Numero Magico",23);
+		Pocima pocima2 = new PocimaSeteo("Numero Mágico",23);
 		Pocima pocima3 = new PocimaPorcentaje("Pocion Aumentadora",1.25);
-		Pocima pocima4 = new PocimaPorcentaje("Pocion Aumentadora",2.25);
+		Pocima pocima4 = new PocimaPorcentaje("Pocion Aumentadora más polenta",2.25);
 		Pocima pocimaCocktail = new PocimaCocktail("VamoAVerQueSale",pocima1,pocima3);
-		Pocima pocimaCocktail2 = new PocimaCocktail("Sí, es un hermoso juego de cartas. ¡¿POR QUÉ EL MÍO NO SE VE ASÍ?!",pocima4,pocima1);
+		Pocima pocimaCocktail2 = new PocimaCocktail("sasarasa",pocima4,pocima1);
 		Pocima pocimaCocktailLoco = new PocimaCocktail("Cocktail Loco",pocimaCocktail,pocimaCocktail2);
        
 		listaPocimas.add(pocima1);

@@ -28,7 +28,7 @@ public abstract class Pocima {
 		return (this.restriccion);
 	}
 	
-	public abstract int alterarCarta (Carta carta, String atributoEnJuego);
+	public abstract int alterarAtributo(String atributo, int valor);
 	
 	@Override
 	public String toString() {

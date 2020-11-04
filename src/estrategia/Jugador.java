@@ -96,13 +96,13 @@ public class Jugador {
 		}
 		switch(opcion) {
 		case('1'):
-				this.setEstrategia(new Ambicioso());
+				this.setEstrategia(new EstrategiaAmbicioso());
 			break;
 		case('2'):
-				this.setEstrategia(new Obstinado(atributoMano));
+				this.setEstrategia(new EstrategiaObstinado(atributoMano));
 			break;
 		case('3'):
-				this.setEstrategia(new Timbero());
+				this.setEstrategia(new EstrategiaTimbero());
 			break;
 		default:
 				System.out.println("No se harán cambios.");

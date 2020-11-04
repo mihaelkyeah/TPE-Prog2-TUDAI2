@@ -4,11 +4,11 @@ import juego.Atributo;
 import juego.Carta;
 import java.util.ArrayList;
 
-public class Ambicioso extends Estrategia  {
+public class EstrategiaAmbicioso extends Estrategia  {
 	
 	private static final String ESTRATEGIA_NOMBRE_AMBICIOSO = "Ambicioso";
 	
-	public Ambicioso() {
+	public EstrategiaAmbicioso() {
 		super(ESTRATEGIA_NOMBRE_AMBICIOSO);
 	}
 

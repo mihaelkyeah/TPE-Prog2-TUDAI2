@@ -15,14 +15,11 @@ public class PocimaCocktail extends Pocima {
 
 	// La pócima cocktail aplica la pota 1 a la carta y luego aplica la pota 2
 	@Override
-	public int alterarCarta(Carta carta, String atributoEnJuego) {
-		Carta cartaAux = carta.copiarCarta();
-		int resultado = this.pota1.alterarCarta(cartaAux, atributoEnJuego);
-		cartaAux.getAtributo(atributoEnJuego).setValor(resultado);
+	public int alterarAtributo(String atributo, int valor) {
+		int resultado = this.pota1.alterarAtributo(atributo, valor);
 		if (this.pota2 != null)
 		{
-			resultado =this.pota2.alterarCarta(cartaAux, atributoEnJuego);
-			cartaAux.getAtributo(atributoEnJuego).setValor(resultado);
+			resultado =this.pota2.alterarAtributo(atributo, resultado);
 		}
 		
 		return resultado;

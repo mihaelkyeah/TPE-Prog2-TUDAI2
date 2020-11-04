@@ -2,11 +2,11 @@ package estrategia;
 
 import juego.Carta;
 
-public class Timbero extends Estrategia {
+public class EstrategiaTimbero extends Estrategia {
 	
 	private static final String ESTRATEGIA_NOMBRE_TIMBERO = "Timbero";
 	
-	public Timbero() {
+	public EstrategiaTimbero() {
 		super(ESTRATEGIA_NOMBRE_TIMBERO);
 	}
 
