@@ -56,11 +56,16 @@ public class Juego {
 	public void repartirCartas(ArrayList<Pocima> listaPocimas)
 	{
 		int j = 0;
-		this.mazoOriginal.repartirPocimas(listaPocimas);
 		this.mazoOriginal.mezclarMazo();
 		while (this.mazoOriginal.getTamanioMazo() > 0)
 		{
-			jugadores.get(j).recibirCarta(this.mazoOriginal.sacarCartaDelMazo());
+			Carta aux = this.mazoOriginal.sacarCartaDelMazo();
+			if (listaPocimas != null)
+			{
+				aux.setPocima(listaPocimas.get(0));
+				listaPocimas.remove(0);
+			}
+			jugadores.get(j).recibirCarta(aux);
 			j++;
 			if(j >= this.jugadores.size())
 				j=0;
