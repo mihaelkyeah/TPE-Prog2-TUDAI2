@@ -19,7 +19,7 @@ public class EstrategiaAmbicioso extends Estrategia  {
         int aux = -1;
         for (String nombreAtributo: nombres)
         {
-            int resultado = carta.usarPocima (carta.getPocima(), nombreAtributo);
+            int resultado = carta.getValor(nombreAtributo);
             if (resultado > aux) {
                 nombre = nombreAtributo;
                 aux = carta.getValor(nombreAtributo);
