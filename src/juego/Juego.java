@@ -60,7 +60,7 @@ public class Juego {
 		while (this.mazoOriginal.getTamanioMazo() > 0)
 		{
 			Carta aux = this.mazoOriginal.sacarCartaDelMazo();
-			if (listaPocimas != null)
+			if (listaPocimas.size() > 0)
 			{
 				aux.setPocima(listaPocimas.get(0));
 				listaPocimas.remove(0);
