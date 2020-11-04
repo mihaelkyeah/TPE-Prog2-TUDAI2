@@ -1,6 +1,5 @@
 package estrategia;
 
-import juego.Atributo;
 import juego.Carta;
 import java.util.ArrayList;
 

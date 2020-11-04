@@ -31,7 +31,6 @@ public class Atributo {
 	
 	@Override
 	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
 		try {
 			Atributo aux = (Atributo) o;
 			if (this.getNombre().equals(aux.getNombre()))

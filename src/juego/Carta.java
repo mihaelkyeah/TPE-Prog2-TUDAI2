@@ -120,7 +120,6 @@ public class Carta{
 
 	@Override
 	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
 		try {
 			Carta aux = (Carta) o;
 			if (this.getNombre().equals(aux.getNombre()))

@@ -54,19 +54,13 @@ public class Mazo {
                     cartaNueva.agregarAtributo(nuevoAtributo);
                 }
             //Agregar carta al mazo
-                if (this.mazo.size() == 0)
+                if ((this.getTamanioMazo() == 0) || (cartaNueva.validarCarta(this.mazo.get(0))))
                      this.agregarCartaAlMazo(cartaNueva);
-                else
-                    {
-                    if (cartaNueva.validarCarta(this.mazo.get(0)))
-                        this.agregarCartaAlMazo(cartaNueva);
-                    }
             }
 
             reader.close();
 
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

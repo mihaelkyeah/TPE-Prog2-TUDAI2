@@ -87,7 +87,6 @@ public class Jugador {
 		System.out.println("3. Timbero (\"3\")");
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		char opcion = '0';
-		Jugador retorno = null;
 		try {
 			opcion = (char)reader.read();
 		}
@@ -116,7 +115,6 @@ public class Jugador {
 
 	@Override
 	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
 		try {
 			Jugador aux = (Jugador) o;
 			if (this.getNombre().equals(aux.getNombre()))

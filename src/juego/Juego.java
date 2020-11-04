@@ -118,6 +118,12 @@ public class Juego {
 			turno++;
 			if (turno >= jugadores.size())
 				 turno = 0;
+			try {
+				Thread.sleep(1000);
+			}
+			catch(Exception e) {
+				System.out.println(e);
+			}
 		}
 		this.declararGanador();
 	}
