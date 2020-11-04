@@ -65,11 +65,6 @@ public class Carta{
 			return (aux.getValor());
 	}
 	
-	//Devolver valor de un atributo de manera directa
-	public int getValor(Atributo atributo) {
-		return (atributo.getValor());
-	}
-	
 	// Devuelve la cantidad de atributos que tiene una carta
 	public int cantidadAtributos() {
 		return this.atributos.size();
@@ -96,27 +91,7 @@ public class Carta{
 		
 	}
 	
-	// Hace un deep clone de una carta
-	// (con direcciones nuevas de memoria para la instancia y sus atributos)
-	public Carta copiarCarta() {
-		Carta retorno = new Carta(this.nombre);
-		ArrayList<Atributo> atributosCarta = this.getCopiaAtributos();
-		for(Atributo a:atributosCarta)
-			retorno.agregarAtributo(a);
-		retorno.setPocima(this.pocima);
-		return retorno;
-	}
-	
-	// Hace un deep clone de la estructura de atributos que tiene la carta
-	public ArrayList<Atributo> getCopiaAtributos() {
-		ArrayList<Atributo> retorno = new ArrayList<>();
-		for(Atributo a:this.atributos) {
-			Atributo nuevo = a.copiarAtributo();
-			retorno.add(nuevo);
-		}
-		return retorno;
-	}
-	
+	// Devuelve los nombres de los atributos de la carta
 	public ArrayList<String> getNombresAtributos() {
 		ArrayList<String> retorno = new ArrayList<>();
 		for(Atributo a:this.atributos)
@@ -144,8 +119,5 @@ public class Carta{
 			return false;
 		}
 	}
-
-
-
 	
 }

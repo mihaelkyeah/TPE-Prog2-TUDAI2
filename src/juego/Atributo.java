@@ -24,14 +24,6 @@ public class Atributo {
 		this.valor = valor;
 	}
 	
-	// Hace un deep clone de un atributo (con una nueva dirección de memoria)
-	public Atributo copiarAtributo() {
-		String nombreNuevo = this.getNombre();
-		int valorNuevo = this.getValor();
-		Atributo retorno = new Atributo(nombreNuevo,valorNuevo);
-		return retorno;
-	}
-	
 	@Override
 	public String toString() {
 		return ("[atributo=" + atributo + ", valor=" + valor + "]");

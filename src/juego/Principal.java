@@ -25,7 +25,7 @@ public class Principal {
 
     public static void main(String[] args) {
     	
-        String mazoPath = "./superheroes.json";
+        String mazoPath = "./autos.json";
         Mazo mazoAux = new Mazo();
         mazoAux.crearMazo(mazoPath);
         
@@ -36,9 +36,9 @@ public class Principal {
         Jugador jugador4 = new Jugador("jugador 4");
         Jugador jugador5 = new Jugador("jugador 5");
         
-        jugador1.setEstrategia(new EstrategiaObstinado("fuerza"));
-        jugador2.setEstrategia(new EstrategiaObstinado("velocidad"));
-        jugador3.setEstrategia(new EstrategiaObstinado("altura"));
+        jugador1.setEstrategia(new EstrategiaObstinado("Km/h"));
+        jugador2.setEstrategia(new EstrategiaObstinado("HP"));
+        jugador3.setEstrategia(new EstrategiaObstinado("Cilindros"));
         jugador4.setEstrategia(new EstrategiaTimbero());
         jugador5.setEstrategia(new EstrategiaAmbicioso());
         
@@ -66,7 +66,7 @@ public class Principal {
 		
        	juego.repartirCartas(listaPocimas);
        	
-       	juego.Ronda(3);
+       	juego.Ronda(8);
        	
     }
     	

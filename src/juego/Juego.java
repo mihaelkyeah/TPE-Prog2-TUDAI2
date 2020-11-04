@@ -56,11 +56,9 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	// Reparte las cartas y las pócimas a los jugadores
 	public void repartirCartas(ArrayList<Pocima> listaPocimas)
 	{
-		this.imprimirMazo();
 		int j = 0;
 		this.mazoOriginal.repartirPocimas(listaPocimas);
 		this.mazoOriginal.mezclarMazo();
-		this.imprimirMazo();
 		while (this.mazoOriginal.getTamanioMazo() > 0)
 		{
 			jugadores.get(j).recibirCarta(this.mazoOriginal.sacarCartaDelMazo());
