@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import estrategia.*;
 import pocima.Pocima;
 
-public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, seguramente sera eliminado el extends
+public class Juego {
 
 	public static Mazo mesa = new Mazo();
 	private Mazo mazoOriginal;
@@ -15,7 +15,6 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	public Juego(String jsonFile) {
 		this.mazoOriginal = new Mazo();
 		this.mazoOriginal.crearMazo(jsonFile);
-        this.mazoOriginal.validarCartas();
 		this.jugadores = new ArrayList<Jugador>();
 	}
 	
@@ -105,9 +104,9 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	public void Ronda(int limiteRonda)
 	{
 		boolean ganador = this.hayGanador();
-		int turno = 0, numeroRonda=0;
+		int turno = 0, numeroRonda=1;
 		this.mostrarEstadisticasTodos();
-		while (!ganador && numeroRonda < limiteRonda)
+		while (!ganador && numeroRonda <= limiteRonda)
 		{
 			ganador = this.juegaRonda(numeroRonda, turno);
 			numeroRonda++;
@@ -125,21 +124,13 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 	{
 		ArrayList <Atributo> valores = new ArrayList<Atributo>();
 		
-		// jajajaja
-		if(numeroRonda!=Integer.MAX_VALUE)
-			System.out.println("\n------ RONDA "+(numeroRonda+1)+" ------");
-		else
-			System.out.println("\n------ RONDA "+(numeroRonda)+" ------");
+		System.out.println("\n------ RONDA "+(numeroRonda)+" ------");
 		
 		Jugador jugadorTurno = jugadores.get(turno);
 		Carta cartaTurno = jugadorTurno.cartaEnMano();
 		String atributoTurno = jugadorTurno.getEstrategia().elegirAtributo(cartaTurno);
-		this.mostrarJugada(jugadorTurno,cartaTurno,atributoTurno);
-		int valorPocima = cartaTurno.usarPocima(cartaTurno.getPocima(), atributoTurno);
-		valores.add(new Atributo(jugadorTurno.getNombre(), valorPocima));
 		
-		mesa.agregarCartaAlMazo(cartaTurno);
-		
+		this.jugarCarta(jugadorTurno,cartaTurno,atributoTurno,valores);
 		this.enfrentar(jugadorTurno,atributoTurno,valores);
 		
 		String ganadorEstaRonda = this.ganadorRonda(valores);
@@ -161,21 +152,22 @@ public class Juego extends Mazo{  //esta mas por comodidad que otra cosa, segura
 		*/
 		return ganador;
 	}
+	
+	private void jugarCarta(Jugador jugador, Carta cartaJugador, String atributoTurno, ArrayList<Atributo> valores) {
+		System.out.println("La carta de "+jugador+" es "+cartaJugador+" con "+atributoTurno+" "+cartaJugador.getValor(atributoTurno));
+		// Aplicar pócimas
+		int valorPocima = cartaJugador.usarPocima(cartaJugador.getPocima(), atributoTurno);
+		valores.add(new Atributo(jugador.getNombre(), valorPocima));
+		mesa.agregarCartaAlMazo(cartaJugador);
+	}
 
 	// Usa un arreglo con todos los oponentes del jugador al que le toca jugar, para poder enfrentarlos
 	// Junta todas las cartas de todos los participantes para luego comparar los valores de sus atributos
 	private void enfrentar(Jugador jugadorTurno, String atributoTurno, ArrayList<Atributo> valores) {
 		ArrayList <Jugador> enfrentar = this.competidores(jugadorTurno);
-		for (Jugador competidor : enfrentar)
-		{
+		for (Jugador competidor : enfrentar) {
 			Carta cartaCompetidor = competidor.cartaEnMano();
-			System.out.println("La carta de "+competidor+" es "+cartaCompetidor+" con "+atributoTurno+" "+cartaCompetidor.getValor(atributoTurno));
-			
-			// Aplicar pócimas
-			int valorPocima = cartaCompetidor.usarPocima(cartaCompetidor.getPocima(), atributoTurno);
-			
-			valores.add(new Atributo(competidor.getNombre(), valorPocima));
-			mesa.agregarCartaAlMazo(cartaCompetidor);
+			this.jugarCarta(competidor, cartaCompetidor, atributoTurno, valores);
 		}
 	}
 

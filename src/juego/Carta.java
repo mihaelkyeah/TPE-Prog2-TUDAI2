@@ -82,7 +82,6 @@ public class Carta{
 				System.out.println("Se aplica la pócima "+pocima+" - Valor resultante = "+resultado);
 				// Cuando la pócima se usa, se gasta
 				// O_O
-				this.pocima = null;
 				return resultado;
 			}
 			else
@@ -90,6 +89,22 @@ public class Carta{
 		}
 		
 	}
+	
+	public boolean validarCarta(Carta carta) {
+		
+        if(this.cantidadAtributos() == carta.cantidadAtributos()) { //primero se fija que coincida la cantidad de atributos, de no hacerlo ya es rechazada
+                int j = 0;
+                Atributo aux = this.getAtributo(j);
+                while((j < this.cantidadAtributos()) && (carta.getAtributo(aux.getNombre()) != null)) { //Verifica que todos los atributos de la carta esten en la primera carta
+                    aux = this.getAtributo(j);
+                    j++;
+                }
+                if(j == carta.cantidadAtributos()) //Cumple todo los requisitos devuelve true
+                    return true;
+        }
+        return false; //Si fallo en algo es rechazada
+        
+    }
 	
 	// Devuelve los nombres de los atributos de la carta
 	public ArrayList<String> getNombresAtributos() {
