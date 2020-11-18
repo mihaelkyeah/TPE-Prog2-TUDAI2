@@ -40,14 +40,13 @@ public class Mazo {
             for (JsonObject carta : cartas.getValuesAs(JsonObject.class)) {
                 String nombreCarta = carta.getString("nombre");
                 JsonObject atributos = (JsonObject) carta.getJsonObject("atributos");
-               //Crear carta
+                // Crear carta
                 Carta cartaNueva = new Carta (nombreCarta);
-                for (String nombreAtributo:atributos.keySet())
-                { //Agregar atributos a la carta
-                    Atributo nuevoAtributo = new Atributo (nombreAtributo, atributos.getInt(nombreAtributo));
-                    cartaNueva.agregarAtributo(nuevoAtributo);
+                // Agregar atributos a la carta
+                for (String nombreAtributo:atributos.keySet()) {
+                    cartaNueva.agregarAtributo(nombreAtributo, atributos.getInt(nombreAtributo));
                 }
-            //Agregar carta al mazo
+                // Agregar carta al mazo
                 if ((this.getTamanioMazo() == 0) || (cartaNueva.validarCarta(this.mazo.get(0))))
                      this.agregarCartaAlMazo(cartaNueva);
             }

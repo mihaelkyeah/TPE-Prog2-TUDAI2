@@ -15,11 +15,8 @@ public class PocimaPorcentaje extends Pocima{
 
 	// Altera el valor del atributo aplicable multiplicándolo por un porcentaje
 	@Override
-	public int alterarAtributo(String atributo, int valor) {		
-		if ((this.getRestriccion().equals(SIN_RESTRICCION)) || (this.getRestriccion().equals(atributo)))
-			return  (int)(this.porcentaje * valor);
-		else
-			return (0);
+	public double alterarAtributo(String atributo, double valor) {		
+		return  (this.porcentaje * valor);
 	}
 
 }

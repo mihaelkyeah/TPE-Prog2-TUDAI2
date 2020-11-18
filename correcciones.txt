@@ -1,0 +1,99 @@
+Hola a todos. 10 = Aprobado 2 = Re entrega, Ahora les subo los comentarios y creo la tarea para la re entrega. 
+Saludos
+LUIS
+Luis Berdun11:31
+
+COMENTARIO:
+
+>>>
+* Lo hicieron para N jugadores, era solo para dos para que no se complicaran.
+TODO (EMPEZADO)
+
+>>>
+ * Jugador imprime por consola. Mazo tambien.
+TODO
+
+>>>
+   * Carta devuelve atributo por posición, los atributos pedirlos por nombre
+ARREGLADO (CREO)
+
+>>>
+* la carta tiene un metodo getValor(String atributo) y también un usarPocima(Pocima, String atributo). La pocima esta en la carta, no deberia llegar como parametro. NO se usa el atributo
+ARREGLADO
+
+>>>
+		int valorPocima = cartaJugador.usarPocima(cartaJugador.getPocima(), atributoTurno);
+		
+En ese ejemplo se ve que se esta usando mal 		
+Esta mal la delegacion de responsabilidades.
+TODO (no entiendo muy bien)
+
+En juego
+
+>>>
+ *Por que el mazo mesa es atributo de clase? no permite tener dos instancias del juego de distintas clases.
+TODO (no entiendo)
+
+>>>
+* public String ganadorRonda(ArrayList <Atributo> jugadores) el ganador es un atributo?
+TODO
+
+>>>
+* para qué hay un sleep(1000)???
+Un detalle cosmético
+
+>>>
+* Linea 140 String atributoTurno = jugadorTurno.getEstrategia().elegirAtributo(cartaTurno);
+  El uso de estrategias deberia ser transparente al juego. Se le pide el atributo al jugador directamente
+  Mal la delegacion
+ARREGLADO (CREO)
+
+>>>
+* El uso de las pocimas también dberia ser transparente al juego (linea 165-166). El juego le pide el valor de un atributo a la carta y la carta decide si aplica pocima o no. No debería luego consultar por el valor original para ver si cambió o no.
+  Mal la delegacion
+PROBLEMA POR IMPRIMIR INFORMACIÓN POR PANTALLA DESDE LA CLASE JUEGO
+TODO
+
+>>>
+* linea 168 valores.add(new Atributo(jugador.getNombre(), valorPocima)); UN ATRIBUTO CON EL NOMBRE DEL JUGADOR??
+TODO
+
+>>>
+Mazo, no deberia recibir el json ya que deja pegada la estructura interna. 
+TODO (no entiendo)
+
+
+POCIMA
+Mala abstracccion del atributo por el que se aplica, no se usa en cocktail
+esconde un if por tipo
+
+PocimaCocktail mal aplicada, e pierde todo lo del pota1
+	int resultado = this.pota1.alterarAtributo(atributo, valor);
+		if (this.pota2 != null)
+		{
+			resultado =this.pota2.alterarAtributo(atributo, resultado);
+		}
+		
+		return resultado;
+		
+El if por tipo, aca no hay problema pero este tipo de "usos" son los que llevan a un mal uso de POO
+
+		if ((this.getRestriccion().equals(SIN_RESTRICCION)) || (this.getRestriccion().equals(atributo)))
+			return  (int)(this.porcentaje * valor);
+
+>>>
+POCIMA SETEO no se pedia eso, la funcionalidad es distinta:
+
+Quiero vale cuatro: no importa el valor del atributo, siempre se retorna 4.
+Número Mágico : siempre se retorna 23, no importa el valor del atributo.
+Siempre retorna un valor fijo.
+
+ARREGLADO (CREO)
+
+
+>>>
+El get Valor de carta no aplica la pocima por lo tanto la estrategia ambicioso no funciona como corresponde
+
+Obtener el valor con o sin pocima es algo que debe ser transparente. Incluso desde afuera nadie deberia saber
+que hay pocimas en las cartas
+ARREGLADO (CREO)

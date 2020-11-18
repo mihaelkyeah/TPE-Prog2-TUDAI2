@@ -12,8 +12,7 @@ public class EstrategiaTimbero extends Estrategia {
 
 	@Override
 	public String elegirAtributo(Carta carta) {
-		int opcion = (int) (Math.random()* carta.getNombresAtributos().size());
-		return (carta.getNombresAtributos().get(opcion));
+		return (carta.getNombresAtributos().get((int)(Math.random()*carta.getCantidadAtributos())));
 	}
 
 }

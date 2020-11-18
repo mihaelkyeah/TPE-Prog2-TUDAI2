@@ -1,114 +1,103 @@
 package juego;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import pocima.Pocima;
 
 
-public class Carta{
+public class Carta {
 	
 	private String nombre;
-	private ArrayList <Atributo> atributos;
+	private Map<String,Double> atributos;
 	private Pocima pocima;
 	
-	public Carta (String nombre)
-	{
+	public Carta (String nombre) {
 		this.nombre = nombre;
-		this.atributos =  new ArrayList <Atributo>();
-		this.pocima =  null;
+		this.atributos = new HashMap<>();
+		this.pocima = null;
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
 	
-	public Pocima getPocima()
-	{
+	public Pocima getPocima() {
 		return (this.pocima);
 	}
 	
-	public void setPocima(Pocima pocima)
-	{
+	public void setPocima(Pocima pocima) {
 		if (this.pocima == null)
 			this.pocima = pocima;
 	}
 	
-	//Devolver atributo por nombre
-	public Atributo getAtributo(String atributo) {
-		for (Atributo a: this.atributos)
-			if (a.getNombre().equals(atributo))
-				return(a);
-		return null;
+	//Buscar atributo en el mapa
+	public boolean estaAtributo(String nombreAtributo) {
+		for(String clave:this.atributos.keySet())
+			if(nombreAtributo.equalsIgnoreCase(clave))
+				return true;
+		return false;
 	}
 	
-	//Devolver atributo por posicion en el ArrayList
-	public Atributo getAtributo(int indice) {
-		return (this.atributos.get(indice));
+	// Devuelve el valor de un atributo por nombre
+	public double getValorAtributo(String nombreAtributo) {
+		return this.atributos.get(nombreAtributo);
+	}
+	
+	/**
+	 * Devuelve el atributo de la carta con mayor valor con la pócima aplicada
+	 * si la carta tiene (para estrategia ambicioso)
+	 * (¿no sé si esto estará bien?)
+	 * @return string
+	 */
+	public String getMayorAtributo() {
+		String retorno = "";
+		double aux = -1;
+		for(String atributo:this.atributos.keySet()) {
+			if(this.usarPocima(atributo) > aux) {
+				aux = this.atributos.get(atributo);
+				retorno = atributo;
+			}
+		}
+		return retorno;
 	}
 	
 	// Agrega un atributo a la lista de atributos
-	public void agregarAtributo(Atributo atributo)
-	{
-		Atributo aux = this.getAtributo(atributo.getNombre()); //Se fija si el atributo ya existe
-		if (aux == null)
-			this.atributos.add(atributo); //Si no esta lo agrega
-		else
-			aux.setValor(atributo.getValor()); //Si ya existe lo modifica
-	}
-	
-	//Devolver valor de un atributo por su nombre
-	public int getValor(String atributo) {
-		Atributo aux = this.getAtributo (atributo);
-		if (aux == null)
-			return 0; //si el atributo no existe devuelve 0
-		else
-			return (aux.getValor());
+	public void agregarAtributo(String nombreAtributo, double valor) {
+		this.atributos.put(nombreAtributo, valor);
 	}
 	
 	// Devuelve la cantidad de atributos que tiene una carta
-	public int cantidadAtributos() {
+	public int getCantidadAtributos() {
 		return this.atributos.size();
 	}
 	
 	// Aplica el efecto de una pócima al valor de una carta
 	// sin afectar la carta del mazo, sólo afectando el valor de la carta en la jugada
-	public int usarPocima(Pocima pocima, String atributoEnJuego)
-	{	
-		if (pocima == null)
-			return this.getValor(atributoEnJuego);
-		else {
-			int resultado = pocima.alterarAtributo(atributoEnJuego,this.getValor(atributoEnJuego));
-			if(resultado != 0) {
-				return resultado;
-			}
-			else
-				return this.getValor(atributoEnJuego);
+	public double usarPocima(String atributoEnJuego) {	
+		if (this.pocima != null) {
+			return this.pocima.alterarAtributo(atributoEnJuego,this.getValorAtributo(atributoEnJuego));
 		}
-		
+		return this.getValorAtributo(atributoEnJuego);
 	}
 	
-	public boolean validarCarta(Carta carta) {
-		
-		//primero se fija que coincida la cantidad de atributos, de no hacerlo ya es rechazada
-        if(this.cantidadAtributos() == carta.cantidadAtributos()) { 
-                int j = 0;
-                Atributo aux = this.getAtributo(j);
-                while((j < this.cantidadAtributos()) && (carta.getAtributo(aux.getNombre()) != null)) { //Verifica que todos los atributos de la carta esten en la primera carta
-                    aux = this.getAtributo(j);
-                    j++;
-                }
-                if(j == carta.cantidadAtributos()) //Cumple todo los requisitos devuelve true
-                    return true;
-        }
-        return false; //Si fallo en algo es rechazada
-        
+	public boolean validarCarta(Carta cartaDeReferencia) {
+		if(this.getCantidadAtributos() == cartaDeReferencia.getCantidadAtributos()) {
+			for(String nombre:this.atributos.keySet())
+				if(!cartaDeReferencia.getNombresAtributos().contains(nombre))
+					return false;
+			return true;
+		}
+		return false;
     }
 	
 	// Devuelve los nombres de los atributos de la carta
-	public ArrayList<String> getNombresAtributos() {
+	public List<String> getNombresAtributos() {
 		ArrayList<String> retorno = new ArrayList<>();
-		for(Atributo a:this.atributos)
-			retorno.add(a.getNombre());
+		for(String clave:this.atributos.keySet())
+			retorno.add(clave);
 		return retorno;
 	}
 
@@ -121,7 +110,7 @@ public class Carta{
 	public boolean equals(Object o) {
 		try {
 			Carta aux = (Carta) o;
-			if (this.getNombre().equals(aux.getNombre()))
+			if (this.getNombre().equalsIgnoreCase(aux.getNombre()))
 				return true;
 			else
 				return false;

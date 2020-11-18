@@ -2,6 +2,7 @@ package estrategia;
 
 import juego.Carta;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EstrategiaAmbicioso extends Estrategia  {
 	
@@ -13,20 +14,8 @@ public class EstrategiaAmbicioso extends Estrategia  {
 
 	@Override
 	public String elegirAtributo(Carta carta) {
-		
-		ArrayList<String> nombres = carta.getNombresAtributos();
-        String nombre = "";
-        int aux = -1;
-        for (String nombreAtributo: nombres)
-        {
-            int resultado = carta.getValor(nombreAtributo);
-            if (resultado > aux) {
-                nombre = nombreAtributo;
-                aux = carta.getValor(nombreAtributo);
-            }
-        }
-        return nombre;
-		
+		// ¿Se puede hacer así o debería hacer new ArrayList<>(carta.getNombresAtributos())?
+		return carta.getMayorAtributo();
 	}
 
 }

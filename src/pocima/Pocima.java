@@ -2,31 +2,21 @@ package pocima;
 
 public abstract class Pocima {
 
-	private String nombre;
-	private String restriccion;
-	public final String SIN_RESTRICCION = "NINGUNA";
-	
+	private String nombre;	
 	
 	public Pocima(String nombre) {
 		this.nombre = nombre;
-		this.restriccion=SIN_RESTRICCION;
 	}
+	
 	public Pocima(String nombre, String restriccion) {
 		this.nombre = nombre;
-		this.restriccion= restriccion;
 	}
 
-	public String getNombre()
-	{
+	public String getNombre() {
 		return (this.nombre);
 	}
 	
-	public String getRestriccion()
-	{
-		return (this.restriccion);
-	}
-	
-	public abstract int alterarAtributo(String atributo, int valor);
+	public abstract double alterarAtributo(String atributo, double valor);
 	
 	@Override
 	public String toString() {
