@@ -1,5 +1,7 @@
 package pocima;
 
+// Esta Pocima "altera" el valor del atributo "reemplazándolo" por el valor de la pocima
+
 public class PocimaSeteo extends Pocima {
 
 	private double seteo;
@@ -8,7 +10,6 @@ public class PocimaSeteo extends Pocima {
 		this.seteo = seteo;
 	}
 
-	// Altera el valor del atributo aplicable reemplazándolo por un valor arbitrario
 	@Override
 	public double alterarAtributo(String atributo, double valor) {
 		return (this.seteo);

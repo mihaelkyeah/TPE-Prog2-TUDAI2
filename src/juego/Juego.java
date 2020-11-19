@@ -19,22 +19,37 @@ public class Juego {
 		this.log = new ArrayList<>();
 	}
 	
+	public List<String> getLog() {
+		return new ArrayList<>(this.log);
+	}
+	
 	public void repartirCartas(List<Pocima> listaPocimas) {
 		this.mazoOriginal.mezclarMazo();
 		Jugador jugadorRecibeCarta = j1;
 		while (this.mazoOriginal.getTamanioMazo() > 0) {
 			Carta aux = this.mazoOriginal.sacarCartaDelMazo();
+			// Mientras queden pocimas para repartir agrega una pocima a la carta
 			if (listaPocimas.size() > 0) {
 				aux.setPocima(listaPocimas.get(0));
+				// Una vez agregada a una carta la saca de la lista
 				listaPocimas.remove(0);
 			}
 			jugadorRecibeCarta.recibirCarta(aux);
-			// consulta la dirección de memoria a ver si se trata de ese objeto
+			// Pasa al otro jugador para que reciba la proxima carta
 			if(jugadorRecibeCarta == j1)
 				jugadorRecibeCarta = j2;
 			else
 				jugadorRecibeCarta = j1;
 		}
+	}
+	
+// Se fija si algun jugador gano porque el otro se quedo sin cartas
+	public Jugador hayGanador() {
+		if(j1.getCantidadCartas() == 0)
+			return j2;
+		else if (j2.getCantidadCartas() == 0)
+			return j1;
+		return null;
 	}
 	
 	public void ronda() {
@@ -47,7 +62,6 @@ public class Juego {
 		int numeroRonda=1;
 		this.logInicioJuego();
 		while (ganador==null && numeroRonda <= limiteRonda) {
-			// juegaRonda se encarga de jugar la ronda y devuelve el jugador que ganó
 			jugadorTurno = this.juegaRonda(numeroRonda, jugadorTurno);
 			numeroRonda++;
 			ganador = this.hayGanador();
@@ -55,6 +69,7 @@ public class Juego {
 		this.logFinDeJuego(ganador);
 	}
 
+// Se encarga de jugar una ronda y devuelve el jugador que le toca en la proxima ronda
 	public Jugador juegaRonda(int numeroRonda, Jugador jugadorTurno) {	
 		
 		String atributoTurno = jugadorTurno.getAtributoJuego();
@@ -113,8 +128,10 @@ public class Juego {
 	private void logFinDeJuego(Jugador j) {
 		Jugador jugadorQueGana = null;
 		if(j != null)
+		// Si el juego termino porque un jugador se quedo sin cartas	
 			jugadorQueGana = j;
 		else {
+		// Si el juego termino porque se llego al limite de rondas
 			if(j1.getCantidadCartas() > j2.getCantidadCartas())
 				jugadorQueGana = j1;
 			else if(j1.getCantidadCartas() < j2.getCantidadCartas())
@@ -126,16 +143,5 @@ public class Juego {
 			this.log.add("¡Empate!");
 	}
 	
-	public List<String> getLog() {
-		return new ArrayList<>(this.log);
-	}
-	
-	public Jugador hayGanador() {
-		if(j1.getCantidadCartas() == 0)
-			return j2;
-		else if (j2.getCantidadCartas() == 0)
-			return j1;
-		return null;
-	}
 
 }

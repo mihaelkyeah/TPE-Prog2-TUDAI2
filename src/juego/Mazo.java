@@ -9,60 +9,41 @@ public class Mazo {
 	protected List<Carta> mazo;
 	
 	public Mazo() {
-		mazo = new ArrayList<>();
-	}
-	
-	// Devuelve un número al azar con respecto a los índices disponibles en el mazo
-	public int posicionAzar() {
-		return (int) (Math.random()*this.mazo.size());
+		this.mazo = new ArrayList<>();
 	}
 	
 	public int getTamanioMazo() {
-		return mazo.size();
+		return this.mazo.size();
 	}
 	
-	// Muestra todas las cartas por pantalla
-	public void imprimirMazo() {
-		for(Carta carta:this.mazo)
-			System.out.println(carta);
-		System.out.println("----------------");
-	}
-	
-	// Agrega una carta al mazo
+	// Agrega una carta valida al mazo
+	// Si es la primera carta en agregarse se la considera valida automaticamente
 	public void agregarCartaAlMazo(Carta carta) {
-		if(this.getTamanioMazo() == 0 || carta.validarCarta(mazo.get(0)))
-			mazo.add(carta);
+		if(this.getTamanioMazo() == 0 || carta.validarCarta(this.topeMazo()) )
+			this.mazo.add(carta);
 	}
 	
-	// Saca una carta del mazo como se sacaría en la vida real
-	// (sacándola en vez de copiarla)
-	public Carta sacarCartaDelMazo() {
-		Carta aux = mazo.get(0);
-		mazo.remove(0);
-		return (aux);
-	}
-	
+	//Mira la primera carta del mazo sin sacarla
 	public Carta topeMazo() {
-		if(mazo.size()>0)
-			return mazo.get(0);
+		if(this.getTamanioMazo() > 0)
+			return this.mazo.get(0);
 		return null;
 	}
 	
-	// Se buscan dos índices al azar y se intercambian las cartas entre esas dos posiciones,
-	// tantas veces como cartas haya en el mazo
+	// Saca y devuelve la primera carta del mazo
+	public Carta sacarCartaDelMazo() {
+		if(this.getTamanioMazo() > 0) {	
+			Carta aux =this.mazo.get(0);
+			this.mazo.remove(0);
+			return (aux);
+		}
+		else
+			return (null);
+	}
+	
+	// Mezcla las cartas del mazo
 	public void mezclarMazo() {
 		Collections.shuffle(this.mazo);
-	}
-
-	// Agrega una por una todas las cartas de un mazo a este mazo
-	public void agregarMazo(Mazo mazoAgregar) {		
-		for (Carta carta : mazoAgregar.mazo) {
-			this.agregarCartaAlMazo(carta);
-		}
-	}
-
-	public void borrarMazo() {
-		this.mazo.clear();
 	}
 	
 }

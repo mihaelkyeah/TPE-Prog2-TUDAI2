@@ -1,9 +1,8 @@
 package estrategia;
 
 import juego.Carta;
-import java.util.ArrayList;
-import java.util.List;
 
+//Esta estrategia siempre elige el atributo con mayor valor
 public class EstrategiaAmbicioso extends Estrategia  {
 	
 	private static final String ESTRATEGIA_NOMBRE_AMBICIOSO = "Ambicioso";

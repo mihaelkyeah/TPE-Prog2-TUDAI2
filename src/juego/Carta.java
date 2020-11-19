@@ -28,25 +28,11 @@ public class Carta {
 		return (this.pocima);
 	}
 	
-	public void setPocima(Pocima pocima) {
-		this.pocima = pocima;
-	}
-	
-	// Buscar atributo en el mapa
-	public boolean contieneAtributo(String nombreAtributo) {
-		return this.atributos.containsKey(nombreAtributo);
-	}
-	
-	// Devuelve el valor de un atributo por nombre
+	// Devuelve el valor de un atributo que llega por parametro, si tiene una pocima devuelve el resultado de la alteracion
 	public double getValorAtributo(String nombreAtributo) {
 		if (this.pocima != null)
 			return this.pocima.alterarAtributo(nombreAtributo,this.atributos.get(nombreAtributo));
 		return this.atributos.get(nombreAtributo);
-	}
-	
-	// Agrega un atributo a la lista de atributos
-	public void agregarAtributo(String nombreAtributo, double valor) {
-		this.atributos.put(nombreAtributo, valor);
 	}
 	
 	// Devuelve la cantidad de atributos que tiene una carta
@@ -54,23 +40,47 @@ public class Carta {
 		return this.atributos.size();
 	}
 	
-	public boolean validarCarta(Carta cartaDeReferencia) {
-		if(this.getCantidadAtributos() == cartaDeReferencia.getCantidadAtributos()) {
-			for(String nombre:this.atributos.keySet())
-				if(!cartaDeReferencia.getNombresAtributos().contains(nombre))
-					return false;
-			return true;
-		}
-		return false;
-    }
-	
-	// Devuelve los nombres de los atributos de la carta
+	// Devuelve una copia de los nombres de los atributos de la carta
 	public List<String> getNombresAtributos() {
 		List<String> retorno = new ArrayList<>();
 		for(String clave:this.atributos.keySet())
 			retorno.add(clave);
 		return retorno;
 	}
+	
+	// Devuelve un String al que se le incluye el nombre de la carta, el atributo que llega por parametro y el valor de dicho atributo en la carta
+	// Si se aplico una pocima tambien agrega el nombre de dicha pocima y el efecto resultante si se le pudo aplicar
+	public String getString(String atributo) {
+		String retorno = this+" - Valor de atributo "+atributo+": "+this.atributos.get(atributo);
+		if(this.pocima != null && this.getValorAtributo(atributo) != this.atributos.get(atributo))
+			retorno += " - Se aplica la pócima "+this.pocima+" - valor resultante: "+this.getValorAtributo(atributo);
+		return retorno;
+	}
+	
+	public void setPocima(Pocima pocima) {
+		this.pocima = pocima;
+	}
+		
+	// Agrega un atributo a la lista de atributos
+	public void agregarAtributo(String nombreAtributo, double valor) {
+		this.atributos.put(nombreAtributo, valor);
+	}
+	
+	// Buscar atributo en el mapa
+	public boolean contieneAtributo(String nombreAtributo) {
+		return this.atributos.containsKey(nombreAtributo);
+	}
+	
+	// Determina si la carta cumple el tener exactamente los mismos atributos que la referencia (el orden es indiferente)
+	public boolean validarCarta(Carta cartaDeReferencia) {
+		if(this.getCantidadAtributos() == cartaDeReferencia.getCantidadAtributos()) {
+			for(String nombre:this.atributos.keySet())
+				if(!cartaDeReferencia.contieneAtributo(nombre))
+					return false;
+			return true;
+		}
+		return false;
+    }
 
 	@Override
 	public String toString() {
@@ -90,13 +100,6 @@ public class Carta {
 		{
 			return false;
 		}
-	}
-	
-	public String getString(String atributo) {
-		String retorno = this+" - Valor de atributo "+atributo+": "+this.atributos.get(atributo);
-		if(this.pocima != null && this.getValorAtributo(atributo) != this.atributos.get(atributo))
-			retorno += " - Se aplica la pócima "+this.pocima+" - valor resultante: "+this.getValorAtributo(atributo);
-		return retorno;
 	}
 	
 }

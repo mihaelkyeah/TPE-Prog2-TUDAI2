@@ -23,29 +23,29 @@ public class Jugador {
 		this.estrategia = new EstrategiaAmbicioso();
 		this.mazoJugador = new Mazo();
 	}
+
+	//Devuelve el nombre del atributo que el jugador elige para competir segun su estrategia
+	public String getAtributoJuego() {
+		return (this.estrategia.elegirAtributo(this.mazoJugador.topeMazo()) );
+	}
+	
+	//Devuelve cuantas cartas quedan en el mazo del jugador
+	public int getCantidadCartas() {
+		return (this.mazoJugador.getTamanioMazo());
+	}
 	
 	public void setEstrategia(Estrategia e) {
 		this.estrategia = e;
 	}
-
-	public String elegirAtributoJugada(Carta carta) {
-		return this.estrategia.elegirAtributo(carta);
-	}
 	
+	//Devuelve la carta que el jugador saca de su mazo para jugar
 	public Carta cartaEnMano() {
 		return this.mazoJugador.sacarCartaDelMazo();
 	}
 	
+	//Agrega una carta al mazo del jugador
 	public void recibirCarta(Carta carta) {
 		this.mazoJugador.agregarCartaAlMazo(carta);
-	}
-	
-	public String getAtributoJuego() {
-		return this.elegirAtributoJugada(this.mazoJugador.topeMazo());
-	}
-	
-	public int getCantidadCartas() {
-		return (this.mazoJugador.getTamanioMazo());
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package pocima;
 
+//Esta Pocima "altera" el valor del atributo siempre y cuando cumpla con la restriccion, es decir, el atributo sea el mismo de la pocima
+
 public class PocimaSelectiva extends Pocima {
 	
 	private String restriccion;

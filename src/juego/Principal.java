@@ -18,7 +18,7 @@ import pocima.*;
 // TPE Programación 2 - TUDAI Lobería 2020 (Año 2 Cuatrimestre 1)
 
 // Integrantes:
-//	Selene Rodrigo (selenerodrigo@alumnos.unicen.edu.ar)
+//	Selene Rodrigo (selene.rodrigo@alumnos.exa.unicen.edu.ar)
 //	Francisco Hernández (fh.franhernandez.92@gmail.com)
 
 // Repositorio del proyecto:
@@ -35,18 +35,12 @@ public class Principal {
         Jugador jugador1 = new Jugador("Ricardo Montaner");
         Jugador jugador2 = new Jugador("Sergio Denis");
         
-        /*
-        jugador1.setEstrategia(new EstrategiaObstinado("Km/h"));
-        jugador2.setEstrategia(new EstrategiaObstinado("HP"));
-        jugador3.setEstrategia(new EstrategiaObstinado("Cilindros"));
-        jugador4.setEstrategia(new EstrategiaTimbero());
-        */
         jugador1.setEstrategia(new EstrategiaTimbero());
         jugador2.setEstrategia(new EstrategiaTimbero());
         
         Juego juego = new Juego(jugador1,jugador2,mazoAux);
 		
-		Pocima pocima1 = new PocimaPorcentaje("Pocion Reductora",0.50,"Km/h");
+		Pocima pocima1 = new PocimaPorcentaje("Pocion Reductora",0.50);
 		Pocima pocima2 = new PocimaSeteo("Numero Mágico",23);
 		Pocima pocima3 = new PocimaPorcentaje("Pocion Aumentadora",1.25);
 		Pocima pocima4 = new PocimaPorcentaje("Pocion Aumentadora más polenta",2.25);
@@ -63,15 +57,15 @@ public class Principal {
 		
        	juego.repartirCartas(listaPocimas);
        	
-       	juego.ronda(2);
+       	juego.ronda(6);
        	
-       	List<String> registro = juego.getLog();
-    	for(String s:registro)
+    	for(String s:juego.getLog())
     		System.out.println(s);
     }
     
+    //Crea un mazo a partir de la direccion a un archivo Json
     public static Mazo crearMazo(String jsonFile) {
-        //AQUI SE HACE LA CARGA POR ARCHIVO
+      
         File jsonInputFile = new File(jsonFile);
         InputStream is;
         Mazo mazoNuevo = new Mazo();
@@ -85,7 +79,7 @@ public class Principal {
             for (JsonObject carta : cartas.getValuesAs(JsonObject.class)) {
                 String nombreCarta = carta.getString("nombre");
                 JsonObject atributos = (JsonObject) carta.getJsonObject("atributos");
-                // Crear carta
+                // Crea una carta
                 Carta cartaNueva = new Carta (nombreCarta);
                 // Agregar atributos a la carta
                 for (String nombreAtributo:atributos.keySet()) {

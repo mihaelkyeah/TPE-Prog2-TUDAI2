@@ -1,5 +1,7 @@
 package pocima;
 
+//Esta Pocima "altera" el valor del atributo "reemplazándolo" por resultado de aplicar una cadena de pocimas
+
 public class PocimaCocktail extends Pocima {
 	
 	private Pocima pota1;

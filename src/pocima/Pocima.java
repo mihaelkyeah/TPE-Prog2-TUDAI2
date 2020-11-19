@@ -7,10 +7,6 @@ public abstract class Pocima {
 	public Pocima(String nombre) {
 		this.nombre = nombre;
 	}
-	
-	public Pocima(String nombre, String restriccion) {
-		this.nombre = nombre;
-	}
 
 	public String getNombre() {
 		return (this.nombre);
