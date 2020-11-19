@@ -31,7 +31,7 @@ public class Principal {
         String mazoPath = "./autos.json";
         Mazo mazoAux = Principal.crearMazo(mazoPath);
         
-        ArrayList <Pocima> listaPocimas = new ArrayList <Pocima>();
+        List<Pocima> listaPocimas = new ArrayList<>();
         Jugador jugador1 = new Jugador("Ricardo Montaner");
         Jugador jugador2 = new Jugador("Sergio Denis");
         
@@ -41,8 +41,8 @@ public class Principal {
         jugador3.setEstrategia(new EstrategiaObstinado("Cilindros"));
         jugador4.setEstrategia(new EstrategiaTimbero());
         */
-        jugador1.setEstrategia(new EstrategiaObstinado("HP"));
-        jugador2.setEstrategia(new EstrategiaAmbicioso());
+        jugador1.setEstrategia(new EstrategiaTimbero());
+        jugador2.setEstrategia(new EstrategiaTimbero());
         
         Juego juego = new Juego(jugador1,jugador2,mazoAux);
 		
@@ -63,7 +63,7 @@ public class Principal {
 		
        	juego.repartirCartas(listaPocimas);
        	
-       	juego.ronda();
+       	juego.ronda(2);
        	
        	List<String> registro = juego.getLog();
     	for(String s:registro)

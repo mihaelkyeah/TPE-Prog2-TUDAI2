@@ -66,7 +66,7 @@ public class Carta {
 	
 	// Devuelve los nombres de los atributos de la carta
 	public List<String> getNombresAtributos() {
-		ArrayList<String> retorno = new ArrayList<>();
+		List<String> retorno = new ArrayList<>();
 		for(String clave:this.atributos.keySet())
 			retorno.add(clave);
 		return retorno;

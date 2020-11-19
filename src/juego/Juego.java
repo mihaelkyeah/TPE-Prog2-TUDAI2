@@ -19,7 +19,7 @@ public class Juego {
 		this.log = new ArrayList<>();
 	}
 	
-	public void repartirCartas(ArrayList<Pocima> listaPocimas) {
+	public void repartirCartas(List<Pocima> listaPocimas) {
 		this.mazoOriginal.mezclarMazo();
 		Jugador jugadorRecibeCarta = j1;
 		while (this.mazoOriginal.getTamanioMazo() > 0) {
@@ -42,25 +42,21 @@ public class Juego {
 	}
 	
 	public void ronda(int limiteRonda) {
-		boolean ganador = this.hayGanador();
+		Jugador ganador = this.hayGanador();
 		Jugador jugadorTurno = j1;
 		int numeroRonda=1;
-		// TODO imprimir las estadísticas de todos
 		this.logInicioJuego();
-		while (!ganador && numeroRonda <= limiteRonda) {
+		while (ganador==null && numeroRonda <= limiteRonda) {
 			// juegaRonda se encarga de jugar la ronda y devuelve el jugador que ganó
 			jugadorTurno = this.juegaRonda(numeroRonda, jugadorTurno);
 			numeroRonda++;
 			ganador = this.hayGanador();
 		}
-		// TODO imprimir quién gana
-		this.logFinDeJuego();
+		this.logFinDeJuego(ganador);
 	}
 
 	public Jugador juegaRonda(int numeroRonda, Jugador jugadorTurno) {	
-		// <Atributo> valores = new ArrayList<Atributo>();
-			// Esto se suponía que iba a ir guardando los atributos y valores
-			// elegidos por cada jugador si eran más de 2
+		
 		String atributoTurno = jugadorTurno.getAtributoJuego();
 		
 		this.logInicioRonda(jugadorTurno,numeroRonda,atributoTurno);
@@ -88,10 +84,12 @@ public class Juego {
 			this.logEmpate(j1,j2);
 			return jugadorTurno;
 		}
+		
 	}
 
 	private void logInicioJuego() {
-		// TODO Auto-generated method stub	
+		this.log.add("¡Inicio de juego!");
+		this.log.add(j1+" tiene "+j1.getCantidadCartas()+" cartas y "+j2+" tiene "+j2.getCantidadCartas()+" cartas.");
 	}
 	
 	private void logInicioRonda(Jugador jugadorTurno, int numeroRonda, String atributoTurno) {
@@ -112,17 +110,32 @@ public class Juego {
 		this.log.add("Se produjo un empate. "+j1+" tiene "+j1.getCantidadCartas()+" cartas y "+j2+" tiene "+j2.getCantidadCartas()+" cartas.");
 	}
 	
-	private void logFinDeJuego() {
-		// TODO Auto-generated method stub
-		
+	private void logFinDeJuego(Jugador j) {
+		Jugador jugadorQueGana = null;
+		if(j != null)
+			jugadorQueGana = j;
+		else {
+			if(j1.getCantidadCartas() > j2.getCantidadCartas())
+				jugadorQueGana = j1;
+			else if(j1.getCantidadCartas() < j2.getCantidadCartas())
+				jugadorQueGana = j2;
+		}
+		if(jugadorQueGana != null)	
+			this.log.add("¡"+jugadorQueGana+" ha ganado el juego!");
+		else
+			this.log.add("¡Empate!");
 	}
 	
 	public List<String> getLog() {
 		return new ArrayList<>(this.log);
 	}
 	
-	public boolean hayGanador() {
-		return(j1.getCantidadCartas() == 0 || j2.getCantidadCartas() == 0);
+	public Jugador hayGanador() {
+		if(j1.getCantidadCartas() == 0)
+			return j2;
+		else if (j2.getCantidadCartas() == 0)
+			return j1;
+		return null;
 	}
 
 }
