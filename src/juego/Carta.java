@@ -29,39 +29,19 @@ public class Carta {
 	}
 	
 	public void setPocima(Pocima pocima) {
-		if (this.pocima == null)
-			this.pocima = pocima;
+		this.pocima = pocima;
 	}
 	
-	//Buscar atributo en el mapa
-	public boolean estaAtributo(String nombreAtributo) {
-		for(String clave:this.atributos.keySet())
-			if(nombreAtributo.equalsIgnoreCase(clave))
-				return true;
-		return false;
+	// Buscar atributo en el mapa
+	public boolean contieneAtributo(String nombreAtributo) {
+		return this.atributos.containsKey(nombreAtributo);
 	}
 	
 	// Devuelve el valor de un atributo por nombre
 	public double getValorAtributo(String nombreAtributo) {
+		if (this.pocima != null)
+			return this.pocima.alterarAtributo(nombreAtributo,this.atributos.get(nombreAtributo));
 		return this.atributos.get(nombreAtributo);
-	}
-	
-	/**
-	 * Devuelve el atributo de la carta con mayor valor con la pócima aplicada
-	 * si la carta tiene (para estrategia ambicioso)
-	 * (¿no sé si esto estará bien?)
-	 * @return string
-	 */
-	public String getMayorAtributo() {
-		String retorno = "";
-		double aux = -1;
-		for(String atributo:this.atributos.keySet()) {
-			if(this.usarPocima(atributo) > aux) {
-				aux = this.atributos.get(atributo);
-				retorno = atributo;
-			}
-		}
-		return retorno;
 	}
 	
 	// Agrega un atributo a la lista de atributos
@@ -72,15 +52,6 @@ public class Carta {
 	// Devuelve la cantidad de atributos que tiene una carta
 	public int getCantidadAtributos() {
 		return this.atributos.size();
-	}
-	
-	// Aplica el efecto de una pócima al valor de una carta
-	// sin afectar la carta del mazo, sólo afectando el valor de la carta en la jugada
-	public double usarPocima(String atributoEnJuego) {	
-		if (this.pocima != null) {
-			return this.pocima.alterarAtributo(atributoEnJuego,this.getValorAtributo(atributoEnJuego));
-		}
-		return this.getValorAtributo(atributoEnJuego);
 	}
 	
 	public boolean validarCarta(Carta cartaDeReferencia) {
@@ -119,6 +90,13 @@ public class Carta {
 		{
 			return false;
 		}
+	}
+	
+	public String getString(String atributo) {
+		String retorno = this+" - Valor de atributo "+atributo+": "+this.atributos.get(atributo);
+		if(this.pocima != null && this.getValorAtributo(atributo) != this.atributos.get(atributo))
+			retorno += " - Se aplica la pócima "+this.pocima+" - valor resultante: "+this.getValorAtributo(atributo);
+		return retorno;
 	}
 	
 }

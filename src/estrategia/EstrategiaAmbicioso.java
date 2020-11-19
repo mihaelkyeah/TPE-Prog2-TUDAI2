@@ -14,8 +14,15 @@ public class EstrategiaAmbicioso extends Estrategia  {
 
 	@Override
 	public String elegirAtributo(Carta carta) {
-		// ¿Se puede hacer así o debería hacer new ArrayList<>(carta.getNombresAtributos())?
-		return carta.getMayorAtributo();
+		double aux = 0;
+		String mayor = "";
+		for(String atributo:carta.getNombresAtributos()) {
+			if(carta.getValorAtributo(atributo) > aux) {
+				aux = carta.getValorAtributo(atributo);
+				mayor = atributo;
+			}
+		}
+		return mayor;
 	}
 
 }

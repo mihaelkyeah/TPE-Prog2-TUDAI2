@@ -7,11 +7,11 @@ COMENTARIO:
 
 >>>
 * Lo hicieron para N jugadores, era solo para dos para que no se complicaran.
-TODO (EMPEZADO)
+ARREGLADO
 
 >>>
  * Jugador imprime por consola. Mazo tambien.
-TODO
+ARREGLADO
 
 >>>
    * Carta devuelve atributo por posición, los atributos pedirlos por nombre
@@ -26,17 +26,17 @@ ARREGLADO
 		
 En ese ejemplo se ve que se esta usando mal 		
 Esta mal la delegacion de responsabilidades.
-TODO (no entiendo muy bien)
+ARREGLADO
 
 En juego
 
 >>>
  *Por que el mazo mesa es atributo de clase? no permite tener dos instancias del juego de distintas clases.
-TODO (no entiendo)
+ARREGLADO
 
 >>>
 * public String ganadorRonda(ArrayList <Atributo> jugadores) el ganador es un atributo?
-TODO
+ARREGLADO
 
 >>>
 * para qué hay un sleep(1000)???
@@ -52,15 +52,15 @@ ARREGLADO (CREO)
 * El uso de las pocimas también dberia ser transparente al juego (linea 165-166). El juego le pide el valor de un atributo a la carta y la carta decide si aplica pocima o no. No debería luego consultar por el valor original para ver si cambió o no.
   Mal la delegacion
 PROBLEMA POR IMPRIMIR INFORMACIÓN POR PANTALLA DESDE LA CLASE JUEGO
-TODO
+ARREGLADO
 
 >>>
 * linea 168 valores.add(new Atributo(jugador.getNombre(), valorPocima)); UN ATRIBUTO CON EL NOMBRE DEL JUGADOR??
-TODO
+ARREGLADO
 
 >>>
 Mazo, no deberia recibir el json ya que deja pegada la estructura interna. 
-TODO (no entiendo)
+ARREGLADO
 
 
 POCIMA
@@ -96,4 +96,4 @@ El get Valor de carta no aplica la pocima por lo tanto la estrategia ambicioso n
 
 Obtener el valor con o sin pocima es algo que debe ser transparente. Incluso desde afuera nadie deberia saber
 que hay pocimas en las cartas
-ARREGLADO (CREO)
+ARREGLADO

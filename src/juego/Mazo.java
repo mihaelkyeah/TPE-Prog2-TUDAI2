@@ -1,21 +1,16 @@
 package juego;
 
-import java.io.File;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
+import java.util.List;
 
 public class Mazo {
 	
-	protected ArrayList<Carta> mazo = new ArrayList<Carta> ();
+	protected List<Carta> mazo;
+	
+	public Mazo() {
+		mazo = new ArrayList<>();
+	}
 	
 	// Devuelve un número al azar con respecto a los índices disponibles en el mazo
 	public int posicionAzar() {
@@ -26,38 +21,6 @@ public class Mazo {
 		return mazo.size();
 	}
 	
-	public void crearMazo(String jsonFile)
-    {
-        //AQUI SE HACE LA CARGA POR ARCHIVO
-        File jsonInputFile = new File(jsonFile);
-        InputStream is;
-        try {
-            is = new FileInputStream(jsonInputFile);
-            // Creo el objeto JsonReader de Json.
-            JsonReader reader = Json.createReader(is);
-            // Obtenemos el JsonObject a partir del JsonReader.
-            JsonArray cartas = (JsonArray) reader.readObject().getJsonArray("cartas");
-            for (JsonObject carta : cartas.getValuesAs(JsonObject.class)) {
-                String nombreCarta = carta.getString("nombre");
-                JsonObject atributos = (JsonObject) carta.getJsonObject("atributos");
-                // Crear carta
-                Carta cartaNueva = new Carta (nombreCarta);
-                // Agregar atributos a la carta
-                for (String nombreAtributo:atributos.keySet()) {
-                    cartaNueva.agregarAtributo(nombreAtributo, atributos.getInt(nombreAtributo));
-                }
-                // Agregar carta al mazo
-                if ((this.getTamanioMazo() == 0) || (cartaNueva.validarCarta(this.mazo.get(0))))
-                     this.agregarCartaAlMazo(cartaNueva);
-            }
-
-            reader.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-	
 	// Muestra todas las cartas por pantalla
 	public void imprimirMazo() {
 		for(Carta carta:this.mazo)
@@ -67,7 +30,8 @@ public class Mazo {
 	
 	// Agrega una carta al mazo
 	public void agregarCartaAlMazo(Carta carta) {
-		mazo.add(carta);
+		if(this.getTamanioMazo() == 0 || carta.validarCarta(mazo.get(0)))
+			mazo.add(carta);
 	}
 	
 	// Saca una carta del mazo como se sacaría en la vida real
@@ -76,6 +40,12 @@ public class Mazo {
 		Carta aux = mazo.get(0);
 		mazo.remove(0);
 		return (aux);
+	}
+	
+	public Carta topeMazo() {
+		if(mazo.size()>0)
+			return mazo.get(0);
+		return null;
 	}
 	
 	// Se buscan dos índices al azar y se intercambian las cartas entre esas dos posiciones,
