@@ -16,21 +16,31 @@ public class Mazo {
 		return this.mazo.size();
 	}
 	
-	// Agrega una carta valida al mazo
-	// Si es la primera carta en agregarse se la considera valida automaticamente
+	/**
+	 * Agrega una carta válida al mazo
+	 * Si es la primera carta en agregarse se la considera válida
+	 * automáticamente
+	 * @param carta
+	 */
 	public void agregarCartaAlMazo(Carta carta) {
 		if(this.getTamanioMazo() == 0 || carta.validarCarta(this.topeMazo()) )
 			this.mazo.add(carta);
 	}
 	
-	//Mira la primera carta del mazo sin sacarla
+	/**
+	 * Mira la primera carta del mazo sin sacarla
+	 * @return Carta
+	 */
 	public Carta topeMazo() {
 		if(this.getTamanioMazo() > 0)
 			return this.mazo.get(0);
 		return null;
 	}
 	
-	// Saca y devuelve la primera carta del mazo
+	/**
+	 * Saca y devuelve la primera carta del mazo
+	 * @return Carta
+	 */
 	public Carta sacarCartaDelMazo() {
 		if(this.getTamanioMazo() > 0) {	
 			Carta aux =this.mazo.get(0);
@@ -41,7 +51,9 @@ public class Mazo {
 			return (null);
 	}
 	
-	// Mezcla las cartas del mazo
+	/**
+	 * Mezcla las cartas del mazo
+	 */
 	public void mezclarMazo() {
 		Collections.shuffle(this.mazo);
 	}

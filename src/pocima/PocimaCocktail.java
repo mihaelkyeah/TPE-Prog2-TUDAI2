@@ -13,7 +13,6 @@ public class PocimaCocktail extends Pocima {
 		this.pota2 = pota2;
 	}
 
-	// La pócima cocktail aplica la pota 1 a la carta y luego aplica la pota 2
 	@Override
 	public double alterarAtributo(String atributo, double valor) {
 		double resultado = this.pota1.alterarAtributo(atributo, valor);

@@ -19,10 +19,20 @@ public class Juego {
 		this.log = new ArrayList<>();
 	}
 	
+	/**
+	 * Devuelve una lista con los registros de todas las
+	 * actividades del juego (en strings)
+	 * @return List<String>
+	 */
 	public List<String> getLog() {
 		return new ArrayList<>(this.log);
 	}
 	
+	/**
+	 * Reparte las pócimas entre las cartas, y luego las cartas
+	 * entre los jugadores
+	 * @param listaPocimas
+	 */
 	public void repartirCartas(List<Pocima> listaPocimas) {
 		this.mazoOriginal.mezclarMazo();
 		Jugador jugadorRecibeCarta = j1;
@@ -43,7 +53,10 @@ public class Juego {
 		}
 	}
 	
-// Se fija si algun jugador gano porque el otro se quedo sin cartas
+	/**
+	 * Se fija si algun jugador gano porque el otro se quedó sin cartas
+	 * @return Jugador
+	 */
 	public Jugador hayGanador() {
 		if(j1.getCantidadCartas() == 0)
 			return j2;
@@ -52,10 +65,19 @@ public class Juego {
 		return null;
 	}
 	
+	/**
+	 * Método sobrecargado para jugar rondas (virtualmente) infinitas
+	 */
 	public void ronda() {
 		this.ronda(Integer.MAX_VALUE);
 	}
 	
+	/**
+	 * Invoca al método primario del juego dentro de un ciclo
+	 * que se repite cierta cantidad de veces (limiteRonda) o
+	 * hasta que alguien gane
+	 * @param limiteRonda
+	 */
 	public void ronda(int limiteRonda) {
 		Jugador ganador = this.hayGanador();
 		Jugador jugadorTurno = j1;
@@ -69,7 +91,13 @@ public class Juego {
 		this.logFinDeJuego(ganador);
 	}
 
-// Se encarga de jugar una ronda y devuelve el jugador que le toca en la proxima ronda
+	/**
+	 * Se encarga de jugar una ronda y devuelve el jugador que le
+	 * toca en la próxima ronda
+	 * @param numeroRonda
+	 * @param jugadorTurno
+	 * @return Jugador
+	 */
 	public Jugador juegaRonda(int numeroRonda, Jugador jugadorTurno) {	
 		
 		String atributoTurno = jugadorTurno.getAtributoJuego();
@@ -102,6 +130,8 @@ public class Juego {
 		
 	}
 
+	// LOGS (registros de actividad en string)
+	
 	private void logInicioJuego() {
 		this.log.add("¡Inicio de juego!");
 		this.log.add(j1+" tiene "+j1.getCantidadCartas()+" cartas y "+j2+" tiene "+j2.getCantidadCartas()+" cartas.");

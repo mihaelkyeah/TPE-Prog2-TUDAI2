@@ -10,6 +10,12 @@ public abstract class Estrategia {
 		this.nombre = nombre;
 	}
 	
+	/**
+	 * Devuelve el atributo por el cual va a jugar el jugador,
+	 * dependiendo de cuál sea su tipo concreto de estrategia
+	 * @param carta
+	 * @return String
+	 */
 	public abstract String elegirAtributo(Carta carta);
 	
 	@Override

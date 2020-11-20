@@ -12,6 +12,13 @@ public abstract class Pocima {
 		return (this.nombre);
 	}
 	
+	/**
+	 * Altera el valor de un atributo de una carta,
+	 * dependiendo del tipo concreto de pócima que la carta tenga
+	 * @param atributo
+	 * @param valor
+	 * @return double
+	 */
 	public abstract double alterarAtributo(String atributo, double valor);
 	
 	@Override

@@ -13,6 +13,11 @@ public class EstrategiaObstinado extends Estrategia  {
 		this.atributoJugando = atributoJugando;
 	}
 
+	/**
+	 * El jugador obstinado siempre elige el mismo atributo
+	 * @param carta
+	 * @return String
+	 */
 	@Override
 	public String elegirAtributo(Carta carta) {
 		return this.atributoJugando;

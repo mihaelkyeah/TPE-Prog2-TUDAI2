@@ -11,25 +11,34 @@ public class Jugador {
 	private Mazo mazoJugador;
 	private Estrategia estrategia;
 	
+	// Constructor con estrategia
 	public Jugador(String nombre, Estrategia estrategia) {
 		this.nombre = nombre;
 		this.estrategia = estrategia;
 		this.mazoJugador = new Mazo();
 	}
 	
-	// Asigna la estrategia ambicioso por defecto
+	// Constructor sin estrategia: 
+	// asigna la estrategia ambicioso por defecto
 	public Jugador(String nombre) {
 		this.nombre = nombre;
 		this.estrategia = new EstrategiaAmbicioso();
 		this.mazoJugador = new Mazo();
 	}
 
-	//Devuelve el nombre del atributo que el jugador elige para competir segun su estrategia
+	/**
+	 * Devuelve el nombre del atributo que el jugador elige para
+	 * competir según su estrategia
+	 * @return String
+	 */
 	public String getAtributoJuego() {
 		return (this.estrategia.elegirAtributo(this.mazoJugador.topeMazo()) );
 	}
 	
-	//Devuelve cuantas cartas quedan en el mazo del jugador
+	/**
+	 * Devuelve cuántas cartas quedan en el mazo del jugador
+	 * @return int
+	 */
 	public int getCantidadCartas() {
 		return (this.mazoJugador.getTamanioMazo());
 	}
@@ -38,12 +47,18 @@ public class Jugador {
 		this.estrategia = e;
 	}
 	
-	//Devuelve la carta que el jugador saca de su mazo para jugar
+	/**
+	 * Devuelve la carta que el jugador saca de su mazo para jugar
+	 * @return Carta
+	 */
 	public Carta cartaEnMano() {
 		return this.mazoJugador.sacarCartaDelMazo();
 	}
 	
-	//Agrega una carta al mazo del jugador
+	/**
+	 * Agrega una carta al mazo del jugador
+	 * @param carta
+	 */
 	public void recibirCarta(Carta carta) {
 		this.mazoJugador.agregarCartaAlMazo(carta);
 	}

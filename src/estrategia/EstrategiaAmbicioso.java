@@ -11,6 +11,12 @@ public class EstrategiaAmbicioso extends Estrategia  {
 		super(ESTRATEGIA_NOMBRE_AMBICIOSO);
 	}
 
+	/**
+	 * El jugador ambicioso elige el atributo de la carta
+	 * que tenga el valor más alto
+	 * @param carta
+	 * @return String
+	 */
 	@Override
 	public String elegirAtributo(Carta carta) {
 		double aux = 0;
